@@ -36,7 +36,7 @@ System.register(['angular2/core', 'angular2/router', './Providers/ConfigProvider
                     core_1.Component({
                         selector: 'play',
                         styleUrls: ['./css/play.ts.css'],
-                        template: "\n    <div class=\"play\">\n        {{info}}\n    </div>\n    "
+                        templateUrl: './html/play.ts.html'
                     }), 
                     __metadata('design:paramtypes', [router_1.RouteParams, ConfigProvider_1.ConfigProvider])
                 ], UIPlay);

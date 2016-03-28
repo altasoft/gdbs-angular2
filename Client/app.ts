@@ -10,7 +10,9 @@ import {ConfigProvider}     from './Providers/ConfigProvider'
     <a [routerLink]="['Main']" class="btn btn-default">Main Page</a>
     <a [routerLink]="['Play']" class="btn btn-default">Play Page</a>
     <hr/>
-    <router-outlet></router-outlet>
+    <div class="content" id="MainContent" style="opacity: 1; display: block;">
+        <router-outlet></router-outlet>
+    </div>
     `,
     directives: [ROUTER_DIRECTIVES]
 })

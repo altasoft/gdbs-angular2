@@ -18,5 +18,9 @@
     <DnxInvisibleContent Include="bower.json" />
     <DnxInvisibleContent Include=".bowerrc" />
   </ItemGroup>
+  <ItemGroup>
+    <DnxInvisibleFolder Include=".git\" />
+    <DnxInvisibleFolder Include=".vs\" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

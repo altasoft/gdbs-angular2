@@ -10,5 +10,3 @@ import {ROUTER_PROVIDERS} from 'angular2/router';
 
 //enableProdMode();
 bootstrap(AppComponent, [HTTP_PROVIDERS, ROUTER_PROVIDERS, ConfigProvider]);
-
-var r = 23

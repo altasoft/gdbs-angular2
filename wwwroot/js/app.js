@@ -31,7 +31,7 @@ System.register(['angular2/core', 'angular2/router', './main', './play'], functi
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'game',
-                        template: "\n    <a [routerLink]=\"['Main']\" class=\"btn btn-default\">Main Page</a>\n    <a [routerLink]=\"['Play']\" class=\"btn btn-default\">Play Page</a>\n    <hr/>\n    <router-outlet></router-outlet>\n    ",
+                        template: "\n    <a [routerLink]=\"['Main']\" class=\"btn btn-default\">Main Page</a>\n    <a [routerLink]=\"['Play']\" class=\"btn btn-default\">Play Page</a>\n    <hr/>\n    <div class=\"content\" id=\"MainContent\" style=\"opacity: 1; display: block;\">\n        <router-outlet></router-outlet>\n    </div>\n    ",
                         directives: [router_1.ROUTER_DIRECTIVES]
                     }),
                     router_1.RouteConfig([

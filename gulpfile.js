@@ -24,6 +24,7 @@ var paths = {
 paths.ts = './Client/**/*.ts';
 paths.dts = './Client/**/*.d.ts';
 paths.less = './Client/**/*.less';
+paths.html = './Client/**/*.html';
 paths.js = paths.webroot + "js/**/*.js";
 paths.minJs = paths.webroot + "js/**/*.min.js";
 paths.css = paths.webroot + "css/**/*.css";
@@ -79,12 +80,19 @@ gulp.task('compile-less', function () {
         .pipe(gulp.dest('./wwwroot/css'));
 });
 
+
+gulp.task('compile-html', function () {
+    gulp.src(paths.html)
+        .pipe(gulp.dest('./wwwroot/html'));
+});
+
 gulp.task('compile', ['compile-ts', 'compile-less']);
 
 
 gulp.task('watch', function () {
     gulp.watch([paths.ts], ['compile-ts']);
     gulp.watch([paths.less], ['compile-less']);
+    gulp.watch([paths.html], ['compile-html']);
 });
 
 
