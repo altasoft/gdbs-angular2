@@ -1,0 +1,53 @@
+﻿<html>
+<head>
+    <base href="/">
+
+    <title>App</title>
+
+    <!-- 0. Styles -->
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- 1. Load libraries -->
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/lib/ee/EventEmitter.js"></script>
+    <script src="/lib/socketio/socket.io-1.3.7.js"></script>
+    <script src="/lib/systemjs/dist/system.src.js"></script>
+    <script src="/lib/es6-shim/es6-shim.min.js"></script>
+    <script src="/lib/systemjs/dist/system-polyfills.js"></script>
+    <script src="/lib/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="/lib/rxjs/bundles/Rx.js"></script>
+    <script src="/lib/angular2/bundles/angular2.dev.js"></script>
+    <script src="/lib/angular2/bundles/router.js"></script>
+    <script src="/lib/angular2/bundles/shims_for_IE.js"></script>
+    <script src="/lib/angular2/bundles/http.dev.js"></script>
+
+
+    <!-- 2. Configure SystemJS -->
+    <script>
+        System.config({
+            packages: {
+                'js': {
+                    format: 'register',
+                    defaultExtension: 'js'
+                }
+            }
+        });
+        System.import('js/boot')
+              .then(null, console.error.bind(console));
+    </script>
+
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+<!-- 3. Display the application -->
+<body class="noselect">
+    <game>
+        <div id="LoadingIcon"><i class="fa fa-spinner fa-spin"></i></div>
+    </game>
+</body>
+</html>
