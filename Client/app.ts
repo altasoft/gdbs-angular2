@@ -2,12 +2,14 @@
 import {RouteConfig, ROUTER_DIRECTIVES, RouteParams, Router} from 'angular2/router'
 import {UIMain}             from './main'
 import {UIPlay}             from './play'
-import {ConfigProvider}     from './Providers/ConfigProvider'
+import {ConfigProvider}     from './Services/ConfigProvider'
+import {SLAComponent} from './Components/SLA.component';
+import {SLADetailComponent} from './Components/SLADetail.component';
 
 @Component({
     selector: 'game',
     template: `
-    <a [routerLink]="['Main']" class="btn btn-default">Main Page</a>
+    <a [routerLink]="['SLAs']" class="btn btn-default">Main Page</a>
     <a [routerLink]="['Play']" class="btn btn-default">Play Page</a>
     <hr/>
     <div class="content" id="MainContent" style="opacity: 1; display: block;">
@@ -17,7 +19,8 @@ import {ConfigProvider}     from './Providers/ConfigProvider'
     directives: [ROUTER_DIRECTIVES]
 })
 @RouteConfig([
-    { path: '/', name: 'Main', component: UIMain },
+    { path: '/', name: 'SLAs', component: SLAComponent },
+    { path: '/detail/:id', name: 'SLADetail', component: SLADetailComponent },
     { path: '/play', name: 'Play', component: UIPlay }
 ])
 export class AppComponent {

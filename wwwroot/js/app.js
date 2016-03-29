@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './main', './play'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', './play', './Components/SLA.component', './Components/SLADetail.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/router', './main', './play'], functi
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, main_1, play_1;
+    var core_1, router_1, play_1, SLA_component_1, SLADetail_component_1;
     var AppComponent;
     return {
         setters:[
@@ -18,11 +18,14 @@ System.register(['angular2/core', 'angular2/router', './main', './play'], functi
             function (router_1_1) {
                 router_1 = router_1_1;
             },
-            function (main_1_1) {
-                main_1 = main_1_1;
-            },
             function (play_1_1) {
                 play_1 = play_1_1;
+            },
+            function (SLA_component_1_1) {
+                SLA_component_1 = SLA_component_1_1;
+            },
+            function (SLADetail_component_1_1) {
+                SLADetail_component_1 = SLADetail_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -31,11 +34,12 @@ System.register(['angular2/core', 'angular2/router', './main', './play'], functi
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'game',
-                        template: "\n    <a [routerLink]=\"['Main']\" class=\"btn btn-default\">Main Page</a>\n    <a [routerLink]=\"['Play']\" class=\"btn btn-default\">Play Page</a>\n    <hr/>\n    <div class=\"content\" id=\"MainContent\" style=\"opacity: 1; display: block;\">\n        <router-outlet></router-outlet>\n    </div>\n    ",
+                        template: "\n    <a [routerLink]=\"['SLAs']\" class=\"btn btn-default\">Main Page</a>\n    <a [routerLink]=\"['Play']\" class=\"btn btn-default\">Play Page</a>\n    <hr/>\n    <div class=\"content\" id=\"MainContent\" style=\"opacity: 1; display: block;\">\n        <router-outlet></router-outlet>\n    </div>\n    ",
                         directives: [router_1.ROUTER_DIRECTIVES]
                     }),
                     router_1.RouteConfig([
-                        { path: '/', name: 'Main', component: main_1.UIMain },
+                        { path: '/', name: 'SLAs', component: SLA_component_1.SLAComponent },
+                        { path: '/detail/:id', name: 'SLADetail', component: SLADetail_component_1.SLADetailComponent },
                         { path: '/play', name: 'Play', component: play_1.UIPlay }
                     ]), 
                     __metadata('design:paramtypes', [])

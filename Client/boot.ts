@@ -4,7 +4,7 @@ import {enableProdMode} from 'angular2/core'
 import {bootstrap}  from 'angular2/platform/browser'
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {AppComponent}  from './app'
-import {ConfigProvider} from './Providers/ConfigProvider';
+import {ConfigProvider} from './Services/ConfigProvider';
 import {ROUTER_PROVIDERS} from 'angular2/router';
 
 
