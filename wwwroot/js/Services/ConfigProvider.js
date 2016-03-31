@@ -63,5 +63,4 @@ System.register(['angular2/core'], function(exports_1) {
         }
     }
 });
-
 //# sourceMappingURL=ConfigProvider.js.map

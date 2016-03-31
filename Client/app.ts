@@ -19,7 +19,7 @@ import {SLADetailComponent} from './Components/SLADetail.component';
     directives: [ROUTER_DIRECTIVES]
 })
 @RouteConfig([
-    { path: '/', name: 'SLAs', component: SLAComponent },
+    { path: '/SLAs', name: 'SLAs', component: SLAComponent, useAsDefault: true },
     { path: '/detail/:id', name: 'SLADetail', component: SLADetailComponent },
     { path: '/play', name: 'Play', component: UIPlay }
 ])

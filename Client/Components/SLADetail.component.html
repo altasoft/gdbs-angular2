@@ -1,6 +1,6 @@
-﻿<detail class="form" *ngIf="SLA"> <!-- *ngIf -->
+﻿<div class="form" *ngIf="SLA">
     <div class="title green">
-        <a (click)="goBack()"><i class="fa fa-angle-double-left"></i></a>
+        <a [routerLink]="['SLAs']"><i class="fa fa-angle-double-left"></i></a>
         <h4>Details</h4>
     </div>
     <div class="form-col-2 col-1-1">
@@ -28,5 +28,4 @@
             <label>State:</label> {{SLA.state}}
         </div>
     </div>
-</detail>
-
+</div>

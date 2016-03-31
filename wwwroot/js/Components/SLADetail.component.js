@@ -31,14 +31,12 @@ System.register(['angular2/core', 'angular2/router', '../Services/SLA.service'],
                     var _this = this;
                     this._SLAService.getSLA(+this._routeParams.get('id')).then(function (SLA) { return _this.SLA = SLA; });
                 };
-                SLADetailComponent.prototype.goBack = function () {
-                    window.history.back();
-                };
                 SLADetailComponent = __decorate([
                     core_1.Component({
                         selector: 'detail',
                         templateUrl: '/html/Components/SLADetail.component.html',
-                        providers: [SLA_service_1.SLAService]
+                        providers: [SLA_service_1.SLAService],
+                        directives: [router_1.ROUTER_DIRECTIVES]
                     }), 
                     __metadata('design:paramtypes', [SLA_service_1.SLAService, router_1.RouteParams])
                 ], SLADetailComponent);
@@ -48,5 +46,4 @@ System.register(['angular2/core', 'angular2/router', '../Services/SLA.service'],
         }
     }
 });
-
 //# sourceMappingURL=SLADetail.component.js.map

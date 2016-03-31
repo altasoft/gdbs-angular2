@@ -38,7 +38,7 @@ System.register(['angular2/core', 'angular2/router', './play', './Components/SLA
                         directives: [router_1.ROUTER_DIRECTIVES]
                     }),
                     router_1.RouteConfig([
-                        { path: '/', name: 'SLAs', component: SLA_component_1.SLAComponent },
+                        { path: '/SLAs', name: 'SLAs', component: SLA_component_1.SLAComponent, useAsDefault: true },
                         { path: '/detail/:id', name: 'SLADetail', component: SLADetail_component_1.SLADetailComponent },
                         { path: '/play', name: 'Play', component: play_1.UIPlay }
                     ]), 
@@ -50,5 +50,4 @@ System.register(['angular2/core', 'angular2/router', './play', './Components/SLA
         }
     }
 });
-
 //# sourceMappingURL=app.js.map
