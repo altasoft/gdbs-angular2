@@ -13,27 +13,27 @@
                         <thead>
                             <tr>
                                 <td nowrap column="id" *ngIf="isVisible('id')">
-                                    <input type="checkbox" [(ngModel)]="columns['id']" *ngIf="configure" />
+                                    <input type="checkbox" [(ngModel)]="columns['id']" *ngIf="isVisible()" />
                                     <label>Id</label>
                                 </td>
                                 <td nowrap column="adminNumber" *ngIf="isVisible('adminNumber')">
-                                    <input type="checkbox" [(ngModel)]="columns['adminNumber']" *ngIf="configure" />
+                                    <input type="checkbox" [(ngModel)]="columns['adminNumber']" *ngIf="isVisible()" />
                                     <label>Admin Number</label>
                                 </td>
                                 <td nowrap column="type" *ngIf="isVisible('type')">
-                                    <input type="checkbox" [(ngModel)]="columns['type']" *ngIf="configure" />
+                                    <input type="checkbox" [(ngModel)]="columns['type']" *ngIf="isVisible()" />
                                     <label>Type</label>
                                 </td>
                                 <td nowrap column="totalBalance" *ngIf="isVisible('totalBalance')">
-                                    <input type="checkbox" [(ngModel)]="columns['totalBalance']" *ngIf="configure" />
+                                    <input type="checkbox" [(ngModel)]="columns['totalBalance']" *ngIf="isVisible()" />
                                     <label>Total Balance</label>
                                 </td>
                                 <td nowrap column="currency" *ngIf="isVisible('currency')">
-                                    <input type="checkbox" [(ngModel)]="columns['currency']" *ngIf="configure" />
+                                    <input type="checkbox" [(ngModel)]="columns['currency']" *ngIf="isVisible()" />
                                     <label>Currency</label>
                                 </td>
                                 <td nowrap column="state" *ngIf="isVisible('state')">
-                                    <input type="checkbox" [(ngModel)]="columns['state']" *ngIf="configure" />
+                                    <input type="checkbox" [(ngModel)]="columns['state']" *ngIf="isVisible()" />
                                     <label>State</label>
                                 </td>
                                 <td nowrap class="text-center">Actions</td>

@@ -1,1 +1,1 @@
-{"version":3,"file":"SLATypes.js","sourceRoot":"","sources":["../../../Client/Models/SLATypes.ts"],"names":["SLATypes"],"mappings":";;;;;YAAA,WAAY,QAAQ;gBAChBA,6CAAWA,CAAAA;gBACXA,uCAAQA,CAAAA;YACZA,CAACA,EAHW,QAAQ,KAAR,QAAQ,QAGnB;4CAAA"}
+{"version":3,"sources":["Models/SLATypes.ts"],"names":["SLATypes"],"mappings":";;;;;YAAA,WAAY,QAAQ;gBAChBA,6CAAWA,CAAAA;gBACXA,uCAAQA,CAAAA;YACZA,CAACA,EAHW,QAAQ,KAAR,QAAQ,QAGnB;4CAAA","file":"Models/SLATypes.js","sourcesContent":["export enum SLATypes {\r\n    Regular = 0,\r\n    Zero = 1\r\n}"],"sourceRoot":"/Source"}

@@ -46,4 +46,5 @@ System.register(['angular2/core', 'angular2/router', '../Services/SLA.service'],
         }
     }
 });
+
 //# sourceMappingURL=SLADetail.component.js.map

@@ -32,10 +32,7 @@ System.register(['angular2/core', 'angular2/router', './Column.component', '../S
         execute: function() {
             SLAComponent = (function (_super) {
                 __extends(SLAComponent, _super);
-                function SLAComponent(
-                    //_ColumnService: ColumnService,
-                    location, element, _SLAService) {
-                    //super(_ColumnService, element);
+                function SLAComponent(location, element, _SLAService) {
                     _super.call(this, element, location);
                     this._SLAService = _SLAService;
                 }
@@ -48,7 +45,6 @@ System.register(['angular2/core', 'angular2/router', './Column.component', '../S
                     core_1.Component({
                         selector: 'list',
                         templateUrl: '/html/Components/SLA.component.html',
-                        //providers: [SLAService, ColumnService],
                         providers: [SLA_service_1.SLAService],
                         directives: [router_1.ROUTER_DIRECTIVES]
                     }), 
@@ -60,4 +56,5 @@ System.register(['angular2/core', 'angular2/router', './Column.component', '../S
         }
     }
 });
+
 //# sourceMappingURL=SLA.component.js.map

@@ -25,15 +25,13 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1) {
                     this._location = _location;
                     this.columns = {};
                     this.configure = false;
-                    this.init = false;
                 }
                 ColumnComponent.prototype.ngOnInit = function () {
                     var columns = localStorage.getItem(this._location.path());
                     this.columns = columns ? JSON.parse(columns) : {};
-                    this.init = Object.keys(this.columns).length == 0;
                 };
                 ColumnComponent.prototype.showHideColumns = function () {
-                    if (this.init) {
+                    if (Object.keys(this.columns).length == 0) {
                         var columns = {};
                         var cells = this.element.nativeElement.getElementsByTagName('table')[0].rows[0].cells;
                         for (var i = 0; i < cells.length; i++)
@@ -44,10 +42,11 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1) {
                     if (this.configure)
                         localStorage.setItem(this._location.path(), JSON.stringify(this.columns));
                     this.configure = !this.configure;
-                    this.init = false;
                 };
                 ColumnComponent.prototype.isVisible = function (name) {
-                    return this.columns[name] || this.configure || this.init;
+                    if (name == undefined)
+                        return this.configure;
+                    return Object.keys(this.columns).length == 0 || this.columns[name] || this.configure;
                 };
                 ColumnComponent = __decorate([
                     core_1.Component({
@@ -61,27 +60,5 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1) {
         }
     }
 });
-//import {Component, OnInit, ElementRef} from 'angular2/core';
-//import {ColumnService} from '../Services/Column.service';
-//export class ColumnComponent implements OnInit {
-//    columns = {};
-//    configure = false;
-//    init = false;
-//    constructor(
-//        public _ColumnService: ColumnService,
-//        public element: ElementRef) {
-//    }
-//    ngOnInit() {
-//        this.columns = this._ColumnService.getColumns();
-//        this.init = Object.keys(this.columns).length == 0;
-//    }
-//    showHideColumns() {
-//        if (this.init)
-//            this.columns = this._ColumnService.initColumns(this.element);
-//        if (this.configure)
-//            this._ColumnService.setColumns(this.columns);
-//        this.configure = !this.configure;
-//        this.init = false;
-//    }
-//} 
+
 //# sourceMappingURL=Column.component.js.map
