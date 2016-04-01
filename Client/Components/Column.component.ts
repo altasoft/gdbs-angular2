@@ -7,7 +7,7 @@ import {Location} from 'angular2/router';
 
 export class ColumnComponent implements OnInit {
     columns = {};
-    configure = false;
+    configMode = false;
 
     constructor(
         private element: ElementRef,
@@ -20,28 +20,27 @@ export class ColumnComponent implements OnInit {
         this.columns = columns ? JSON.parse(columns) : {};
     }
 
-    showHideColumns() {
+    showHideColumns(id: string) {
         if (Object.keys(this.columns).length == 0) {
             var columns = {};
-            var cells = this.element.nativeElement.getElementsByTagName('table')[0].rows[0].cells;
+            var cells = this.element.nativeElement.querySelectorAll('#' + id + ' td[column]')
 
             for (var i = 0; i < cells.length; i++)
-                if (cells[i].getAttribute('column'))
-                    columns[cells[i].getAttribute('column')] = true;
+                columns[cells[i].getAttribute('column')] = true;
 
             this.columns = columns;
         }
 
-        if (this.configure)
+        if (this.configMode)
             localStorage.setItem(this._location.path(), JSON.stringify(this.columns));
 
-        this.configure = !this.configure;
+        this.configMode = !this.configMode;
     }
 
     isVisible(name?: string) {
         if (name == undefined)
-            return this.configure;
+            return this.configMode;
 
-        return Object.keys(this.columns).length == 0 || this.columns[name] || this.configure;
+        return Object.keys(this.columns).length == 0 || this.columns[name] || this.configMode;
     }
 }

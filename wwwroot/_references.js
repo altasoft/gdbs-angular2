@@ -16,7 +16,6 @@
 /// <reference path="js/models/SLATypes.js" />
 /// <reference path="js/play.js" />
 /// <reference path="js/providers/ConfigProvider.js" />
-/// <reference path="js/services/column.service.js" />
 /// <reference path="js/services/ConfigProvider.js" />
 /// <reference path="js/services/mock-slas.js" />
 /// <reference path="js/services/SLA.service.js" />

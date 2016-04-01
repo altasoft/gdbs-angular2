@@ -17,8 +17,8 @@ export class SLAComponent extends ColumnComponent implements OnInit {
     SLAs: SLA[];
 
     constructor(
-        location: Location,
         element: ElementRef,
+        location: Location,
         private _SLAService: SLAService) {
         super(element, location);
     }
