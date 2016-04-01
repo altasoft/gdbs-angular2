@@ -46,5 +46,4 @@ System.register(['angular2/core', 'angular2/router', './Services/ConfigProvider'
         }
     }
 });
-
 //# sourceMappingURL=play.js.map

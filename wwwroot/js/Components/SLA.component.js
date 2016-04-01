@@ -33,7 +33,7 @@ System.register(['angular2/core', 'angular2/router', './Column.component', '../S
             SLAComponent = (function (_super) {
                 __extends(SLAComponent, _super);
                 function SLAComponent(element, location, _SLAService) {
-                    _super.call(this, element, location);
+                    _super.call(this, element, location, 'SLAs');
                     this._SLAService = _SLAService;
                 }
                 SLAComponent.prototype.ngOnInit = function () {
@@ -56,5 +56,4 @@ System.register(['angular2/core', 'angular2/router', './Column.component', '../S
         }
     }
 });
-
 //# sourceMappingURL=SLA.component.js.map

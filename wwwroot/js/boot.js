@@ -24,5 +24,4 @@ System.register(['angular2/platform/browser', 'angular2/http', './app', './Servi
         }
     }
 });
-
 //# sourceMappingURL=boot.js.map

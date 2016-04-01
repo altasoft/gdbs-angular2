@@ -20,26 +20,27 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1) {
             }],
         execute: function() {
             ColumnComponent = (function () {
-                function ColumnComponent(element, _location) {
-                    this.element = element;
+                function ColumnComponent(_element, _location, _id) {
+                    this._element = _element;
                     this._location = _location;
+                    this._id = _id;
                     this.columns = {};
                     this.configMode = false;
                 }
                 ColumnComponent.prototype.ngOnInit = function () {
-                    var columns = localStorage.getItem(this._location.path());
+                    var columns = localStorage.getItem(this._location.path() + '#' + this._id);
                     this.columns = columns ? JSON.parse(columns) : {};
                 };
-                ColumnComponent.prototype.showHideColumns = function (id) {
+                ColumnComponent.prototype.showHideColumns = function () {
                     if (Object.keys(this.columns).length == 0) {
                         var columns = {};
-                        var cells = this.element.nativeElement.querySelectorAll('#' + id + ' td[column]');
+                        var cells = this._element.nativeElement.querySelectorAll('#' + this._id + ' td[column]');
                         for (var i = 0; i < cells.length; i++)
                             columns[cells[i].getAttribute('column')] = true;
                         this.columns = columns;
                     }
                     if (this.configMode)
-                        localStorage.setItem(this._location.path(), JSON.stringify(this.columns));
+                        localStorage.setItem(this._location.path() + '#' + this._id, JSON.stringify(this.columns));
                     this.configMode = !this.configMode;
                 };
                 ColumnComponent.prototype.isVisible = function (name) {
@@ -51,7 +52,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1) {
                     core_1.Component({
                         providers: [router_1.Location]
                     }), 
-                    __metadata('design:paramtypes', [core_1.ElementRef, router_1.Location])
+                    __metadata('design:paramtypes', [core_1.ElementRef, router_1.Location, String])
                 ], ColumnComponent);
                 return ColumnComponent;
             })();
@@ -59,5 +60,4 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1) {
         }
     }
 });
-
 //# sourceMappingURL=Column.component.js.map

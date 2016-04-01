@@ -10,20 +10,21 @@ export class ColumnComponent implements OnInit {
     configMode = false;
 
     constructor(
-        private element: ElementRef,
-        private _location: Location) {
+        private _element: ElementRef,
+        private _location: Location,
+        private _id: string) {
     }
 
     ngOnInit() {
-        var columns = localStorage.getItem(this._location.path());
+        var columns = localStorage.getItem(this._location.path() + '#' + this._id);
 
         this.columns = columns ? JSON.parse(columns) : {};
     }
 
-    showHideColumns(id: string) {
+    showHideColumns() {
         if (Object.keys(this.columns).length == 0) {
             var columns = {};
-            var cells = this.element.nativeElement.querySelectorAll('#' + id + ' td[column]')
+            var cells = this._element.nativeElement.querySelectorAll('#' + this._id + ' td[column]')
 
             for (var i = 0; i < cells.length; i++)
                 columns[cells[i].getAttribute('column')] = true;
@@ -32,7 +33,7 @@ export class ColumnComponent implements OnInit {
         }
 
         if (this.configMode)
-            localStorage.setItem(this._location.path(), JSON.stringify(this.columns));
+            localStorage.setItem(this._location.path() + '#' + this._id, JSON.stringify(this.columns));
 
         this.configMode = !this.configMode;
     }

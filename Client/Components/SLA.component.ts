@@ -20,7 +20,7 @@ export class SLAComponent extends ColumnComponent implements OnInit {
         element: ElementRef,
         location: Location,
         private _SLAService: SLAService) {
-        super(element, location);
+        super(element, location, 'SLAs');
     }
 
     ngOnInit() {
