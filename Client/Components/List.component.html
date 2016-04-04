@@ -1,0 +1,35 @@
+﻿<list class="form">
+    <!-- *ngIf -->
+    <div class="title green">
+        <h4>{{title}}</h4>
+    </div>
+    <div style="overflow: auto;">
+        <div class="form-col-2">
+            <div>
+                <div class="scroll-view">
+                    <table class="table table no-more-tables">
+                        <thead>
+                            <tr>
+                                <td nowrap *ngFor="#col of columns">
+                                    <label>{{col.Name || col.Key}}</label>
+                                </td>
+                                <td nowrap class="text-center">Actions</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="#item of source">
+                                <td nowrap *ngFor="#col of columns">
+                                    <a *ngIf="hasLink(item, col)" [routerLink]="col.LinkRoute.concat({ id: item[col.LinkItemKey] })">{{item[col.Key]}}</a>
+                                    <span *ngIf="!hasLink(item, col)">{{item[col.Key]}}</span>
+                                </td>
+                                <td nowrap class="action-list text-center">
+                                    <a [routerLink]="details_route.concat({ id: item.SLAId })"><i class="fa fa-mail-forward pointer" title="Details"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</list>
