@@ -194,4 +194,5 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1) {
         }
     }
 });
+
 //# sourceMappingURL=pagination.component.js.map

@@ -60,4 +60,5 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1) {
         }
     }
 });
+
 //# sourceMappingURL=Column.component.js.map
