@@ -6,13 +6,23 @@
 })
 
 export class Pagination {
-    @Input() public currentPage: number = 1;
-    @Input() public itemsPerPage: number = 10;
-    @Input() public totalItems: number;
-    @Input() public maxSize: number = 5;
+    @Input()
+    currentPage: number = 1;
 
-    @Output() curentPageChange = new EventEmitter();
-    @Output() itemsPerPageChange = new EventEmitter();
+    @Input()
+    itemsPerPage: number = 10;
+
+    @Input()
+    totalItems: number;
+
+    @Input()
+    maxSize: number = 5;
+
+    @Output()
+    curentPageChange = new EventEmitter();
+
+    @Output()
+    itemsPerPageChange = new EventEmitter();
 
     GetPagesArray(): any[] {
         let pages: any[] = [];
