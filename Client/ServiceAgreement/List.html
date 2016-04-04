@@ -1,6 +1,6 @@
 ﻿<list class="form" *ngIf="SLAs"> <!-- *ngIf -->
     <div class="title green">
-        <h4>List</h4>
+        <h4>Service Agreements</h4>
     </div>
     <div style="overflow: auto;">
         <div class="form-col-2">
@@ -51,7 +51,6 @@
                                     <span>{{SLA.state}}</span>
                                 </td>
                                 <td nowrap class="action-list text-center">
-                                    <a [routeLink]="['SLADetail', { id: SLA.id }])"><i class="fa fa-mail-forward pointer" title="Details"></i></a>
                                 </td>
                             </tr>
                         </tbody>

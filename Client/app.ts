@@ -2,27 +2,25 @@
 import {RouteConfig, ROUTER_DIRECTIVES, RouteParams, Router} from 'angular2/router'
 import {UIPlay}             from './play'
 import {SLAComponent} from './Components/SLA.component';
+import {MenuComponent} from './Components/Menu.component';
 import {SLADetailComponent} from './Components/SLADetail.component';
+import * as ServiceAgreement from './ServiceAgreement/Route'
 
 @Component({
     selector: 'game',
     template: `
-    <a [routerLink]="['SLAs']" class="btn btn-default">Main Page</a>
-    <a [routerLink]="['Play']" class="btn btn-default">Play Page</a>
-    <hr/>
-    <div class="content" id="MainContent" style="opacity: 1; display: block;">
-        <router-outlet></router-outlet>
+    <menu></menu>
+    <div class="page-content">
+        <div class="content" id="MainContent" style="opacity: 1; display: block;">
+            <router-outlet></router-outlet>
+        </div>
     </div>
     `,
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, MenuComponent]
 })
 @RouteConfig([
     { path: '/SLAs', name: 'SLAs', component: SLAComponent, useAsDefault: true },
     { path: '/detail/:id', name: 'SLADetail', component: SLADetailComponent },
-    { path: '/play', name: 'Play', component: UIPlay }
+    { path: '/ServiceAgreement/...', name: 'ServiceAgreement', component: ServiceAgreement.Route }
 ])
-export class AppComponent {
-
-    constructor() {
-    }
-}
+export class AppComponent { }
