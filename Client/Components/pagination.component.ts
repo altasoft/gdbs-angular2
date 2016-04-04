@@ -1,30 +1,19 @@
-﻿import {Component, OnInit, Input, Output, ElementRef, EventEmitter, Self, Renderer} from 'angular2/core';
-import {ControlValueAccessor, NgModel} from 'angular2/common';
-
-export interface IPaginationConfig {
-    maxSize: number;
-    itemsPerPage: number;
-}
-
-export interface IPageChangedEvent {
-    itemsPerPage: number;
-    page: number;
-}
-
-const paginationConfig: IPaginationConfig = {
-    maxSize: 5,
-    itemsPerPage: 10,
-}
+﻿import {Component, OnInit, Input, Output, EventEmitter, Self} from 'angular2/core';
+import {NgFor, NgIf, ControlValueAccessor, NgModel} from 'angular2/common';
 
 @Component({
-    selector: 'pagination',
-    templateUrl: '/html/Components/pagination.component.html',
-    providers: [NgModel]
+    selector: 'pagination[ngModel]',
+    templateUrl: '/html/Components/pagination.component.html'
 })
 
-export class Pagination implements ControlValueAccessor, OnInit, IPaginationConfig {
+export class Pagination implements ControlValueAccessor, OnInit {
+    defaultConfig = {
+        maxSize: 5,
+        itemsPerPage: 10,
+    }
+
     @Input() public maxSize: number;
-    @Output() private pageChanged: EventEmitter<IPageChangedEvent> = new EventEmitter(false);
+    @Output() private pageChanged = new EventEmitter(false);
 
     @Input() public get itemsPerPage() {
         return this._itemsPerPage;
@@ -51,6 +40,7 @@ export class Pagination implements ControlValueAccessor, OnInit, IPaginationConf
     private _totalPages: number;
 
     private inited: boolean = false;
+    private change: boolean;
 
     private get totalPages() {
         return this._totalPages;
@@ -60,14 +50,18 @@ export class Pagination implements ControlValueAccessor, OnInit, IPaginationConf
         this._totalPages = v;
 
         if (this.inited)
-            this.selectPage(this.page);
+            this.selectPage(this.page, new MouseEvent('change'));
+    }
+
+    public get page() {
+        return this._page;
     }
 
     public set page(value) {
         const _previous = this._page;
         this._page = (value > this.totalPages) ? this.totalPages : (value || 1);
 
-        if (_previous === this._page || typeof _previous === 'undefined')
+        if ((_previous === this._page || typeof _previous === 'undefined') && !this.change)
             return;
 
         this.pageChanged.emit({
@@ -76,29 +70,25 @@ export class Pagination implements ControlValueAccessor, OnInit, IPaginationConf
         });
     }
 
-    public get page() {
-        return this._page;
-    }
-
     private _page: number;
     private pages: Array<any>;
 
-    constructor( @Self() public cd: NgModel, public renderer: Renderer, public elementRef: ElementRef) {
-        cd.valueAccessor = this;
-        this.config = this.config || paginationConfig;
+    constructor( @Self() public ngModel: NgModel) {
+        ngModel.valueAccessor = this;
+        this.config = this.config || this.defaultConfig;
     }
 
     ngOnInit() {
         // watch for maxSize
-        this.maxSize = typeof this.maxSize !== 'undefined' ? this.maxSize : paginationConfig.maxSize;
+        this.maxSize = typeof this.maxSize !== 'undefined' ? this.maxSize : this.defaultConfig.maxSize;
 
         // base class
-        this.itemsPerPage = typeof this.itemsPerPage !== 'undefined' ? this.itemsPerPage : paginationConfig.itemsPerPage;
+        this.itemsPerPage = typeof this.itemsPerPage !== 'undefined' ? this.itemsPerPage : this.defaultConfig.itemsPerPage;
         this.totalPages = this.calculateTotalPages();
         
         // this class
         this.pages = this.getPages(this.page, this.totalPages);
-        this.page = this.cd.value;
+        this.page = this.ngModel.value;
         this.inited = true;
     }
 
@@ -111,29 +101,27 @@ export class Pagination implements ControlValueAccessor, OnInit, IPaginationConf
         if (event)
             event.preventDefault();
 
+        if (event && event.type == 'change' && this.change != undefined)
+            this.change = true;
+
         if (event && event.target) {
             let target: any = event.target;
             target.blur();
         }
 
         this.writeValue(page);
-        this.cd.viewToModelUpdate(this.page);
-    }
+        this.pages = this.getPages(this.page, this.totalPages);
+        this.ngModel.viewToModelUpdate(this.page);
 
-    private noPrevious(): boolean {
-        return this.page === 1;
-    }
-
-    private noNext(): boolean {
-        return this.page === this.totalPages;
+        this.change = false;
     }
 
     // Create page object used in template
-    private makePage(number: number, text: string, isActive: boolean): { number: number, text: string, active: boolean } {
+    private makePage(number: number, text: string, active: boolean) {
         return {
             number: number,
             text: text,
-            active: isActive
+            active: active
         };
     }
 
