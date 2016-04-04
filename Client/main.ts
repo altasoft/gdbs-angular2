@@ -1,6 +1,6 @@
 import {Component, ViewEncapsulation, OnInit, Inject} from 'angular2/core'
 import {RouteConfig, ROUTER_DIRECTIVES, RouteParams, Router} from 'angular2/router'
-import {ConfigProvider}                 from './Providers/ConfigProvider'
+import {ConfigProvider} from './Services/ConfigProvider'
 
 
 @Component({
