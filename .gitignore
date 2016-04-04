@@ -238,6 +238,3 @@ Temporary Items
 
 #Nuspec
 *.nuspec
-
-.vs/
-*.xproj.user
