@@ -45,7 +45,7 @@
                                     <span>{{SLA.id}}</span>
                                 </td>
                                 <td nowrap *ngIf="isVisible('adminNumber')">
-                                    <span>{{SLA.adminNumber}}</span>
+                                    <a [routerLink]="['SLADetail', {id: SLA.id}]">{{SLA.adminNumber}}</a>
                                 </td>
                                 <td nowrap *ngIf="isVisible('type')">
                                     <span>{{SLA.type}}</span>
