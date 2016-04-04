@@ -1,7 +1,5 @@
 ///<reference path="../node_modules/angular2/typings/browser.d.ts"/>
-System.register(['angular2/platform/browser', 'angular2/http', './app', './Services/ConfigProvider', 'angular2/router'], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(['angular2/platform/browser', 'angular2/http', './app', './Services/ConfigProvider', 'angular2/router'], function(exports_1) {
     var browser_1, http_1, app_1, ConfigProvider_1, router_1;
     return {
         setters:[

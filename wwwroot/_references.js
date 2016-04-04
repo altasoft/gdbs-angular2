@@ -2,6 +2,7 @@
 /// <reference path="../gulpfile.js" />
 /// <reference path="js/app.js" />
 /// <reference path="js/boot.js" />
+/// <reference path="js/components/column.component.js" />
 /// <reference path="js/components/sla.component.js" />
 /// <reference path="js/components/SLA.js" />
 /// <reference path="js/components/sla.service.js" />
@@ -9,16 +10,14 @@
 /// <reference path="js/components/SLAStates.js" />
 /// <reference path="js/components/SLATypes.js" />
 /// <reference path="js/main.js" />
+/// <reference path="js/models/column.js" />
 /// <reference path="js/models/SLA.js" />
 /// <reference path="js/models/SLAStates.js" />
 /// <reference path="js/models/SLATypes.js" />
 /// <reference path="js/play.js" />
 /// <reference path="js/providers/ConfigProvider.js" />
-/// <reference path="js/serviceagreement/Details.js" />
-/// <reference path="js/serviceagreement/List.js" />
-/// <reference path="js/serviceagreement/root.js" />
-/// <reference path="js/serviceagreement/Route.js" />
 /// <reference path="js/services/ConfigProvider.js" />
+/// <reference path="js/services/mock-slas.js" />
 /// <reference path="js/services/SLA.service.js" />
 /// <reference path="lib/angular2/bundles - beta.0/angular2.dev.js" />
 /// <reference path="lib/angular2/bundles - beta.0/angular2.js" />

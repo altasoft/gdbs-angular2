@@ -1,6 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../Services/SLA.service'], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(['angular2/core', 'angular2/router', '../Services/SLA.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -33,19 +31,17 @@ System.register(['angular2/core', 'angular2/router', '../Services/SLA.service'],
                     var _this = this;
                     this._SLAService.getSLA(+this._routeParams.get('id')).then(function (SLA) { return _this.SLA = SLA; });
                 };
-                SLADetailComponent.prototype.goBack = function () {
-                    window.history.back();
-                };
                 SLADetailComponent = __decorate([
                     core_1.Component({
                         selector: 'detail',
                         templateUrl: '/html/Components/SLADetail.component.html',
-                        providers: [SLA_service_1.SLAService]
+                        providers: [SLA_service_1.SLAService],
+                        directives: [router_1.ROUTER_DIRECTIVES]
                     }), 
                     __metadata('design:paramtypes', [SLA_service_1.SLAService, router_1.RouteParams])
                 ], SLADetailComponent);
                 return SLADetailComponent;
-            }());
+            })();
             exports_1("SLADetailComponent", SLADetailComponent);
         }
     }
