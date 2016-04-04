@@ -16,11 +16,15 @@ var SLAs: SLA[] = [
     { "id": 11, "adminNumber": "01020304050", "type": 0, "totalBalance": 13.13, "currency": "GEL", "state": 0 },
     { "id": 12, "adminNumber": "05040302010", "type": 1, "currency": "GEL", "state": 2 },
 ];
+var total = SLAs.length;
 
 @Injectable()
 export class SLAService {
-    getSLAs() {
-        return Promise.resolve(SLAs);
+    getSLAs(skip: number = 0, take: number = 10) {
+        return Promise.resolve({
+            SLAs: SLAs.slice(skip, skip + take),
+            total: total
+        });
     }
 
     getSLA(id: number) {

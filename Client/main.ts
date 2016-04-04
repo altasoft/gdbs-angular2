@@ -15,4 +15,3 @@ import {ConfigProvider} from './Services/ConfigProvider'
 export class UIMain {
 
 }
-

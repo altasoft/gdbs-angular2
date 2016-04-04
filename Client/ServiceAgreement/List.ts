@@ -19,7 +19,7 @@ export class List implements OnInit {
     }
 
     ngOnInit() {
-        this._SLAService.getSLAs().then(SLAs => this.SLAs = SLAs);
+        //this._SLAService.getSLAs().then(SLAs => this.SLAs = SLAs);
     }
 
     gotoDetail(id: number) {
