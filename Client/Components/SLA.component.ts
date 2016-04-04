@@ -17,6 +17,7 @@ import {SLAService} from '../Services/SLA.service';
 export class SLAComponent extends ColumnComponent implements OnInit {
     SLAs: SLA[];
     total: number;
+    currentPage: number;
 
     constructor(
         element: ElementRef,

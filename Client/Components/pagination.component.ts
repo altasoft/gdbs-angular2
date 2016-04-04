@@ -1,13 +1,12 @@
 ﻿import {Component, OnInit, Input, Output, EventEmitter, Self} from 'angular2/core';
-import {NgModel} from 'angular2/common';
+import {NgFor, NgIf, ControlValueAccessor, NgModel} from 'angular2/common';
 
 @Component({
-    selector: 'pagination',
-    templateUrl: '/html/Components/pagination.component.html',
-    providers: [NgModel]
+    selector: 'pagination[ngModel]',
+    templateUrl: '/html/Components/pagination.component.html'
 })
 
-export class Pagination implements OnInit {
+export class Pagination implements ControlValueAccessor, OnInit {
     defaultConfig = {
         maxSize: 5,
         itemsPerPage: 10,
@@ -75,6 +74,7 @@ export class Pagination implements OnInit {
     private pages: Array<any>;
 
     constructor( @Self() public ngModel: NgModel) {
+        ngModel.valueAccessor = this;
         this.config = this.config || this.defaultConfig;
     }
 
@@ -92,6 +92,11 @@ export class Pagination implements OnInit {
         this.inited = true;
     }
 
+    writeValue(value: number) {
+        this.page = value;
+        this.pages = this.getPages(this.page, this.totalPages);
+    }
+
     private selectPage(page: number, event?: MouseEvent) {
         if (event)
             event.preventDefault();
@@ -104,7 +109,7 @@ export class Pagination implements OnInit {
             target.blur();
         }
 
-        this.page = page;
+        this.writeValue(page);
         this.pages = this.getPages(this.page, this.totalPages);
         this.ngModel.viewToModelUpdate(this.page);
 
@@ -161,8 +166,13 @@ export class Pagination implements OnInit {
     }
 
     onChange = (_: any) => { };
+    onTouched = () => { };
 
     registerOnChange(fn: (_: any) => {}): void {
         this.onChange = fn;
+    }
+
+    registerOnTouched(fn: () => {}): void {
+        this.onTouched = fn;
     }
 }

@@ -21,8 +21,6 @@ var total = SLAs.length;
 @Injectable()
 export class SLAService {
     getSLAs(skip: number = 0, take: any = 10) {
-        console.log(1);
-
         return Promise.resolve({
             SLAs: SLAs.slice(skip, skip + parseInt(take)),
             total: total
