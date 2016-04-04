@@ -3,6 +3,7 @@
 /// <reference path="js/app.js" />
 /// <reference path="js/boot.js" />
 /// <reference path="js/components/column.component.js" />
+/// <reference path="js/components/pagination.component.js" />
 /// <reference path="js/components/sla.component.js" />
 /// <reference path="js/components/SLA.js" />
 /// <reference path="js/components/sla.service.js" />
