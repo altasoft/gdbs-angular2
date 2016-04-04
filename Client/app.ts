@@ -4,7 +4,8 @@ import {UIPlay}             from './play'
 import {SLAComponent} from './Components/SLA.component';
 import {MenuComponent} from './Components/Menu.component';
 import {SLADetailComponent} from './Components/SLADetail.component';
-import * as ServiceAgreement from './ServiceAgreement/Route'
+import * as ServiceAgreement from './ServiceAgreement/Route';
+import * as MeterPoint from './MeterPoints/MeterPoint';
 
 @Component({
     selector: 'game',
@@ -21,6 +22,7 @@ import * as ServiceAgreement from './ServiceAgreement/Route'
 @RouteConfig([
     { path: '/SLAs', name: 'SLAs', component: SLAComponent, useAsDefault: true },
     { path: '/detail/:id', name: 'SLADetail', component: SLADetailComponent },
-    { path: '/ServiceAgreement/...', name: 'ServiceAgreement', component: ServiceAgreement.Route }
+    { path: '/ServiceAgreement/...', name: 'ServiceAgreement', component: ServiceAgreement.Route },
+    { path: '/MeterPoint/...', name: 'MeterPoint', component: MeterPoint.Route }
 ])
 export class AppComponent { }
