@@ -4,20 +4,21 @@ import {UIMain}             from './main'
 import {UIPlay}             from './play'
 import {ConfigProvider}     from './Services/ConfigProvider'
 import {SLAComponent} from './Components/SLA.component';
+import {MenuComponent} from './Components/Menu.component';
 import {SLADetailComponent} from './Components/SLADetail.component';
 import * as ServiceAgreement from './ServiceAgreement/Route'
 
 @Component({
     selector: 'game',
     template: `
-    <a [routerLink]="['SLAs']" class="btn btn-default">Main Page</a>
-    <a [routerLink]="['ServiceAgreement']" class="btn btn-default">Service Agreement</a>
-    <hr/>
-    <div class="content" id="MainContent" style="opacity: 1; display: block;">
-        <router-outlet></router-outlet>
+    <menu></menu>
+    <div class="page-content">
+        <div class="content" id="MainContent" style="opacity: 1; display: block;">
+            <router-outlet></router-outlet>
+        </div>
     </div>
     `,
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, MenuComponent]
 })
 @RouteConfig([
     { path: '/SLAs', name: 'SLAs', component: SLAComponent, useAsDefault: true },

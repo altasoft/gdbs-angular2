@@ -45,16 +45,6 @@ gulp.task("clean:css", function (cb) {
 gulp.task("clean", ["clean:js", "clean:css"]);
 
 
-
-gulp.task('browserify', function () {
-
-    gulp.src('./wwwroot/lib/ng2-cookies/ng2-cookies.js')
-        .pipe(browserify({
-            insertGlobals: false,
-            debug: false
-        })).pipe(gulp.dest('./build'));
-});
-
 gulp.task('compile-ts', function () {
 
     var tsOutputPath = './wwwroot/js/';
@@ -86,10 +76,9 @@ gulp.task('compile-html', function () {
         .pipe(gulp.dest('./wwwroot/html'));
 });
 
-gulp.task('compile', ['compile-ts', 'compile-less']);
+gulp.task('compile', ['compile-ts', 'compile-less', 'compile-html']);
 
-
-gulp.task('watch', function () {
+gulp.task('watch', ['compile'], function () {
     gulp.watch([paths.ts], ['compile-ts']);
     gulp.watch([paths.less], ['compile-less']);
     gulp.watch([paths.html], ['compile-html']);
