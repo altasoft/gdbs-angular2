@@ -241,3 +241,6 @@ Temporary Items
 
 .vs/
 *.xproj.user
+
+
+wwwroot/
