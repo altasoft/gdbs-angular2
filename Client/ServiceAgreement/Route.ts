@@ -9,7 +9,7 @@ import {List} from './List'
     directives: [ROUTER_DIRECTIVES]
 })
 @RouteConfig([
-    { path: '/', name: 'List', component: List },
+    { path: '/', name: 'List', component: List, useAsDefault: true },
     { path: '/detail/:id', name: 'Details', component: Details }
 ])
 export class Route { }
