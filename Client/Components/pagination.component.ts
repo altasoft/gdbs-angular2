@@ -1,17 +1,12 @@
 ﻿import {Component, OnInit, Input, Output, ElementRef, EventEmitter, Self, Renderer} from 'angular2/core';
 import {ControlValueAccessor, NgModel} from 'angular2/common';
 
-export interface IPaginationConfig {
-    maxSize: number;
-    itemsPerPage: number;
-}
-
 export interface IPageChangedEvent {
     itemsPerPage: number;
     page: number;
 }
 
-const paginationConfig: IPaginationConfig = {
+const paginationConfig = {
     maxSize: 5,
     itemsPerPage: 10,
 }
@@ -22,7 +17,7 @@ const paginationConfig: IPaginationConfig = {
     providers: [NgModel]
 })
 
-export class Pagination implements ControlValueAccessor, OnInit, IPaginationConfig {
+export class Pagination implements ControlValueAccessor, OnInit {
     @Input() public maxSize: number;
     @Output() private pageChanged: EventEmitter<IPageChangedEvent> = new EventEmitter(false);
 
@@ -118,14 +113,6 @@ export class Pagination implements ControlValueAccessor, OnInit, IPaginationConf
 
         this.writeValue(page);
         this.cd.viewToModelUpdate(this.page);
-    }
-
-    private noPrevious(): boolean {
-        return this.page === 1;
-    }
-
-    private noNext(): boolean {
-        return this.page === this.totalPages;
     }
 
     // Create page object used in template

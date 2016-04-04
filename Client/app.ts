@@ -1,8 +1,6 @@
 ﻿import {Component, OnInit}  from 'angular2/core'
 import {RouteConfig, ROUTER_DIRECTIVES, RouteParams, Router} from 'angular2/router'
-import {UIMain}             from './main'
 import {UIPlay}             from './play'
-import {ConfigProvider}     from './Services/ConfigProvider'
 import {SLAComponent} from './Components/SLA.component';
 import {MenuComponent} from './Components/Menu.component';
 import {SLADetailComponent} from './Components/SLADetail.component';

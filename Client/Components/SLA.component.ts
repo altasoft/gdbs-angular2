@@ -16,9 +16,7 @@ import {SLAService} from '../Services/SLA.service';
 
 export class SLAComponent extends ColumnComponent implements OnInit {
     SLAs: SLA[];
-    get totalSLAs() {
-        return this.SLAs ? this.SLAs.length : 0;
-    }
+    total: number;
 
     constructor(
         element: ElementRef,
@@ -30,6 +28,9 @@ export class SLAComponent extends ColumnComponent implements OnInit {
     ngOnInit() {
         super.ngOnInit();
 
-        this._SLAService.getSLAs().then(SLAs => this.SLAs = SLAs);
+        this._SLAService.getSLAs().then(res => {
+            this.SLAs = res.SLAs;
+            this.total = res.total
+        });
     }
 }
