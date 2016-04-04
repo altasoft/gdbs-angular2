@@ -1,31 +1,31 @@
 ﻿<div class="row">
-    <select class="col-md-1" style="margin-top: 20px" [(ngModel)]="itemsPerPage">
+    <select class="col-md-1" [(ngModel)]="itemsPerPage" (ngModelChange)="selectPage(1)">
         <option value="10">10</option>
         <option value="20">20</option>
         <option value="50">50</option>
         <option value="100">100</option>
     </select>
-    <ul class="pagination" style="padding-left: 10px">
+    <ul class="pagination" style="padding-left: 10px; margin-top: 0px">
         <li class="pagination-first page-item"
-            [ngClass]="{'disabled': page == 1}">
+            [ngClass]="{'disabled': currentPage == 1}">
             <a class="page-link" href="" (click)="selectPage(1, $event)"><<</a>
         </li>
         <li class="pagination-prev page-item"
-            [ngClass]="{'disabled': page == 1}">
-            <a class="page-link" href="" (click)="selectPage(page - 1, $event)"><</a>
+            [ngClass]="{'disabled': currentPage == 1}">
+            <a class="page-link" href="" (click)="selectPage(currentPage - 1, $event)"><</a>
         </li>
-        <li *ngFor="#page of pages"
+        <li *ngFor="#page of GetPagesArray()"
             [ngClass]="{'active': page.active}"
-            class="'pagination-page page-item">
+            class="pagination-page page-item">
             <a class="page-link" href="" (click)="selectPage(page.number, $event)">{{page.text}}</a>
         </li>
         <li class="pagination-next page-item"
-            [ngClass]="{'disabled': page == totalPages}">
-            <a class="page-link" href="" (click)="selectPage(page + 1, $event)">></a>
+            [ngClass]="{'disabled': currentPage == calculateTotalPages()}">
+            <a class="page-link" href="" (click)="selectPage(currentPage + 1, $event)">></a>
         </li>
         <li class="pagination-last page-item"
-            [ngClass]="{'disabled': page == totalPages}">
-            <a class="page-link" href="" (click)="selectPage(totalPages, $event)">>></a>
+            [ngClass]="{'disabled': currentPage == calculateTotalPages()}">
+            <a class="page-link" href="" (click)="selectPage(calculateTotalPages(), $event)">>></a>
         </li>
     </ul>
 </div>
