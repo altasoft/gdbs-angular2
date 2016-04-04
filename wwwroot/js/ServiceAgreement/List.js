@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './Services/ConfigProvider'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../Services/SLA.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,8 +10,8 @@ System.register(['angular2/core', 'angular2/router', './Services/ConfigProvider'
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, ConfigProvider_1;
-    var UIPlay;
+    var core_1, router_1, SLA_service_1;
+    var List;
     return {
         setters:[
             function (core_1_1) {
@@ -20,32 +20,34 @@ System.register(['angular2/core', 'angular2/router', './Services/ConfigProvider'
             function (router_1_1) {
                 router_1 = router_1_1;
             },
-            function (ConfigProvider_1_1) {
-                ConfigProvider_1 = ConfigProvider_1_1;
+            function (SLA_service_1_1) {
+                SLA_service_1 = SLA_service_1_1;
             }],
         execute: function() {
-            UIPlay = (function () {
-                function UIPlay(routeParams, configProvider) {
-                    this.routeParams = routeParams;
-                    this.configProvider = configProvider;
-                    this.info = 'Play Page';
+            List = (function () {
+                function List(_SLAService, _router) {
+                    this._SLAService = _SLAService;
+                    this._router = _router;
                 }
-                UIPlay.prototype.ngOnInit = function () {
-                    this.configProvider.channel = this.routeParams.get('channel') || '';
-                    this.configProvider.sid = this.routeParams.get('sid') || this.configProvider.sid;
+                List.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this._SLAService.getSLAs().then(function (SLAs) { return _this.SLAs = SLAs; });
                 };
-                UIPlay = __decorate([
+                List.prototype.gotoDetail = function (id) {
+                    this._router.navigate(['SLADetail', { id: id }]);
+                };
+                List = __decorate([
                     core_1.Component({
-                        selector: 'play',
-                        styleUrls: ['./css/play.ts.css'],
-                        templateUrl: './html/play.ts.html'
+                        selector: 'list',
+                        templateUrl: '/html/ServiceAgreement/List.html',
+                        providers: [SLA_service_1.SLAService]
                     }), 
-                    __metadata('design:paramtypes', [router_1.RouteParams, ConfigProvider_1.ConfigProvider])
-                ], UIPlay);
-                return UIPlay;
+                    __metadata('design:paramtypes', [SLA_service_1.SLAService, router_1.Router])
+                ], List);
+                return List;
             }());
-            exports_1("UIPlay", UIPlay);
+            exports_1("List", List);
         }
     }
 });
-//# sourceMappingURL=play.js.map
+//# sourceMappingURL=List.js.map

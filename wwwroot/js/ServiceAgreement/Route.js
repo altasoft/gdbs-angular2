@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './Details', './List'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,29 +10,42 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
-    var UIMain;
+    var core_1, router_1, Details_1, List_1;
+    var Route;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
+            },
+            function (Details_1_1) {
+                Details_1 = Details_1_1;
+            },
+            function (List_1_1) {
+                List_1 = List_1_1;
             }],
         execute: function() {
-            UIMain = (function () {
-                function UIMain() {
+            Route = (function () {
+                function Route() {
                 }
-                UIMain = __decorate([
+                Route = __decorate([
                     core_1.Component({
-                        selector: 'main',
-                        styleUrls: ['./css/main.ts.css'],
-                        template: "\n    <div class=\"main\">\n        Main Page\n    </div>\n    "
-                    }), 
+                        selector: 'route',
+                        template: "<router-outlet></router-outlet>",
+                        directives: [router_1.ROUTER_DIRECTIVES]
+                    }),
+                    router_1.RouteConfig([
+                        { path: '/', name: 'List', component: List_1.List },
+                        { path: '/detail/:id', name: 'Details', component: Details_1.Details }
+                    ]), 
                     __metadata('design:paramtypes', [])
-                ], UIMain);
-                return UIMain;
+                ], Route);
+                return Route;
             }());
-            exports_1("UIMain", UIMain);
+            exports_1("Route", Route);
         }
     }
 });
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=Route.js.map

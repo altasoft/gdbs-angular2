@@ -11,7 +11,7 @@ System.register(['angular2/core', 'angular2/router', '../Services/SLA.service'],
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, router_1, SLA_service_1;
-    var SLAComponent;
+    var Details;
     return {
         setters:[
             function (core_1_1) {
@@ -24,30 +24,30 @@ System.register(['angular2/core', 'angular2/router', '../Services/SLA.service'],
                 SLA_service_1 = SLA_service_1_1;
             }],
         execute: function() {
-            SLAComponent = (function () {
-                function SLAComponent(_SLAService, _router) {
+            Details = (function () {
+                function Details(_SLAService, _routeParams) {
                     this._SLAService = _SLAService;
-                    this._router = _router;
+                    this._routeParams = _routeParams;
                 }
-                SLAComponent.prototype.ngOnInit = function () {
+                Details.prototype.ngOnInit = function () {
                     var _this = this;
-                    this._SLAService.getSLAs().then(function (SLAs) { return _this.SLAs = SLAs; });
+                    this._SLAService.getSLA(+this._routeParams.get('id')).then(function (SLA) { return _this.SLA = SLA; });
                 };
-                SLAComponent.prototype.gotoDetail = function (id) {
-                    this._router.navigate(['SLADetail', { id: id }]);
+                Details.prototype.goBack = function () {
+                    window.history.back();
                 };
-                SLAComponent = __decorate([
+                Details = __decorate([
                     core_1.Component({
-                        selector: 'list',
-                        templateUrl: '/html/Components/SLA.component.html',
+                        selector: 'details',
+                        templateUrl: '/html/ServiceAgreement/Details.html',
                         providers: [SLA_service_1.SLAService]
                     }), 
-                    __metadata('design:paramtypes', [SLA_service_1.SLAService, router_1.Router])
-                ], SLAComponent);
-                return SLAComponent;
+                    __metadata('design:paramtypes', [SLA_service_1.SLAService, router_1.RouteParams])
+                ], Details);
+                return Details;
             }());
-            exports_1("SLAComponent", SLAComponent);
+            exports_1("Details", Details);
         }
     }
 });
-//# sourceMappingURL=SLA.component.js.map
+//# sourceMappingURL=Details.js.map

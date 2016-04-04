@@ -14,6 +14,10 @@
 /// <reference path="js/models/SLATypes.js" />
 /// <reference path="js/play.js" />
 /// <reference path="js/providers/ConfigProvider.js" />
+/// <reference path="js/serviceagreement/Details.js" />
+/// <reference path="js/serviceagreement/List.js" />
+/// <reference path="js/serviceagreement/root.js" />
+/// <reference path="js/serviceagreement/Route.js" />
 /// <reference path="js/services/ConfigProvider.js" />
 /// <reference path="js/services/SLA.service.js" />
 /// <reference path="lib/angular2/bundles - beta.0/angular2.dev.js" />

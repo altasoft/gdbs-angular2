@@ -3,8 +3,9 @@ import {RouteConfig, ROUTER_DIRECTIVES, RouteParams, Router} from 'angular2/rout
 import {UIMain}             from './main'
 import {UIPlay}             from './play'
 import {ConfigProvider}     from './Services/ConfigProvider'
-import {SLAComponent} from './Components/SLA.component';
+import {SLAComponent}       from './Components/SLA.component';
 import {SLADetailComponent} from './Components/SLADetail.component';
+import * as ServiceAgreement from './ServiceAgreement/Route' 
 
 @Component({
     selector: 'game',
@@ -21,7 +22,7 @@ import {SLADetailComponent} from './Components/SLADetail.component';
 @RouteConfig([
     { path: '/', name: 'SLAs', component: SLAComponent },
     { path: '/detail/:id', name: 'SLADetail', component: SLADetailComponent },
-    { path: '/play', name: 'Play', component: UIPlay }
+    { path: '/ServiceAgreement/...', name: 'ServiceAgreement', component: ServiceAgreement.Route }
 ])
 export class AppComponent {
 

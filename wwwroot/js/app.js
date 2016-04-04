@@ -1,4 +1,6 @@
-System.register(['angular2/core', 'angular2/router', './play', './Components/SLA.component', './Components/SLADetail.component'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', './Components/SLA.component', './Components/SLADetail.component', './ServiceAgreement/Route'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', './play', './Components/SLA
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, play_1, SLA_component_1, SLADetail_component_1;
+    var core_1, router_1, SLA_component_1, SLADetail_component_1, ServiceAgreement;
     var AppComponent;
     return {
         setters:[
@@ -18,14 +20,14 @@ System.register(['angular2/core', 'angular2/router', './play', './Components/SLA
             function (router_1_1) {
                 router_1 = router_1_1;
             },
-            function (play_1_1) {
-                play_1 = play_1_1;
-            },
             function (SLA_component_1_1) {
                 SLA_component_1 = SLA_component_1_1;
             },
             function (SLADetail_component_1_1) {
                 SLADetail_component_1 = SLADetail_component_1_1;
+            },
+            function (ServiceAgreement_1) {
+                ServiceAgreement = ServiceAgreement_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -40,15 +42,14 @@ System.register(['angular2/core', 'angular2/router', './play', './Components/SLA
                     router_1.RouteConfig([
                         { path: '/', name: 'SLAs', component: SLA_component_1.SLAComponent },
                         { path: '/detail/:id', name: 'SLADetail', component: SLADetail_component_1.SLADetailComponent },
-                        { path: '/play', name: 'Play', component: play_1.UIPlay }
+                        { path: '/ServiceAgreement/...', name: 'ServiceAgreement', component: ServiceAgreement.Route }
                     ]), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
                 return AppComponent;
-            })();
+            }());
             exports_1("AppComponent", AppComponent);
         }
     }
 });
-
 //# sourceMappingURL=app.js.map
