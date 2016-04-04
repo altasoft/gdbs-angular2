@@ -238,3 +238,11 @@ Temporary Items
 
 #Nuspec
 *.nuspec
+
+.vs/
+*.xproj.user
+
+
+wwwroot/css/
+wwwroot/js/
+wwwroot/html/
