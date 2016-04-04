@@ -1,28 +1,68 @@
 ﻿import {Component, OnInit} from 'angular2/core';
-import { Router } from 'angular2/router';
+import {ListComponent, ListColumn} from '../Components/List.component'
 
-import {SLA} from '../Models/SLA';
-import {SLAService} from '../Services/SLA.service';
+
 
 @Component({
     selector: 'list',
     templateUrl: '/html/ServiceAgreement/List.html',
-    providers: [SLAService]
+    directives: [ListComponent]
 })
 
-export class List implements OnInit {
-    SLAs: SLA[];
+export class List {
 
-    constructor(
-        private _SLAService: SLAService,
-        private _router: Router) {
-    }
+    // Configuration
+    columns: ListColumn[] = [
+        { Key: 'SLAAdminNumber', Name: 'SLAN', LinkRoute: ['/SLADetail'], LinkItemKey: 'SLAId' },
+        { Key: 'OldCustomerNumber', Name: 'Old Customer Number' },
+        { Key: 'CustomerFullName', Name: 'Customer Full Name' },
+        { Key: 'IdentificationNumber', Name: 'Identification Number' },
+        { Key: 'District' },
+        { Key: 'Address', Sorting: false },
+        { Key: 'ServiceType', Name: 'Service Type' },
+        { Key: 'State' },
+    ]
 
-    ngOnInit() {
-        this._SLAService.getSLAs().then(SLAs => this.SLAs = SLAs);
-    }
 
-    gotoDetail(id: number) {
-        this._router.navigate(['SLADetail', { id: id }]);
-    }
+
+    // Mock Data
+    items = [
+        {
+            SLAId: 1,
+            SLAAdminNumber: '3100003360',
+            OldCustomerNumber: '',
+            CustomerFullName: 'შპს რას მერჩი',
+            IdentificationNumber: '205205205',
+            District: 'აბაშა',
+            Address: 'ცცცც',
+            ServiceType: 'State Budget',
+            State: 'Active',
+        },
+        {
+            SLAId: 2,
+            SLAAdminNumber: '3100003360',
+            OldCustomerNumber: '123456',
+            CustomerFullName: 'ნინჩო ხელაძე 2+',
+            IdentificationNumber: '	01005007111',
+            District: 'აბაშა',
+            Address: 'ცცცც',
+            ServiceType: 'State Budget',
+            State: 'Active',
+        },
+        {
+            SLAId: 3,
+            SLAAdminNumber: '3100002586',
+            OldCustomerNumber: '123321',
+            CustomerFullName: '	რამანა რამანა',
+            IdentificationNumber: '01005007000',
+            District: 'ქარელი',
+            Address: 'ედიშერ მაღალაშვილის ქუჩა, N8',
+            ServiceType: 'Retail Commercial',
+            State: 'Suspended',
+        }
+    ]
+
+
+
+
 }
