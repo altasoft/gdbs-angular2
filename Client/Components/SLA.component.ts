@@ -17,7 +17,6 @@ import {SLAService} from '../Services/SLA.service';
 export class SLAComponent extends ColumnComponent implements OnInit {
     SLAs: SLA[];
     total: number;
-    currentPage: number;
 
     constructor(
         element: ElementRef,
@@ -35,7 +34,7 @@ export class SLAComponent extends ColumnComponent implements OnInit {
         });
     }
 
-    pageChanged(event) {
+    curentPageChange(event) {
         this._SLAService.getSLAs((event.page - 1) * event.itemsPerPage, event.itemsPerPage).then(res => {
             this.SLAs = res.SLAs;
             this.total = res.total
