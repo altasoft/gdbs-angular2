@@ -1,1 +1,0 @@
-{"version":3,"sources":["Models/SLATypes.ts"],"names":["SLATypes"],"mappings":";;;;;YAAA,WAAY,QAAQ;gBAChBA,6CAAWA,CAAAA;gBACXA,uCAAQA,CAAAA;YACZA,CAACA,EAHW,QAAQ,KAAR,QAAQ,QAGnB;4CAAA","file":"Models/SLATypes.js","sourcesContent":["export enum SLATypes {\n    Regular = 0,\n    Zero = 1\n}"],"sourceRoot":"/Source"}
