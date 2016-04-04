@@ -243,4 +243,6 @@ Temporary Items
 *.xproj.user
 
 
-wwwroot/
+wwwroot/css/
+wwwroot/js/
+wwwroot/html/
