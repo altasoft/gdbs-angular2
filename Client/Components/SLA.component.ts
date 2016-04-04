@@ -1,5 +1,6 @@
 ﻿import {Component, OnInit, ElementRef} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router, Location} from 'angular2/router';
+import {Pagination} from './pagination.component'
 
 import {ColumnComponent} from './Column.component'
 
@@ -10,11 +11,14 @@ import {SLAService} from '../Services/SLA.service';
     selector: 'list',
     templateUrl: '/html/Components/SLA.component.html',
     providers: [SLAService],
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, Pagination]
 })
 
 export class SLAComponent extends ColumnComponent implements OnInit {
     SLAs: SLA[];
+    get totalSLAs() {
+        return this.SLAs ? this.SLAs.length : 0;
+    }
 
     constructor(
         element: ElementRef,
