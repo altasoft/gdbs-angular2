@@ -2,5 +2,10 @@
       [columns]="columns"
       [source]="items"
       [title]="'Service Agreements'" 
-      [details_route]="['/ServiceAgreement', 'Details']">
+      [paging]="pagingConfig"
+      [details_route]="['/ServiceAgreement', 'Details']"
+      (refreshData)="refreshData($event)">
+    <div>
+        
+    </div>
 </list>

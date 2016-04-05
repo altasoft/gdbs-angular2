@@ -3,6 +3,9 @@
     <div class="title green">
         <h4>{{title}}</h4>
     </div>
+
+    <ng-content></ng-content>
+
     <div style="overflow: auto;">
         <div class="form-col-2">
             <div>
@@ -11,7 +14,10 @@
                         <thead>
                             <tr>
                                 <td nowrap *ngFor="#col of columns">
-                                    <label>{{col.Name || col.Key}}</label>
+                                    <input type="checkbox" checked="checked" [class.hidden]="true">
+                                    <label [class.pointer]="col.Sorting" (click)="sortClick(col.Key)">{{col.Name || col.Key}}</label>
+                                    <i [class.hidden]="!(col.Sorting && (sortAsc == true))" class="fa fa-caret-up" style="margin-left:5px"></i>
+                                    <i [class.hidden]="!(col.Sorting && (sortAsc == false))" class="fa fa-caret-down" style="margin-left:5px; vertical-align: middle"></i>
                                 </td>
                                 <td nowrap class="text-center">Actions</td>
                             </tr>
@@ -23,12 +29,18 @@
                                     <span *ngIf="!hasLink(item, col)">{{item[col.Key]}}</span>
                                 </td>
                                 <td nowrap class="action-list text-center">
-                                    <a [routerLink]="details_route.concat({ id: item.SLAId })"><i class="fa fa-mail-forward pointer" title="Details"></i></a>
+                                    <a [routerLink]="details_route.concat({ id: item.Id })"><i class="fa fa-mail-forward pointer" title="Details"></i></a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+
+                <pagination *ngIf="paging"
+                            [(ngModel)]="paging.ActivePage"
+                            [totalItems]="50"
+                            (ngModelChange)="pageChanged()">
+                </pagination>
             </div>
         </div>
     </div>
