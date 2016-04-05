@@ -34,7 +34,7 @@ export class SLAComponent extends ColumnComponent implements OnInit {
         });
     }
 
-    curentPageChange(event) {
+    currentPageChange(event) {
         this._SLAService.getSLAs((event.page - 1) * event.itemsPerPage, event.itemsPerPage).then(res => {
             this.SLAs = res.SLAs;
             this.total = res.total

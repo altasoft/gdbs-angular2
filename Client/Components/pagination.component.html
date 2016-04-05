@@ -1,5 +1,5 @@
 ﻿<div class="row">
-    <select class="col-md-1" [(ngModel)]="itemsPerPage" (ngModelChange)="selectPage(1)">
+    <select class="col-md-1" [(ngModel)]="itemsPerPage" (ngModelChange)="selectPage(1)" (change)="blur($event)">
         <option value="10">10</option>
         <option value="20">20</option>
         <option value="50">50</option>

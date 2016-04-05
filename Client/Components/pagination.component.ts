@@ -19,7 +19,7 @@ export class Pagination {
     maxSize: number = 5;
 
     @Output()
-    curentPageChange = new EventEmitter();
+    currentPageChange = new EventEmitter();
 
     @Output()
     itemsPerPageChange = new EventEmitter();
@@ -77,9 +77,12 @@ export class Pagination {
             return;
 
         this.currentPage = page;
-        this.curentPageChange.emit({
-            page: page,
-            itemsPerPage: this.itemsPerPage
-        });
+        this.currentPageChange.emit({ page: page, itemsPerPage: this.itemsPerPage });
+        this.itemsPerPageChange.emit({ page: page, itemsPerPage: this.itemsPerPage });
+    }
+
+    private blur(event: MouseEvent) {
+        let target: any = event.target;
+        target.blur();
     }
 }
