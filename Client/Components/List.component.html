@@ -2,6 +2,13 @@
     <!-- *ngIf -->
     <div class="title green">
         <h4>{{title}}</h4>
+
+        <div class="pull-right">
+            <a (click)="showHideColumns()"><i class="fa fa-columns" data-toggle="tooltip" title="" data-original-title="Show / Hide Columns"></i></a>
+            <a data-toggle="collapse" data-target="#SLAListFilterFormPanel" class="toggle-filter"><i class="fa fa-filter" data-toggle="tooltip" title="Show / Hide Filters"></i></a>
+            <a><i class="fa fa-plus" data-toggle="tooltip" title="Add New"></i></a>
+            <a><i class="fa fa-download" data-toggle="tooltip" style="vertical-align: -1px" title="Export"></i></a>
+        </div>
     </div>
 
     <ng-content></ng-content>
@@ -13,18 +20,21 @@
                     <table class="table table no-more-tables">
                         <thead>
                             <tr>
-                                <td nowrap *ngFor="#col of columns">
-                                    <input type="checkbox" checked="checked" [class.hidden]="true">
-                                    <label [class.pointer]="col.Sorting" (click)="sortClick(col.Key)">{{col.Name || col.Key}}</label>
-                                    <i [class.hidden]="!(col.Sorting && (sortAsc == true))" class="fa fa-caret-up" style="margin-left:5px"></i>
-                                    <i [class.hidden]="!(col.Sorting && (sortAsc == false))" class="fa fa-caret-down" style="margin-left:5px; vertical-align: middle"></i>
+                                <td nowrap *ngFor="#col of columns" [class.hidden]="!isVisible(col)">
+                                    <label [class.hidden]="!configMode">
+                                        <input type="checkbox" [(ngModel)]="col.IsVisible">
+                                        {{col.Name || col.Key}}
+                                    </label>
+                                    <label [class.hidden]="configMode" [class.pointer]="col.Sorting" (click)="sortClick(col.Key)">{{col.Name || col.Key}}</label>
+                                    <i [class.hidden]="!(col.Sorting && (sortAsc === true))" class="fa fa-caret-up" style="margin-left:5px"></i>
+                                    <i [class.hidden]="!(col.Sorting && (sortAsc === false))" class="fa fa-caret-down" style="margin-left:5px; vertical-align: middle"></i>
                                 </td>
                                 <td nowrap class="text-center">Actions</td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="#item of source">
-                                <td nowrap *ngFor="#col of columns">
+                                <td nowrap *ngFor="#col of columns" [class.hidden]="!isVisible(col)">
                                     <a *ngIf="hasLink(item, col)" [routerLink]="col.LinkRoute.concat({ id: item[col.LinkItemKey] })">{{item[col.Key]}}</a>
                                     <span *ngIf="!hasLink(item, col)">{{item[col.Key]}}</span>
                                 </td>
@@ -36,11 +46,11 @@
                     </table>
                 </div>
 
-                <pagination *ngIf="paging"
+                <!--<pagination *ngIf="paging"
                             [(ngModel)]="paging.ActivePage"
                             [totalItems]="50"
                             (ngModelChange)="pageChanged()">
-                </pagination>
+                </pagination>-->
             </div>
         </div>
     </div>

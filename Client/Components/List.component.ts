@@ -1,11 +1,12 @@
 ﻿import {Component, OnInit, ElementRef, Input, Output, EventEmitter} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from 'angular2/router'
+import {ROUTER_DIRECTIVES, Location} from 'angular2/router'
 import {Pagination} from './pagination.component'
 
 @Component({
     selector: 'list',
     templateUrl: '/html/Components/List.component.html',
-    directives: [ROUTER_DIRECTIVES, Pagination]
+    directives: [ROUTER_DIRECTIVES, Pagination],
+    providers: [Location]
 })
 export class ListComponent {
 
@@ -64,6 +65,37 @@ export class ListComponent {
             SortAsc: this.sortAsc
         })
     }
+
+
+
+
+    configMode = true;
+    _id = ''
+
+    constructor(
+        private _element: ElementRef,
+        private _location: Location
+        ) {
+    }
+
+    ngOnInit() {
+        var columns = localStorage.getItem(this._location.path() + '#' + this._id);
+    }
+
+    showHideColumns() {
+
+        if (this.configMode)
+            localStorage.setItem(this._location.path() + '#' + this._id, JSON.stringify(this.columns));
+
+        this.configMode = !this.configMode;
+    }
+
+    isVisible(col: ListColumn) {
+        if (col == undefined)
+            return this.configMode;
+
+        return col.IsVisible || this.configMode;
+    }
 }
 
 export interface PagingConfig {
@@ -86,4 +118,10 @@ export interface ListColumn {
     Sorting?: boolean
     LinkRoute?: string[]
     LinkItemKey?: string
+    IsVisible?: boolean
+}
+
+export interface ListColumnVisibility {
+    Key: string
+    IsVisible: boolean
 }

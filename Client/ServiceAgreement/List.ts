@@ -26,7 +26,7 @@ export class List {
         { Key: 'OldCustomerNumber', Name: 'Old Customer Number' },
         { Key: 'CustomerFullName', Name: 'Customer Full Name' },
         { Key: 'IdentificationNumber', Name: 'Identification Number' },
-        { Key: 'District' },
+        { Key: 'District', IsVisible: true },
         { Key: 'Address', Sorting: false },
         { Key: 'ServiceType', Name: 'Service Type' },
         { Key: 'State' },

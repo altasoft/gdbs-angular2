@@ -6,7 +6,7 @@ import {Location} from 'angular2/router';
 })
 
 export class ColumnComponent implements OnInit {
-    columns = {};
+    columnsVisibility = {};
     configMode = false;
 
     constructor(
@@ -18,22 +18,22 @@ export class ColumnComponent implements OnInit {
     ngOnInit() {
         var columns = localStorage.getItem(this._location.path() + '#' + this._id);
 
-        this.columns = columns ? JSON.parse(columns) : {};
+        this.columnsVisibility = columns ? JSON.parse(columns) : {};
     }
 
     showHideColumns() {
-        if (Object.keys(this.columns).length == 0) {
+        if (Object.keys(this.columnsVisibility).length == 0) {
             var columns = {};
             var cells = this._element.nativeElement.querySelectorAll('#' + this._id + ' td[column]')
 
             for (var i = 0; i < cells.length; i++)
                 columns[cells[i].getAttribute('column')] = true;
 
-            this.columns = columns;
+            this.columnsVisibility = columns;
         }
 
         if (this.configMode)
-            localStorage.setItem(this._location.path() + '#' + this._id, JSON.stringify(this.columns));
+            localStorage.setItem(this._location.path() + '#' + this._id, JSON.stringify(this.columnsVisibility));
 
         this.configMode = !this.configMode;
     }
@@ -42,6 +42,6 @@ export class ColumnComponent implements OnInit {
         if (name == undefined)
             return this.configMode;
 
-        return Object.keys(this.columns).length == 0 || this.columns[name] || this.configMode;
+        return Object.keys(this.columnsVisibility).length == 0 || this.columnsVisibility[name] || this.configMode;
     }
 }
