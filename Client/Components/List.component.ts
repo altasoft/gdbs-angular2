@@ -66,35 +66,31 @@ export class ListComponent {
         })
     }
 
+    @Input()
+    id: string;
 
-
-
-    configMode = true;
-    _id = ''
+    configMode = false;
 
     constructor(
         private _element: ElementRef,
-        private _location: Location
-        ) {
+        private _location: Location) {
     }
 
     ngOnInit() {
-        var columns = localStorage.getItem(this._location.path() + '#' + this._id);
+        let columns: ListColumn[] = JSON.parse(localStorage.getItem(this._location.path() + '#' + this.id));
+
+        if (columns)
+            for (var i = 0; i < columns.length; i++)
+                this.columns.filter(function (c) {
+                    return c.Key == columns[i].Key;
+                })[0].IsVisible = columns[i].IsVisible;
     }
 
     showHideColumns() {
-
         if (this.configMode)
-            localStorage.setItem(this._location.path() + '#' + this._id, JSON.stringify(this.columns));
+            localStorage.setItem(this._location.path() + '#' + this.id, JSON.stringify(this.columns));
 
         this.configMode = !this.configMode;
-    }
-
-    isVisible(col: ListColumn) {
-        if (col == undefined)
-            return this.configMode;
-
-        return col.IsVisible || this.configMode;
     }
 }
 
@@ -119,9 +115,4 @@ export interface ListColumn {
     LinkRoute?: string[]
     LinkItemKey?: string
     IsVisible?: boolean
-}
-
-export interface ListColumnVisibility {
-    Key: string
-    IsVisible: boolean
 }

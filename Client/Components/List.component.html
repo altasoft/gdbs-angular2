@@ -20,7 +20,7 @@
                     <table class="table table no-more-tables">
                         <thead>
                             <tr>
-                                <td nowrap *ngFor="#col of columns" [class.hidden]="!isVisible(col)">
+                                <td nowrap *ngFor="#col of columns" [class.hidden]="!(col.IsVisible || configMode)">
                                     <label [class.hidden]="!configMode">
                                         <input type="checkbox" [(ngModel)]="col.IsVisible">
                                         {{col.Name || col.Key}}
@@ -34,7 +34,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="#item of source">
-                                <td nowrap *ngFor="#col of columns" [class.hidden]="!isVisible(col)">
+                                <td nowrap *ngFor="#col of columns" [class.hidden]="!(col.IsVisible || configMode)">
                                     <a *ngIf="hasLink(item, col)" [routerLink]="col.LinkRoute.concat({ id: item[col.LinkItemKey] })">{{item[col.Key]}}</a>
                                     <span *ngIf="!hasLink(item, col)">{{item[col.Key]}}</span>
                                 </td>
