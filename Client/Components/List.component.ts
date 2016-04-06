@@ -77,23 +77,19 @@ export class ListComponent {
     }
 
     ngOnInit() {
-        let columns: ListColumn[] = JSON.parse(localStorage.getItem(this._location.path() + '#' + this.id));
+        var columns = JSON.parse(localStorage.getItem(this._location.path() + '#' + this.id));
 
         if (columns)
-            for (var i = 0; i < columns.length; i++)
-                this.columns.filter(function (c) {
-                    return c.Key == columns[i].Key;
-                })[0].IsVisible = columns[i].IsVisible;
+            for (var i = 0; i < this.columns.length; i++)
+                this.columns[i].IsVisible = columns[this.columns[i].Key];
     }
 
     showHideColumns() {
         if (this.configMode) {
-            let columns = this.columns.map(function (c) {
-                return {
-                    Key: c.Key,
-                    IsVisible: c.IsVisible || false
-                };
-            });
+            var columns = {};
+
+            for (var i = 0; i < this.columns.length; i++)
+                columns[this.columns[i].Key] = this.columns[i].IsVisible || false;
 
             localStorage.setItem(this._location.path() + '#' + this.id, JSON.stringify(columns));
         }
