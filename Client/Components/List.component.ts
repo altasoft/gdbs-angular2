@@ -87,8 +87,16 @@ export class ListComponent {
     }
 
     showHideColumns() {
-        if (this.configMode)
-            localStorage.setItem(this._location.path() + '#' + this.id, JSON.stringify(this.columns));
+        if (this.configMode) {
+            let columns = this.columns.map(function (c) {
+                return {
+                    Key: c.Key,
+                    IsVisible: c.IsVisible || false
+                };
+            });
+
+            localStorage.setItem(this._location.path() + '#' + this.id, JSON.stringify(columns));
+        }
 
         this.configMode = !this.configMode;
     }
