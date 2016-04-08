@@ -21,6 +21,7 @@
   <ItemGroup>
     <DnxInvisibleFolder Include=".git\" />
     <DnxInvisibleFolder Include=".vs\" />
+    <DnxInvisibleFolder Include="packages\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>
