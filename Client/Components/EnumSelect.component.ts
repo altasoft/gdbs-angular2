@@ -30,7 +30,6 @@ export class EnumSelect implements OnInit {
             option.text = this.enumType[key];
 
             this._e.appendChild(option)
-            this._e.
         }
 
         this._e.onchange = function () {  };
