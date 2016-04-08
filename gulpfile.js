@@ -1,4 +1,4 @@
-﻿/// <binding  ProjectOpened='watch' />
+﻿/// <binding ProjectOpened='watch, live-server' />
 // AfterBuild='clean, compile, min:js' Clean='clean'
 
 var gulp = require("gulp"),
@@ -10,6 +10,7 @@ var gulp = require("gulp"),
     sourcemaps = require('gulp-sourcemaps'),
     tsc = require('gulp-typescript'),
     browserify = require('gulp-browserify'),
+    gls = require('gulp-live-server'),
 
     path = require('path'),
     rimraf = require("rimraf"),
@@ -33,6 +34,10 @@ paths.concatJsDest = paths.webroot + "js/site.min.js";
 paths.concatCssDest = paths.webroot + "css/site.min.css";
 
 
+gulp.task('live-server', function () {
+    var server = gls.static('wwwroot', 8000); //equals to gls.static('public', 3000);
+    server.start();
+});
 
 gulp.task("clean:js", function (cb) {
     rimraf(paths.concatJsDest, cb);

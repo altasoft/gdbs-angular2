@@ -1,5 +1,7 @@
 ﻿import {Component, OnInit} from 'angular2/core';
+import {ROUTER_DIRECTIVES} from 'angular2/router'
 import {ListComponent, ListColumn, PagingConfig} from '../Components/List.component'
+import {ListColumnsComponent} from '../Components/ListColumns.component'
 import {Pagination} from '../Components/pagination.component'
 
 
@@ -7,7 +9,7 @@ import {Pagination} from '../Components/pagination.component'
 @Component({
     selector: 'list',
     templateUrl: '/html/ServiceAgreement/List.html',
-    directives: [ListComponent, Pagination]
+    directives: [ROUTER_DIRECTIVES, ListComponent, ListColumnsComponent, Pagination]
 })
 
 export class List {
@@ -18,7 +20,6 @@ export class List {
         ItemsPerPage: 10,
         TotalItemsCount: 2000
     };
-
 
     // Columns Configuration
     columns: ListColumn[] = [
@@ -36,10 +37,16 @@ export class List {
 
 
 
+
     constructor() {
         this.refreshData({})
     }
 
+
+
+    hasLink(item: any, col: ListColumn) {
+        return item && col && col.LinkRoute && col.LinkItemKey && item[col.LinkItemKey]
+    }
 
     refreshData(info) {
         console.log(info)
