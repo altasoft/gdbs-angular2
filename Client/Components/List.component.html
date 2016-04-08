@@ -17,7 +17,7 @@
         <div class="form-col-2">
             <div>
                 <div class="scroll-view">
-                    <table class="table table no-more-tables">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
                                 <td nowrap *ngFor="#col of columns" [class.hidden]="!(col.IsVisible || configMode)">
@@ -35,12 +35,16 @@
                         <ng-content select="[body]"></ng-content>
                     </table>
                 </div>
-
-                <!--<pagination *ngIf="paging"
-                            [(ngModel)]="paging.ActivePage"
-                            [totalItems]="50"
-                            (ngModelChange)="pageChanged()">
-                </pagination>-->
+                <div class="col-md-12" style="border-top: 1px solid #f3f3f3; padding-top: 20px;">
+                    <pagination *ngIf="paging"
+                                [currentPage]="paging.ActivePage"
+                                [itemsPerPage]="paging.ItemsPerPage"
+                                [totalItems]="paging.TotalItemsCount"
+                                [maxSize]="5"
+                                (currentPageChange)="pageChanged()"
+                                (itemsPerPageChange)="pageChanged()">
+                    </pagination>
+                </div>
             </div>
         </div>
     </div>
