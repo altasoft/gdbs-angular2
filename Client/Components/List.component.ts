@@ -20,22 +20,20 @@ export class ListComponent {
     source: any[]
 
     @Input()
-    details_route: string[]
-
-    @Input()
     paging: PagingConfig
 
     @Output()
     refreshData = new EventEmitter<RefreshInfo>()
 
+    @Input()
+    configMode = false;
+
+    @Output()
+    configModeChange = new EventEmitter<boolean>()
 
     sortKey: string
     sortAsc: boolean
 
-
-    hasLink(item: any, col: ListColumn) {
-        return item && col && col.LinkRoute && col.LinkItemKey && item[col.LinkItemKey]
-    }
 
     sortClick(key: string) {
 
@@ -69,7 +67,6 @@ export class ListComponent {
     @Input()
     id: string;
 
-    configMode = false;
 
     constructor(
         private _element: ElementRef,
@@ -82,6 +79,8 @@ export class ListComponent {
         if (columns)
             for (var i = 0; i < this.columns.length; i++)
                 this.columns[i].IsVisible = columns[this.columns[i].Key];
+
+        this.configModeChange.emit(this.configMode)
     }
 
     showHideColumns() {
@@ -95,6 +94,7 @@ export class ListComponent {
         }
 
         this.configMode = !this.configMode;
+        this.configModeChange.emit(this.configMode)
     }
 }
 
