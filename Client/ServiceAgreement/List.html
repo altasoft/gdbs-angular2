@@ -1,12 +1,173 @@
-﻿<list 
-      [columns]="columns"
+﻿<list [columns]="columns"
       [source]="items"
-      [title]="'Service Agreements'" 
+      [title]="'Service Agreements'"
       [id]="'SAs'"
       [paging]="pagingConfig"
-      [details_route]="['/ServiceAgreement', 'Details']"
-      (refreshData)="refreshData($event)">
-    <div>
-        
+      (refreshData)="refreshData($event)"
+      [(configMode)]="configMode">
+    <div filters>
+        <div id="SLAListFilterFormPanel" class="panel panel-default fade collapse in" data-load-url="/SavedFilter/GetFilter" data-save-url="/SavedFilter/SaveFilter" data-delete-url="/SavedFilter/DeleteFilter">
+            <div class="panel-heading" style="min-height: 54px;">
+                <button type="button" class="btn btn-default delete-filter pull-right" disabled="disabled">Delete</button>
+                <select class="saved-filters pull-right" data-fill-url="/SavedFilter/GetFilters" style="width: 200px; margin-right: 10px;">
+                    <option value="0">No Filter</option>
+                    <optgroup label="Individual" data-type="Individual"></optgroup>
+                    <optgroup label="Common" data-type="Common"></optgroup>
+                </select>
+                <div class="navbar-form" style="margin:0; padding:0;">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default save-filter">Save Filter</button>
+                    </div>
+                    <input type="text" class="form-control required" placeholder="Filter Name" id="FilterName">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default active" id="IndividualLabel">
+                            <input type="radio" value="individual">
+                            Individual
+                        </label>
+                        <label class="btn btn-default" id="CommonLabel">
+                            <input type="radio" value="common">
+                            Common
+                        </label>
+                    </div>
+                    <div class="form-group error-block">
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <form action="/SLA/ListItems" class="form-horizontal" id="SLAListFilterForm" method="post" novalidate="novalidate" data-column="AdminNumber" data-direction="desc">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="AdminNumber">Admin Number</label>
+                        <div class="col-md-2">
+                            <input id="AdminNumber" input-data-type="uinteger" name="AdminNumber" type="text" value="">
+                        </div>
+                        <label class="col-md-2 control-label" for="ServiceUnitId">District</label>
+                        <div class="col-md-2">
+                            <select data-val="true" data-val-number="The field District must be a number." id="ServiceUnitId" name="ServiceUnitId" title="District">
+                                <option selected="selected" value="">--</option>
+                                <option value="1">SU01 - ქარელი</option>
+                                <option value="2">SU02 - ხაშური</option>
+                                <option value="3">SU03 - დმანისი</option>
+                                <option value="4">SU04 - გარდაბანი</option>
+                                <option value="5">SU05 - ყაზბეგი</option>
+                                <option value="6">SU06 - დუშეთი</option>
+                                <option value="7">SU07 - მცხეთა</option>
+                                <option value="14">SU14 - აბაშა</option>
+                                <option value="15">SU15 - ოზურგეთი</option>
+                                <option value="16">SU16 - ლანჩხუთი</option>
+                                <option value="17">SU17 - ჩოხატაური</option>
+                                <option value="18">SU18 - ბაღდათი</option>
+                                <option value="19">SU19 - წყალტუბო</option>
+                                <option value="20">SU20 - ახმეტა</option>
+                                <option value="21">SU21 - ლაგოდეხი</option>
+                                <option value="22">SU22 - ზუგდიდი</option>
+                                <option value="23">SU23 - გურჯაანი</option>
+                                <option value="24">SU24 - ყვარელი</option>
+                                <option value="25">SU25 - სიღნაღი</option>
+                                <option value="26">SU26 - ზესტაფონი</option>
+                                <option value="27">SU27 - დედოფლის წყარო</option>
+                                <option value="28">SU28 - ჭიათურა</option>
+                                <option value="30">SU30 - მარნეული</option>
+                                <option value="31">SU31 - საგარეჯო</option>
+                                <option value="32">SU32 - ფოთი</option>
+                                <option value="33">SU33 - ბათუმი</option>
+                                <option value="35">SU35 - ქობულეთი</option>
+                                <option value="36">SU36 - ხარაგაული</option>
+                                <option value="37">SU37 - ხობი</option>
+                                <option value="38">SU38 - სამტრედია</option>
+                                <option value="42">SU42 - ვანი</option>
+                                <option value="43">SU43 - თერჯოლა</option>
+                                <option value="45">SU45 - ბორჯომი</option>
+                                <option value="46">SU46 - კასპი</option>
+                                <option value="47">SU47 - გორი</option>
+                                <option value="48">SU48 - ბოლნისი</option>
+                                <option value="49">SU49 - თეთრიწყარო</option>
+                                <option value="50">SU50 - ქუთაისი</option>
+                                <option value="51">SU51 - რუსთავი</option>
+                                <option value="58">SU58 - ახალციხე</option>
+                                <option value="61">SU61 - თბილისი</option>
+                                <option value="62">SU62 - PPP test1</option>
+                                <option value="63">SU63 - aaa</option>
+                                <option value="64">SU64 - uuu</option>
+                                <option value="65">SU65 - aaa</option>
+                                <option value="66">SU66 - aadfff</option>
+                                <option value="69">SU69 - test</option>
+                                <option value="70">SU070 - testt</option>
+                                <option value="71">SU71 - ტესტ</option>
+                            </select>
+                        </div>
+                        <label class="col-md-2 control-label" for="FunctionType">Function Type</label>
+                        <div class="col-md-2">
+                            <select id="FunctionType" name="FunctionType" title="Function Type">
+                                <option value="">--</option>
+                                <option value="1">Regular</option>
+                                <option value="2">Zero</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="OldCustomerNumber">Old Customer Number</label>
+                        <div class="col-md-2">
+                            <input data-input-type="uinteger" id="OldCustomerNumber" name="OldCustomerNumber" type="text" value="">
+                        </div>
+                        <label class="col-md-2 control-label" for="SupplyPointNumber">Supply Point Number</label>
+                        <div class="col-md-2">
+                            <input id="SupplyPointNumber" name="SupplyPointNumber" type="text" value="">
+                        </div>
+                        <label class="col-md-2 control-label" for="OwnershipType">Ownership Type</label>
+                        <div class="col-md-2">
+                            <select id="OwnershipType" name="OwnershipType" title="Ownership Type">
+                                <option value="">--</option>
+                                <option value="0">Permanent</option>
+                                <option value="1">Temporal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="CustomerFullName">Full Name</label>
+                        <div class="col-md-2">
+                            <input id="CustomerFullName" name="CustomerFullName" type="text" value="">
+                        </div>
+                        <label class="col-md-2 control-label" for="MeterPointAdminNumber">Meter Point Admin Numer</label>
+                        <div class="col-md-2">
+                            <input id="MeterPointAdminNumber" name="MeterPointAdminNumber" type="text" value="">
+                        </div>
+                        <label class="col-md-2 control-label" for="Currency">Currency</label>
+                        <div class="col-md-2">
+                            <select id="Currency" name="Currency" title="Currency">
+                                <option value="">--</option>
+                                <option value="GEL">GEL</option>
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="AZM">AZM</option>
+                                <option value="BBB">BBB</option>
+                                <option value="AAA">AAA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-8">
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <button type="submit" class="btn btn-block btn-success">Filter</button>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <input type="button" data-button-role="clearFilter" class="btn btn-block btn-default" value="Clear">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+    <tbody body>
+        <tr *ngFor="#item of items">
+            <td nowrap *ngFor="#col of columns" [class.hidden]="!(col.IsVisible || configMode)">
+                <a *ngIf="hasLink(col)" [routerLink]="col.LinkRoute.concat({ id: item[col.LinkItemKey] })">{{item[col.Key]}}</a>
+                <span *ngIf="!hasLink(col)">{{item[col.Key]}}</span>
+            </td>
+            <td nowrap class="action-list text-center">
+                <a [routerLink]="['/ServiceAgreement', 'Details', { id: item.Id }]"><i class="fa fa-mail-forward pointer" title="Details"></i></a>
+            </td>
+        </tr>
+    </tbody>
 </list>
+
