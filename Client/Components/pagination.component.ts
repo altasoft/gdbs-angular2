@@ -64,6 +64,7 @@ export class Pagination {
     }
 
     private selectPage(page: number, event?: MouseEvent) {
+
         if (event) {
             event.preventDefault();
 
@@ -81,8 +82,11 @@ export class Pagination {
         this.itemsPerPageChange.emit({ page: page, itemsPerPage: this.itemsPerPage });
     }
 
-    private blur(event: MouseEvent) {
+    private onChange(event: MouseEvent) {
         let target: any = event.target;
         target.blur();
+
+        this.itemsPerPage = target.value;
+        this.selectPage(1);
     }
 }
