@@ -11,7 +11,9 @@ import {MPListHandler} from './MPListHandler'
 
 export class List {
 
-    classa: any[];
+    //classa: any[];
+
+    pppName: string;
 
     // Configuration
     columns: ListColumn[] = [
@@ -24,7 +26,6 @@ export class List {
         { Key: 'ServiceType', Name: 'Service Type' },
         { Key: 'State' },
     ]
-
 
 
     // Mock Data
