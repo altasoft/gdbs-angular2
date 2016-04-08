@@ -4,6 +4,7 @@ import {UIPlay}             from './play'
 import {SLAComponent} from './Components/SLA.component';
 import {MenuComponent} from './Components/Menu.component';
 import {SLADetailComponent} from './Components/SLADetail.component';
+import {SLACreateComponent} from './Components/SLACreate.component';
 import * as ServiceAgreement from './ServiceAgreement/Route';
 import * as MeterPoint from './MeterPoints/MeterPoint';
 
@@ -22,6 +23,7 @@ import * as MeterPoint from './MeterPoints/MeterPoint';
 @RouteConfig([
     { path: '/SLAs', name: 'SLAs', component: SLAComponent, useAsDefault: true },
     { path: '/detail/:id', name: 'SLADetail', component: SLADetailComponent },
+    { path: '/SLA/create', name: 'SLACreate', component: SLACreateComponent },
     { path: '/ServiceAgreement/...', name: 'ServiceAgreement', component: ServiceAgreement.Route },
     { path: '/MeterPoint/...', name: 'MeterPoint', component: MeterPoint.Route }
 ])
