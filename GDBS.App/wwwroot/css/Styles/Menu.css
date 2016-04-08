@@ -1,0 +1,340 @@
+/**********************
+       CONSTANTS
+***********************/
+/**********************
+        MIXINS
+***********************/
+.no-margin {
+  margin: 0;
+  padding: 0;
+}
+/*********************************
+   OPERATIONS & COLOR FUNCTIONS
+**********************************/
+/**********************
+         STYLES
+***********************/
+/*** Page sidebar ***/
+.menu-item {
+  padding: 11.5px 11px 11.5px 31px;
+  color: #ffffff;
+}
+.page-sidebar {
+  background-color: #1b1e24 !important;
+  background-image: url('img/logo2.png');
+  background-repeat: no-repeat;
+  background-position: 145px bottom;
+  background-size: 110px;
+  color: #ffffff;
+  min-width: 280px;
+  z-index: 2000;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.page-sidebar ul {
+  list-style: none;
+  background: rgba(27, 30, 36, 0.77);
+  margin: 0;
+  padding: 0;
+}
+.page-sidebar ul li {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.page-sidebar ul li:hover {
+  background: rgba(0, 0, 0, 0.26);
+}
+.page-sidebar ul li:hover a {
+  padding: 11.5px 11px 11.5px 31px;
+  color: #ffffff;
+  color: #ffffff !important;
+}
+.page-sidebar ul li:hover i {
+  color: #ffffff !important;
+}
+.page-sidebar ul li a {
+  color: #8b91a0;
+  margin: 0;
+  padding: 11.5px 11px 11.5px 31px;
+  display: block;
+  position: relative;
+  border: 0;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: normal;
+  margin-right: 5px;
+  text-shadow: none;
+}
+.page-sidebar ul li a:hover {
+  padding: 11.5px 11px 11.5px 31px;
+  color: #ffffff;
+}
+.page-sidebar ul li a .arrow:before {
+  font-size: 16px;
+  font-family: FontAwesome;
+  content: "\f104";
+  font-weight: 300;
+  text-shadow: none;
+  float: right;
+  margin-right: 5px;
+  display: inline;
+}
+.page-sidebar ul li a .arrow.open:before {
+  color: #ffffff !important;
+  font-size: 16px;
+  font-family: FontAwesome;
+  content: "\f107";
+  font-weight: 300;
+  text-shadow: none;
+  float: right;
+  margin-right: 3px;
+  display: inline;
+}
+.page-sidebar ul li i {
+  margin-right: 5px;
+}
+.page-sidebar ul li:last-child > a {
+  border-bottom: 1px solid transparent !important;
+}
+.page-sidebar ul li a i {
+  color: #8b91a0;
+  width: 20px;
+  text-align: center;
+  display: inline-block;
+}
+.page-sidebar ul li.open a {
+  padding: 11.5px 11px 11.5px 31px;
+  color: #ffffff;
+}
+.page-sidebar ul li.active a {
+  border-top-color: transparent !important;
+  color: #ffffff;
+  border: none;
+  text-shadow: none;
+}
+.page-sidebar ul li.active a .selected {
+  display: block;
+  width: 8px;
+  height: 25px;
+  background-image: url("/Content/img/sidebar-menu-arrow.png");
+  float: right;
+  position: absolute;
+  right: -8px;
+  top: 8px;
+}
+.page-sidebar ul li.active i {
+  color: #ffffff !important;
+}
+.page-sidebar ul li.active ul.sub-menu {
+  display: block;
+}
+.page-sidebar .menu-wrapper {
+  height: 30px;
+}
+.page-sidebar.mini > ul > li > ul.sub-menu {
+  margin: -46px 0 0 50px;
+  padding: 0;
+  position: absolute;
+  width: auto;
+  z-index: 999;
+  min-width: 250px;
+}
+.page-sidebar > ul > li > ul.sub-menu {
+  margin: 0;
+  padding: 8px 0 10px 0;
+  display: none;
+  list-style: none;
+  clear: both;
+}
+.page-sidebar > ul > li > ul.sub-menu li {
+  margin: 1px 0 0 0;
+  padding: 0;
+  background: none;
+}
+.page-sidebar > ul > li > ul.sub-menu li a {
+  margin: 0;
+  padding: 5px 0;
+  display: block;
+  padding-left: 53px !important;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 300;
+  background: none;
+}
+.page-sidebar > ul > li > ul.sub-menu li a:hover {
+  background: rgba(0, 0, 0, 0.26);
+  color: #ffffff !important;
+}
+.page-sidebar > ul > li > ul.sub-menu li:first-child a {
+  border-top: 0 !important;
+}
+.page-sidebar > ul > li > ul.sub-menu li .active a {
+  color: #ffffff !important;
+  background: #4b4b4b !important;
+}
+.page-sidebar > ul > li > ul.sub-menu li .start a {
+  border-top-color: transparent !important;
+}
+.page-sidebar > ul > li > ul.sub-menu:last-child a {
+  border-bottom: 1px solid transparent !important;
+}
+body.mobile_version .page-sidebar {
+  display: none;
+}
+body.mobile_version .page-content {
+  margin-left: 62px;
+}
+body:not(.mobile_version) .page-sidebar {
+  display: block;
+}
+body:not(.mobile_version) .page-content {
+  margin-left: 280px;
+}
+@media (max-width: 1200px) {
+  .page-sidebar {
+    display: none !important;
+  }
+  .page-content {
+    margin-left: 62px !important;
+  }
+  #showLeftPushMenu {
+    display: none;
+  }
+}
+#SubmenuPopover {
+  position: fixed;
+  width: 100%;
+  z-index: 2000;
+}
+#SubmenuPopover .popover {
+  background-color: #1b1e24;
+  z-index: 2000;
+}
+#SubmenuPopover .popover-title {
+  background-color: rgba(27, 30, 36, 0.24);
+  color: #9a9797;
+  border-bottom-color: gray;
+}
+#SubmenuPopover .arrow:after {
+  border-right-color: #1b1e24;
+}
+#SubmenuPopover .popover-content a {
+  color: silver;
+}
+#SubmenuPopover li {
+  margin-top: 12px;
+  margin-bottom: 10px;
+}
+.menu-azure {
+  background-color: #1b1e24;
+  background-image: url('img/logo2.png');
+  background-repeat: no-repeat;
+  background-position: 145px bottom;
+  background-size: 110px;
+  color: #ffffff;
+  width: 62px;
+  z-index: 2000;
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  padding-top: 7px;
+  padding-bottom: 30px;
+}
+.menu-azure ul {
+  list-style: none;
+  background: rgba(27, 30, 36, 0.77);
+  margin: 0;
+  padding: 0;
+}
+.menu-azure ul li {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-align: left;
+}
+.menu-azure ul li .socar-logo {
+  width: 20px;
+  margin-left: 3px;
+  margin-bottom: 10px;
+  opacity: .9;
+}
+.menu-azure ul li:hover {
+  background: rgba(0, 0, 0, 0.26);
+}
+.menu-azure ul li:hover a {
+  padding: 11.5px 11px 11.5px 31px;
+  color: #ffffff;
+  color: #ffffff !important;
+}
+.menu-azure ul li:hover i {
+  color: #ffffff !important;
+}
+.menu-azure ul li:hover .socar-logo {
+  opacity: 1;
+}
+.menu-azure ul li a {
+  color: #8b91a0;
+  margin: 0;
+  padding: 12px 16px 12px 16px;
+  display: block;
+  position: relative;
+  border: 0;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: normal;
+  text-shadow: none;
+}
+.menu-azure ul li a:hover {
+  padding: 12px 16px 12px 16px;
+  color: #ffffff;
+}
+.menu-azure ul li a .arrow:before {
+  font-size: 16px;
+  font-family: FontAwesome;
+  content: "\f104";
+  font-weight: 300;
+  text-shadow: none;
+  float: right;
+  margin-right: 5px;
+  display: inline;
+}
+.menu-azure ul li a .arrow.open:before {
+  color: #ffffff !important;
+  font-size: 16px;
+  font-family: FontAwesome;
+  content: "\f107";
+  font-weight: 300;
+  text-shadow: none;
+  float: right;
+  margin-right: 3px;
+  display: inline;
+}
+.menu-azure ul li i {
+  font-size: 20px;
+  text-align: center;
+  width: 25px;
+}
+.menu-azure ul li:last-child > a {
+  border-bottom: 1px solid transparent !important;
+}
+.menu-azure-bg {
+  background-color: #1b1e24;
+  z-index: 1999;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 62px;
+  content: '';
+}
+/*# sourceMappingURL=menu.css.map */

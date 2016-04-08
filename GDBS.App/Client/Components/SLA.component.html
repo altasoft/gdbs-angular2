@@ -1,0 +1,74 @@
+﻿<div class="form">
+    <div class="title green">
+        <h4>List</h4>
+        <div class="pull-right">
+            <a (click)="showHideColumns()"><i class="fa fa-columns" title="Show / Hide Columns"></i></a>
+            <a [routerLink]="['SLACreate']"><i class="fa fa-plus" title="Add New"></i></a>
+        </div>
+    </div>
+    <div style="overflow: auto;">
+        <div class="form-col-2">
+            <div>
+                <div class="scroll-view">
+                    <table class="table table no-more-tables" id="SLAs">
+                        <thead>
+                            <tr>
+                                <td nowrap column="id" *ngIf="isVisible('id')">
+                                    <input type="checkbox" [(ngModel)]="columns['id']" *ngIf="isVisible()" />
+                                    <label>Id</label>
+                                </td>
+                                <td nowrap column="adminNumber" *ngIf="isVisible('adminNumber')">
+                                    <input type="checkbox" [(ngModel)]="columns['adminNumber']" *ngIf="isVisible()" />
+                                    <label>Admin Number</label>
+                                </td>
+                                <td nowrap column="type" *ngIf="isVisible('type')">
+                                    <input type="checkbox" [(ngModel)]="columns['type']" *ngIf="isVisible()" />
+                                    <label>Type</label>
+                                </td>
+                                <td nowrap column="totalBalance" *ngIf="isVisible('totalBalance')">
+                                    <input type="checkbox" [(ngModel)]="columns['totalBalance']" *ngIf="isVisible()" />
+                                    <label>Total Balance</label>
+                                </td>
+                                <td nowrap column="currency" *ngIf="isVisible('currency')">
+                                    <input type="checkbox" [(ngModel)]="columns['currency']" *ngIf="isVisible()" />
+                                    <label>Currency</label>
+                                </td>
+                                <td nowrap column="state" *ngIf="isVisible('state')">
+                                    <input type="checkbox" [(ngModel)]="columns['state']" *ngIf="isVisible()" />
+                                    <label>State</label>
+                                </td>
+                                <td nowrap class="text-center">Actions</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="#SLA of SLAs">
+                                <td nowrap *ngIf="isVisible('id')">
+                                    <span>{{SLA.id}}</span>
+                                </td>
+                                <td nowrap *ngIf="isVisible('adminNumber')">
+                                    <a [routerLink]="['SLADetail', {id: SLA.id}]">{{SLA.adminNumber}}</a>
+                                </td>
+                                <td nowrap *ngIf="isVisible('type')">
+                                    <span>{{SLA.type}}</span>
+                                </td>
+                                <td nowrap *ngIf="isVisible('totalBalance')">
+                                    <span>{{SLA.totalBalance}}</span>
+                                </td>
+                                <td nowrap *ngIf="isVisible('currency')">
+                                    <span>{{SLA.currency}}</span>
+                                </td>
+                                <td nowrap *ngIf="isVisible('state')">
+                                    <span>{{SLA.state}}</span>
+                                </td>
+                                <td nowrap class="action-list text-center">
+                                    <a [routerLink]="['SLADetail', {id: SLA.id}]"><i class="fa fa-mail-forward pointer" title="Details"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <pagination [totalItems]="total" (currentPageChange)="currentPageChange($event)"></pagination>
+            </div>
+        </div>
+    </div>
+</div>
