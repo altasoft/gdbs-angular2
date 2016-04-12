@@ -32,6 +32,14 @@ System.register(['angular2/core', 'angular2/router', './pagination.component'], 
                     this.configMode = false;
                     this.configModeChange = new core_1.EventEmitter();
                 }
+                ListComponent.prototype.ngOnInit = function () {
+                    var columns = JSON.parse(localStorage.getItem(this.getPathName('columns')));
+                    this.isFiltersVisible = JSON.parse(localStorage.getItem(this.getPathName('filters')));
+                    if (columns)
+                        for (var i = 0; i < this.columns.length; i++)
+                            this.columns[i].IsVisible = columns[this.columns[i].Key];
+                    this.configModeChange.emit(this.configMode);
+                };
                 ListComponent.prototype.sortClick = function (key) {
                     if (this.sortKey != key) {
                         this.sortKey = key;
@@ -46,6 +54,20 @@ System.register(['angular2/core', 'angular2/router', './pagination.component'], 
                     console.log(key, this.sortAsc);
                     this.pageChanged();
                 };
+                ListComponent.prototype.toggleConfigColumns = function () {
+                    if (this.configMode) {
+                        var columns = {};
+                        for (var i = 0; i < this.columns.length; i++)
+                            columns[this.columns[i].Key] = this.columns[i].IsVisible || false;
+                        localStorage.setItem(this.getPathName('columns'), JSON.stringify(columns));
+                    }
+                    this.configMode = !this.configMode;
+                    this.configModeChange.emit(this.configMode);
+                };
+                ListComponent.prototype.toggleFilters = function () {
+                    this.isFiltersVisible = !this.isFiltersVisible;
+                    localStorage.setItem(this.getPathName('filters'), JSON.stringify(this.isFiltersVisible));
+                };
                 ListComponent.prototype.pageChanged = function () {
                     this.refreshData.emit({
                         Skip: this.paging.ActivePage * this.paging.ItemsPerPage,
@@ -54,22 +76,8 @@ System.register(['angular2/core', 'angular2/router', './pagination.component'], 
                         SortAsc: this.sortAsc
                     });
                 };
-                ListComponent.prototype.ngOnInit = function () {
-                    var columns = JSON.parse(localStorage.getItem(this._location.path() + '#' + this.id));
-                    if (columns)
-                        for (var i = 0; i < this.columns.length; i++)
-                            this.columns[i].IsVisible = columns[this.columns[i].Key];
-                    this.configModeChange.emit(this.configMode);
-                };
-                ListComponent.prototype.showHideColumns = function () {
-                    if (this.configMode) {
-                        var columns = {};
-                        for (var i = 0; i < this.columns.length; i++)
-                            columns[this.columns[i].Key] = this.columns[i].IsVisible || false;
-                        localStorage.setItem(this._location.path() + '#' + this.id, JSON.stringify(columns));
-                    }
-                    this.configMode = !this.configMode;
-                    this.configModeChange.emit(this.configMode);
+                ListComponent.prototype.getPathName = function (name) {
+                    return this._location.path() + '#' + this.id + ':' + name;
                 };
                 __decorate([
                     core_1.Input(), 
@@ -118,5 +126,4 @@ System.register(['angular2/core', 'angular2/router', './pagination.component'], 
         }
     }
 });
-
 //# sourceMappingURL=List.component.js.map

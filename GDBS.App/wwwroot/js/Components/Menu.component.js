@@ -40,5 +40,4 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
         }
     }
 });
-
 //# sourceMappingURL=Menu.component.js.map

@@ -44,5 +44,4 @@ System.register(['angular2/core', 'angular2/router', './List'], function(exports
         }
     }
 });
-
 //# sourceMappingURL=MeterPoint.js.map

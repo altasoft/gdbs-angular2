@@ -31,8 +31,32 @@ export class ListComponent {
     @Output()
     configModeChange = new EventEmitter<boolean>()
 
+    @Input()
+    id: string;
+
+
     sortKey: string
     sortAsc: boolean
+
+    isFiltersVisible: boolean
+
+
+    constructor(
+        private _element: ElementRef,
+        private _location: Location) {
+    }
+
+
+    ngOnInit() {
+        var columns = JSON.parse(localStorage.getItem(this.getPathName('columns')));
+        this.isFiltersVisible = JSON.parse(localStorage.getItem(this.getPathName('filters')));
+
+        if (columns)
+            for (var i = 0; i < this.columns.length; i++)
+                this.columns[i].IsVisible = columns[this.columns[i].Key];
+
+        this.configModeChange.emit(this.configMode)
+    }
 
 
     sortClick(key: string) {
@@ -55,6 +79,26 @@ export class ListComponent {
         this.pageChanged()
     }
 
+    toggleConfigColumns() {
+        if (this.configMode) {
+            var columns = {};
+
+            for (var i = 0; i < this.columns.length; i++)
+                columns[this.columns[i].Key] = this.columns[i].IsVisible || false;
+
+            localStorage.setItem(this.getPathName('columns'), JSON.stringify(columns));
+        }
+
+        this.configMode = !this.configMode;
+        this.configModeChange.emit(this.configMode)
+    }
+
+    toggleFilters() {
+        this.isFiltersVisible = !this.isFiltersVisible
+
+        localStorage.setItem(this.getPathName('filters'), JSON.stringify(this.isFiltersVisible));
+    }
+
     pageChanged() {
         this.refreshData.emit({
             Skip: this.paging.ActivePage * this.paging.ItemsPerPage,
@@ -64,39 +108,11 @@ export class ListComponent {
         })
     }
 
-    @Input()
-    id: string;
-
-
-    constructor(
-        private _element: ElementRef,
-        private _location: Location) {
-    }
-
-    ngOnInit() {
-        var columns = JSON.parse(localStorage.getItem(this._location.path() + '#' + this.id));
-
-        if (columns)
-            for (var i = 0; i < this.columns.length; i++)
-                this.columns[i].IsVisible = columns[this.columns[i].Key];
-
-        this.configModeChange.emit(this.configMode)
-    }
-
-    showHideColumns() {
-        if (this.configMode) {
-            var columns = {};
-
-            for (var i = 0; i < this.columns.length; i++)
-                columns[this.columns[i].Key] = this.columns[i].IsVisible || false;
-
-            localStorage.setItem(this._location.path() + '#' + this.id, JSON.stringify(columns));
-        }
-
-        this.configMode = !this.configMode;
-        this.configModeChange.emit(this.configMode)
+    getPathName(name: string): string {
+        return this._location.path() + '#' + this.id + ':' + name
     }
 }
+
 
 export interface PagingConfig {
     ItemsPerPage: number

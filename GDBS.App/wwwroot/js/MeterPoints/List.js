@@ -86,5 +86,4 @@ System.register(['angular2/core', './MPListHandler'], function(exports_1, contex
         }
     }
 });
-
 //# sourceMappingURL=List.js.map

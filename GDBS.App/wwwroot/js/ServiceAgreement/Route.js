@@ -48,5 +48,4 @@ System.register(['angular2/core', 'angular2/router', './Details', './List'], fun
         }
     }
 });
-
 //# sourceMappingURL=Route.js.map
