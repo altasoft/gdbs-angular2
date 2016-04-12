@@ -18,20 +18,11 @@ export class Create {
 
     form: ControlGroup;
 
-    username: Control;
-    type: Control;
-    email: Control;
-    asyncEmail: Control;
-
-
     constructor(private builder: FormBuilder) {
 
-        this.username = new Control('', Validators.compose([Validators.required, UsernameValidator.startsWithNumber]));
-        this.type = new Control('', Validators.required)
-
         this.form = builder.group({
-            username: this.username,
-            type: this.type
+            username: new Control('', Validators.compose([Validators.required, UsernameValidator.startsWithNumber])),
+            type: new Control('', Validators.required)
         });
     }
 
@@ -46,14 +37,14 @@ export class Create {
     }
 
     changeValidator() {
-        this.username.validator = UsernameValidator.startsWithNumber
-        this.type.validator = null
+        this.form.controls['username'].validator = null
+        this.form.controls['type'].validator = null
 
-        this.username.updateValueAndValidity({
+        this.form.controls['username'].updateValueAndValidity({
             onlySelf: false,
             emitEvent: true
         })
-        this.type.updateValueAndValidity({
+        this.form.controls['type'].updateValueAndValidity({
             onlySelf: false,
             emitEvent: true
         })

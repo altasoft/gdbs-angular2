@@ -11,13 +11,13 @@
         <form [ngFormModel]="form">
             <div>
                 <label>Admin Number:</label> <input type="text" ngControl="username" />
-                <p *ngIf="username.pending">Fetching data from the server...</p>
+                <!--<p *ngIf="username.pending">Fetching data from the server...</p>
 
                 <div *ngIf="username.dirty && !username.valid && !username.pending">
                     <p *ngIf="username.errors.required">Username is required.</p>
                     <p *ngIf="username.errors.startsWithNumber">Your username can't start with a number</p>
                     <p *ngIf="username.errors.usernameTaken">This username is taken</p>
-                </div>
+                </div>-->
             </div>
 
             <div>
