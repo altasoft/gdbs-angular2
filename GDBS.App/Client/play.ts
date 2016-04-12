@@ -6,7 +6,7 @@ import {ConfigProvider}                 from './Services/ConfigProvider'
 @Component({
     selector: 'play',
     styleUrls: ['./css/play.ts.css'],
-    templateUrl: './html/play.ts.html'
+    templateUrl: 'play.ts.html'
 })
 export class UIPlay implements OnInit {
 

@@ -18,6 +18,7 @@ export class Create {
 
     form: ControlGroup;
 
+
     constructor(private builder: FormBuilder) {
 
         this.form = builder.group({
@@ -39,7 +40,7 @@ export class Create {
     changeValidator() {
         this.form.controls['username'].validator = null
         this.form.controls['type'].validator = null
-
+        
         this.form.controls['username'].updateValueAndValidity({
             onlySelf: false,
             emitEvent: true

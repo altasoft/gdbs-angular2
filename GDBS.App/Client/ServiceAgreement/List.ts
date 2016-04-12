@@ -23,10 +23,10 @@ export class List {
 
     // Columns Configuration
     columns: ListColumn[] = [
-        { Key: 'SLAAdminNumber', Name: 'SLAN', LinkRoute: ['/SLADetail'], LinkItemKey: 'SLAId' },
-        { Key: 'OldCustomerNumber', Name: 'Old Customer Number' },
-        { Key: 'CustomerFullName', Name: 'Customer Full Name' },
-        { Key: 'IdentificationNumber', Name: 'Identification Number' },
+        { Key: 'SLAAdminNumber', Name: 'SLAN', LinkRoute: ['/SLADetail'], LinkItemKey: 'SLAId', IsVisible: true },
+        { Key: 'OldCustomerNumber', Name: 'Old Customer Number', IsVisible: true },
+        { Key: 'CustomerFullName', Name: 'Customer Full Name', IsVisible: true },
+        { Key: 'IdentificationNumber', Name: 'Identification Number', IsVisible: true },
         { Key: 'District', IsVisible: true },
         { Key: 'Address', Sorting: false },
         { Key: 'ServiceType', Name: 'Service Type' },

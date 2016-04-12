@@ -11,11 +11,13 @@ var gulp = require("gulp"),
     tsc = require('gulp-typescript'),
     browserify = require('gulp-browserify'),
     gls = require('gulp-live-server'),
+    embedTemplates = require('gulp-angular-embed-templates'),
 
     path = require('path'),
     rimraf = require("rimraf"),
     project = require("./project.json"),
     tsProject = tsc.createProject('tsconfig.json');
+
 
 
 var paths = {
@@ -56,8 +58,19 @@ gulp.task('compile-ts', function () {
 
     var sourceTsFiles = [paths.ts, paths.dts];
 
+    var embedConfig = {
+        sourceType: 'ts',
+        minimize: {
+            empty: true,                      // KEEP empty attributes
+            ssi: true,                        // KEEP Server Side Includes
+            conditionals: true,               // KEEP conditional internet explorer comments
+            spare: false,                      // KEEP redundant attributes
+            quotes: true,                     // KEEP arbitrary quotes
+        }
+    }
 
     var tsResult = gulp.src(sourceTsFiles)
+                       //.pipe(embedTemplates(embedConfig))
                        .pipe(sourcemaps.init())
                        .pipe(tsc(tsProject));
 
