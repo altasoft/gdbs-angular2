@@ -1,4 +1,4 @@
-System.register(['angular2/core', './MPListHandler'], function(exports_1, context_1) {
+System.register(['angular2/core', '../Components/List.component', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,26 +10,41 @@ System.register(['angular2/core', './MPListHandler'], function(exports_1, contex
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, MPListHandler_1;
+    var core_1, List_component_1, router_1;
     var List;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (MPListHandler_1_1) {
-                MPListHandler_1 = MPListHandler_1_1;
+            function (List_component_1_1) {
+                List_component_1 = List_component_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
             List = (function () {
                 function List() {
-                    // Configuration
+                    //constructor(paging: Pagination) {
+                    //    paging.testEvent.subscribe(function () { alert(1); });
+                    //}
+                    //onTestEvent() {
+                    //    alert(1);
+                    //}
+                    // Paging Configuration
+                    this.pagingConfig = {
+                        ActivePage: 1,
+                        ItemsPerPage: 10,
+                        TotalItemsCount: 3000
+                    };
+                    // Columns Configuration
                     this.columns = [
                         { Key: 'SLAAdminNumber', Name: 'SLAN', LinkRoute: ['/SLADetail'], LinkItemKey: 'SLAId' },
                         { Key: 'OldCustomerNumber', Name: 'Old Customer Number' },
                         { Key: 'CustomerFullName', Name: 'Customer Full Name' },
                         { Key: 'IdentificationNumber', Name: 'Identification Number' },
-                        { Key: 'District' },
+                        { Key: 'District', IsVisible: true },
                         { Key: 'Address', Sorting: false },
                         { Key: 'ServiceType', Name: 'Service Type' },
                         { Key: 'State' },
@@ -71,12 +86,14 @@ System.register(['angular2/core', './MPListHandler'], function(exports_1, contex
                         }
                     ];
                 }
+                List.prototype.hasLink = function (item, col) {
+                    return item && col && col.LinkRoute && col.LinkItemKey && item[col.LinkItemKey];
+                };
                 List = __decorate([
                     core_1.Component({
                         selector: 'list',
                         templateUrl: '/html/MeterPoints/List.html',
-                        //directives: [ListComponent]
-                        directives: [MPListHandler_1.MPListHandler]
+                        directives: [List_component_1.ListComponent, router_1.ROUTER_DIRECTIVES],
                     }), 
                     __metadata('design:paramtypes', [])
                 ], List);
@@ -86,4 +103,5 @@ System.register(['angular2/core', './MPListHandler'], function(exports_1, contex
         }
     }
 });
+
 //# sourceMappingURL=List.js.map

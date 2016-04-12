@@ -11,7 +11,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var SLAs, total, SLAService;
+    var SLAs, total, MeterPointService;
     return {
         setters:[
             function (core_1_1) {
@@ -33,10 +33,10 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 { "id": 12, "adminNumber": "05040302010", "type": 1, "totalBalance": 13.13, "currency": "GEL", "state": 2 },
             ];
             total = SLAs.length;
-            SLAService = (function () {
-                function SLAService() {
+            MeterPointService = (function () {
+                function MeterPointService() {
                 }
-                SLAService.prototype.getSLAs = function (skip, take) {
+                MeterPointService.prototype.getSLAs = function (skip, take) {
                     if (skip === void 0) { skip = 0; }
                     if (take === void 0) { take = 10; }
                     return Promise.resolve({
@@ -44,18 +44,18 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                         total: total
                     });
                 };
-                SLAService.prototype.getSLA = function (id) {
+                MeterPointService.prototype.getSLA = function (id) {
                     return Promise.resolve(SLAs).then(function (SLAs) { return SLAs.filter(function (SLA) { return SLA.id === id; })[0]; });
                 };
-                SLAService = __decorate([
+                MeterPointService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [])
-                ], SLAService);
-                return SLAService;
+                ], MeterPointService);
+                return MeterPointService;
             }());
-            exports_1("SLAService", SLAService);
+            exports_1("MeterPointService", MeterPointService);
         }
     }
 });
 
-//# sourceMappingURL=SLA.service.js.map
+//# sourceMappingURL=MeterPoint.service.js.map

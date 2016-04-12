@@ -31,6 +31,7 @@ System.register(['angular2/core', 'angular2/router', './pagination.component'], 
                     this.refreshData = new core_1.EventEmitter();
                     this.configMode = false;
                     this.configModeChange = new core_1.EventEmitter();
+                    this.onTestEvent = new core_1.EventEmitter();
                 }
                 ListComponent.prototype.ngOnInit = function () {
                     var columns = JSON.parse(localStorage.getItem(this.getPathName('columns')));
@@ -107,6 +108,10 @@ System.register(['angular2/core', 'angular2/router', './pagination.component'], 
                     core_1.Output(), 
                     __metadata('design:type', Object)
                 ], ListComponent.prototype, "configModeChange", void 0);
+                __decorate([
+                    core_1.Output(), 
+                    __metadata('design:type', Object)
+                ], ListComponent.prototype, "onTestEvent", void 0);
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', String)

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './List'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './List', './Test'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', './List'], function(exports
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, List_1;
+    var core_1, router_1, List_1, Test_1;
     var Route;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(['angular2/core', 'angular2/router', './List'], function(exports
             },
             function (List_1_1) {
                 List_1 = List_1_1;
+            },
+            function (Test_1_1) {
+                Test_1 = Test_1_1;
             }],
         execute: function() {
             Route = (function () {
@@ -35,6 +38,7 @@ System.register(['angular2/core', 'angular2/router', './List'], function(exports
                     }),
                     router_1.RouteConfig([
                         { path: '/', name: 'List', component: List_1.List, useAsDefault: true },
+                        { path: '/test', name: 'Test', component: Test_1.Test },
                     ]), 
                     __metadata('design:paramtypes', [])
                 ], Route);
@@ -44,4 +48,5 @@ System.register(['angular2/core', 'angular2/router', './List'], function(exports
         }
     }
 });
+
 //# sourceMappingURL=MeterPoint.js.map

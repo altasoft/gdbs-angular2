@@ -87,7 +87,7 @@ export class ListComponent {
                 columns[this.columns[i].Key] = this.columns[i].IsVisible || false;
 
             localStorage.setItem(this.getPathName('columns'), JSON.stringify(columns));
-        }
+    }
 
         this.configMode = !this.configMode;
         this.configModeChange.emit(this.configMode)
@@ -106,7 +106,7 @@ export class ListComponent {
             SortKey: this.sortKey,
             SortAsc: this.sortAsc
         })
-    }
+        }
 
     getPathName(name: string): string {
         return this._location.path() + '#' + this.id + ':' + name
