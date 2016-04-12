@@ -4,6 +4,7 @@
       [id]="'SAs'"
       [paging]="pagingConfig"
       (refreshData)="refreshData($event)"
+      (addItem)="addItem()"
       [(configMode)]="configMode">
     <div filters>
         <div class="panel panel-default fade collapse in" data-load-url="/SavedFilter/GetFilter" data-save-url="/SavedFilter/SaveFilter" data-delete-url="/SavedFilter/DeleteFilter">

@@ -31,6 +31,9 @@ export class ListComponent {
     @Output()
     configModeChange = new EventEmitter<boolean>()
 
+    @Output()
+    addItem = new EventEmitter()
+
     @Input()
     id: string;
 
@@ -110,6 +113,10 @@ export class ListComponent {
 
     getPathName(name: string): string {
         return this._location.path() + '#' + this.id + ':' + name
+    }
+
+    createNew() {
+        this.addItem.emit(null)
     }
 }
 

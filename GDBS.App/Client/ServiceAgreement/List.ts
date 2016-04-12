@@ -1,5 +1,5 @@
 ﻿import {Component, OnInit} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from 'angular2/router'
+import {ROUTER_DIRECTIVES, Router} from 'angular2/router'
 import {ListComponent, ListColumn, PagingConfig} from '../Components/List.component'
 import {Pagination} from '../Components/pagination.component'
 import {RightsService} from '../Services/Rights.service'
@@ -39,7 +39,7 @@ export class List {
 
 
 
-    constructor(private rights: RightsService) {
+    constructor(private rights: RightsService, private router: Router) {
         this.refreshData({})
     }
 
@@ -88,5 +88,9 @@ export class List {
                 State: 'Suspended',
             }
         ]
+    }
+
+    addItem() {
+        this.router.navigate(['Create'])
     }
 }
