@@ -2,7 +2,6 @@
     <!-- *ngIf -->
     <div class="title green">
         <h4>{{title}}</h4>
-
         <div class="pull-right">
             <a (click)="showHideColumns()"><i class="fa fa-columns" data-toggle="tooltip" title="" data-original-title="Show / Hide Columns"></i></a>
             <a data-toggle="collapse" data-target="#SLAListFilterFormPanel" class="toggle-filter"><i class="fa fa-filter" data-toggle="tooltip" title="Show / Hide Filters"></i></a>
@@ -10,9 +9,7 @@
             <a><i class="fa fa-download" data-toggle="tooltip" style="vertical-align: -1px" title="Export"></i></a>
         </div>
     </div>
-
     <ng-content select="[filters]"></ng-content>
-
     <div style="overflow: auto;">
         <div class="form-col-2">
             <div>

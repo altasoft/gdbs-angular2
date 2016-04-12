@@ -28,19 +28,19 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 }
                 Pagination.prototype.GetPagesArray = function () {
                     var pages = [];
-                    var totalPages = this.calculateTotalPages();
+                    this.totalPages = this.calculateTotalPages();
                     var startPage = 1;
-                    var endPage = totalPages;
-                    if (this.maxSize < totalPages) {
+                    var endPage = this.totalPages;
+                    if (this.maxSize < this.totalPages) {
                         startPage = ((Math.ceil(this.currentPage / this.maxSize) - 1) * this.maxSize) + 1;
-                        endPage = Math.min(startPage + this.maxSize - 1, totalPages);
+                        endPage = Math.min(startPage + this.maxSize - 1, this.totalPages);
                     }
                     for (var number = startPage; number <= endPage; number++)
                         pages.push(this.makePage(number, number.toString(), number === this.currentPage));
-                    if (this.maxSize < totalPages) {
+                    if (this.maxSize < this.totalPages) {
                         if (startPage > 1)
                             pages.unshift(this.makePage(startPage - 1, '...', false));
-                        if (endPage < totalPages)
+                        if (endPage < this.totalPages)
                             pages.push(this.makePage(endPage + 1, '...', false));
                     }
                     return pages;
@@ -64,7 +64,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                             target.blur();
                         }
                     }
-                    if ((page == this.currentPage || page == 0 || page == this.calculateTotalPages() + 1) && event != undefined)
+                    if ((page == this.currentPage || page == 0 || page == this.totalPages + 1) && event != undefined)
                         return;
                     this.currentPage = page;
                     this.currentPageChange.emit({ page: page, itemsPerPage: this.itemsPerPage });

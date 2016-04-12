@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './List', './Test'], function(exports_1, context_1) {
+System.register(['angular2/core', '../Components/pagination.component', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,43 +10,46 @@ System.register(['angular2/core', 'angular2/router', './List', './Test'], functi
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, List_1, Test_1;
-    var Route;
+    var core_1, pagination_component_1, router_1;
+    var Test;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
+            function (pagination_component_1_1) {
+                pagination_component_1 = pagination_component_1_1;
+            },
             function (router_1_1) {
                 router_1 = router_1_1;
-            },
-            function (List_1_1) {
-                List_1 = List_1_1;
-            },
-            function (Test_1_1) {
-                Test_1 = Test_1_1;
             }],
         execute: function() {
-            Route = (function () {
-                function Route() {
+            Test = (function () {
+                function Test() {
+                    this.paging = {
+                        ActivePage: 1,
+                        ItemsPerPage: 10,
+                        TotalItemsCount: 70
+                    };
                 }
-                Route = __decorate([
+                Test.prototype.onClick = function () {
+                    this.paging.TotalItemsCount = 2000;
+                };
+                Test.prototype.pageChanged = function () {
+                };
+                Test = __decorate([
                     core_1.Component({
-                        selector: 'route',
-                        template: '<router-outlet></router-outlet>',
-                        directives: [router_1.ROUTER_DIRECTIVES]
-                    }),
-                    router_1.RouteConfig([
-                        { path: '/', name: 'List', component: List_1.List, useAsDefault: true },
-                        { path: '/test', name: 'Test', component: Test_1.Test },
-                    ]), 
+                        selector: 'list',
+                        templateUrl: '/html/MeterPoints/Test.html',
+                        directives: [pagination_component_1.Pagination, router_1.ROUTER_DIRECTIVES]
+                    }), 
                     __metadata('design:paramtypes', [])
-                ], Route);
-                return Route;
+                ], Test);
+                return Test;
             }());
-            exports_1("Route", Route);
+            exports_1("Test", Test);
         }
     }
 });
 
-//# sourceMappingURL=MeterPoint.js.map
+//# sourceMappingURL=Test.js.map

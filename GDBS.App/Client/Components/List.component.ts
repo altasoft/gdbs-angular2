@@ -34,6 +34,13 @@ export class ListComponent {
     sortKey: string
     sortAsc: boolean
 
+    @Output()
+    onTestEvent = new EventEmitter();
+
+    ooonTestEvent() {
+        alert('list');
+        this.onTestEvent.emit({});
+    }
 
     sortClick(key: string) {
 

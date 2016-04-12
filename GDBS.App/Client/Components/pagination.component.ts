@@ -24,25 +24,27 @@ export class Pagination {
     @Output()
     itemsPerPageChange = new EventEmitter();
 
+    totalPages: number;
+
     GetPagesArray(): any[] {
         let pages: any[] = [];
-        let totalPages = this.calculateTotalPages();
+        this.totalPages = this.calculateTotalPages();
         let startPage = 1;
-        let endPage = totalPages;
+        let endPage = this.totalPages;
 
-        if (this.maxSize < totalPages) {
+        if (this.maxSize < this.totalPages) {
             startPage = ((Math.ceil(this.currentPage / this.maxSize) - 1) * this.maxSize) + 1;
-            endPage = Math.min(startPage + this.maxSize - 1, totalPages);
+            endPage = Math.min(startPage + this.maxSize - 1, this.totalPages);
         }
 
         for (var number = startPage; number <= endPage; number++)
             pages.push(this.makePage(number, number.toString(), number === this.currentPage));
 
-        if (this.maxSize < totalPages) {
+        if (this.maxSize < this.totalPages) {
             if (startPage > 1)
                 pages.unshift(this.makePage(startPage - 1, '...', false));
 
-            if (endPage < totalPages)
+            if (endPage < this.totalPages)
                 pages.push(this.makePage(endPage + 1, '...', false));
         }
 
@@ -74,10 +76,11 @@ export class Pagination {
             }
         }
 
-        if ((page == this.currentPage || page == 0 || page == this.calculateTotalPages() + 1) && event != undefined)
+        if ((page == this.currentPage || page == 0 || page == this.totalPages + 1) && event != undefined)
             return;
 
         this.currentPage = page;
+
         this.currentPageChange.emit({ page: page, itemsPerPage: this.itemsPerPage });
         this.itemsPerPageChange.emit({ page: page, itemsPerPage: this.itemsPerPage });
     }
