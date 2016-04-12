@@ -166,6 +166,7 @@
             </td>
             <td nowrap class="action-list text-center">
                 <a [routerLink]="['/ServiceAgreement', 'Details', { id: item.Id }]"><i class="fa fa-mail-forward pointer" title="Details"></i></a>
+                <a *ngIf="rights.allowed('ServiceAgreement', 'Remove')"><i class="fa fa-remove pointer" title="Delete"></i></a>
             </td>
         </tr>
     </tbody>

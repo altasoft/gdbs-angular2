@@ -2,6 +2,7 @@
 import {ROUTER_DIRECTIVES} from 'angular2/router'
 import {ListComponent, ListColumn, PagingConfig} from '../Components/List.component'
 import {Pagination} from '../Components/pagination.component'
+import {RightsService} from '../Services/Rights.service'
 
 
 
@@ -38,7 +39,7 @@ export class List {
 
 
 
-    constructor() {
+    constructor(private rights: RightsService) {
         this.refreshData({})
     }
 
