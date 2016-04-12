@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../Components/List.component', '../Components/ListColumns.component', '../Components/pagination.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../Components/List.component', '../Components/pagination.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', '../Components/List.compone
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, List_component_1, ListColumns_component_1, pagination_component_1;
+    var core_1, router_1, List_component_1, pagination_component_1;
     var List;
     return {
         setters:[
@@ -22,9 +22,6 @@ System.register(['angular2/core', 'angular2/router', '../Components/List.compone
             },
             function (List_component_1_1) {
                 List_component_1 = List_component_1_1;
-            },
-            function (ListColumns_component_1_1) {
-                ListColumns_component_1 = ListColumns_component_1_1;
             },
             function (pagination_component_1_1) {
                 pagination_component_1 = pagination_component_1_1;
@@ -96,7 +93,7 @@ System.register(['angular2/core', 'angular2/router', '../Components/List.compone
                     core_1.Component({
                         selector: 'list',
                         templateUrl: '/html/ServiceAgreement/List.html',
-                        directives: [router_1.ROUTER_DIRECTIVES, List_component_1.ListComponent, ListColumns_component_1.ListColumnsComponent, pagination_component_1.Pagination]
+                        directives: [router_1.ROUTER_DIRECTIVES, List_component_1.ListComponent, pagination_component_1.Pagination]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], List);

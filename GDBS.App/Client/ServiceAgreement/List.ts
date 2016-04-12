@@ -1,7 +1,6 @@
 ﻿import {Component, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router'
 import {ListComponent, ListColumn, PagingConfig} from '../Components/List.component'
-import {ListColumnsComponent} from '../Components/ListColumns.component'
 import {Pagination} from '../Components/pagination.component'
 
 
@@ -9,7 +8,7 @@ import {Pagination} from '../Components/pagination.component'
 @Component({
     selector: 'list',
     templateUrl: '/html/ServiceAgreement/List.html',
-    directives: [ROUTER_DIRECTIVES, ListComponent, ListColumnsComponent, Pagination]
+    directives: [ROUTER_DIRECTIVES, ListComponent, Pagination]
 })
 
 export class List {
