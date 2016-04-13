@@ -11,7 +11,6 @@ var gulp = require("gulp"),
     tsc = require('gulp-typescript'),
     browserify = require('gulp-browserify'),
     gls = require('gulp-live-server'),
-    embedTemplates = require('gulp-angular-embed-templates'),
 
     path = require('path'),
     rimraf = require("rimraf"),

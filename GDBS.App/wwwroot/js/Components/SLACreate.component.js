@@ -81,5 +81,4 @@ System.register(['angular2/core', 'angular2/router', 'angular2/common', '../Mode
         }
     }
 });
-
 //# sourceMappingURL=SLACreate.component.js.map
