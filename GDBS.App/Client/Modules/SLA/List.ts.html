@@ -3,7 +3,7 @@
         <h4>List</h4>
         <div class="pull-right">
             <a (click)="showHideColumns()"><i class="fa fa-columns" title="Show / Hide Columns"></i></a>
-            <a [routerLink]="['SLACreate']"><i class="fa fa-plus" title="Add New"></i></a>
+            <a [routerLink]="['Create']"><i class="fa fa-plus" title="Add New"></i></a>
         </div>
     </div>
     <div style="overflow: auto;">
@@ -46,7 +46,7 @@
                                     <span>{{SLA.id}}</span>
                                 </td>
                                 <td nowrap *ngIf="isVisible('adminNumber')">
-                                    <a [routerLink]="['SLADetail', {id: SLA.id}]">{{SLA.adminNumber}}</a>
+                                    <a [routerLink]="['Details', {id: SLA.id}]">{{SLA.adminNumber}}</a>
                                 </td>
                                 <td nowrap *ngIf="isVisible('type')">
                                     <span>{{SLA.type}}</span>
@@ -61,7 +61,7 @@
                                     <span>{{SLA.state}}</span>
                                 </td>
                                 <td nowrap class="action-list text-center">
-                                    <a [routerLink]="['SLADetail', {id: SLA.id}]"><i class="fa fa-mail-forward pointer" title="Details"></i></a>
+                                    <a [routerLink]="['Details', {id: SLA.id}]"><i class="fa fa-mail-forward pointer" title="Details"></i></a>
                                 </td>
                             </tr>
                         </tbody>
