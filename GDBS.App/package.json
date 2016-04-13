@@ -1,5 +1,5 @@
 {
-  "name": "app.jok.io",
+  "name": "gdbs.altasoft.ge",
   "version": "0.0.1",
   "devDependencies": {
     "angular2": "2.0.0-beta.14",
@@ -16,6 +16,7 @@
     "gulp-typescript": "2.12.2",
     "gulp-uglify": "1.5.3",
     "gulp-live-server": "0.0.29",
+    "gulp-angular-embed-templates2": "2.2.0",
     "ng2-cookies": "0.1.5",
     "path": "0.12.7",
     "rimraf": "2.5.2",

@@ -1,12 +1,12 @@
 ﻿import {Component, OnInit}  from 'angular2/core'
 import {RouteConfig, ROUTER_DIRECTIVES, RouteParams, Router} from 'angular2/router'
-import {UIPlay}             from './play'
-import {SLAComponent} from './Components/SLA.component';
-import {MenuComponent} from './Components/Menu.component';
-import {SLADetailComponent} from './Components/SLADetail.component';
-import {SLACreateComponent} from './Components/SLACreate.component';
-import * as ServiceAgreement from './ServiceAgreement/Route';
-import * as MeterPoint from './MeterPoints/MeterPoint';
+
+import {MenuComponent} from './Common/Components';
+
+import * as SLA from './Modules/SLA/Config';
+import * as ServiceAgreement from './Modules/ServiceAgreement/Config';
+import * as MeterPoint from './Modules/MeterPoint/Config';
+
 
 @Component({
     selector: 'game',
@@ -21,10 +21,8 @@ import * as MeterPoint from './MeterPoints/MeterPoint';
     directives: [ROUTER_DIRECTIVES, MenuComponent]
 })
 @RouteConfig([
-    { path: '/SLAs', name: 'SLAs', component: SLAComponent, useAsDefault: true },
-    { path: '/detail/:id', name: 'SLADetail', component: SLADetailComponent },
-    { path: '/SLA/create', name: 'SLACreate', component: SLACreateComponent },
-    { path: '/ServiceAgreement/...', name: 'ServiceAgreement', component: ServiceAgreement.Route },
-    { path: '/MeterPoint/...', name: 'MeterPoint', component: MeterPoint.Route }
+    { path: '/SLA/...', name: 'SLA', component: SLA.Config, useAsDefault: true },
+    { path: '/ServiceAgreement/...', name: 'ServiceAgreement', component: ServiceAgreement.Config },
+    { path: '/MeterPoint/...', name: 'MeterPoint', component: MeterPoint.Config }
 ])
 export class AppComponent { }

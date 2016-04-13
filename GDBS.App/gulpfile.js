@@ -11,6 +11,7 @@ var gulp = require("gulp"),
     tsc = require('gulp-typescript'),
     browserify = require('gulp-browserify'),
     gls = require('gulp-live-server'),
+    embedTemplates = require('gulp-angular-embed-templates'),
 
     path = require('path'),
     rimraf = require("rimraf"),
@@ -69,7 +70,7 @@ gulp.task('compile-ts', function () {
     }
 
     var tsResult = gulp.src(sourceTsFiles)
-                       //.pipe(embedTemplates(embedConfig))
+                       .pipe(embedTemplates(embedConfig))
                        .pipe(sourcemaps.init())
                        .pipe(tsc(tsProject));
 
@@ -88,17 +89,17 @@ gulp.task('compile-less', function () {
 });
 
 
-gulp.task('compile-html', function () {
-    gulp.src(paths.html)
-        .pipe(gulp.dest('./wwwroot/html'));
-});
+//gulp.task('compile-html', function () {
+//    gulp.src(paths.html)
+//        .pipe(gulp.dest('./wwwroot/html'));
+//});
 
-gulp.task('compile', ['compile-ts', 'compile-less', 'compile-html']);
+gulp.task('compile', ['compile-ts', 'compile-less']);
 
 gulp.task('watch', ['compile'], function () {
     gulp.watch([paths.ts], ['compile-ts']);
     gulp.watch([paths.less], ['compile-less']);
-    gulp.watch([paths.html], ['compile-html']);
+    gulp.watch([paths.html], ['compile-ts']);
 });
 
 
