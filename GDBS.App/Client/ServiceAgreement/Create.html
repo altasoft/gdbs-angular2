@@ -1,0 +1,40 @@
+﻿<div class="form">
+    <div class="title green">
+        <a (click)="goBack()"><i class="fa fa-angle-double-left"></i></a>
+        <h4>Create New</h4>
+    </div>
+    <div class="form-col-2 col-1-1">
+
+        <div *ngIf="form.valid" class="alert alert-success">Form is Valid</div>
+        <div *ngIf="!form.valid" class="alert alert-warning">Form is Invalid</div>
+
+        <form [ngFormModel]="form">
+            <div>
+                <label>Admin Number:</label> <input type="text" ngControl="username" />
+                <!--<p *ngIf="username.pending">Fetching data from the server...</p>
+
+                <div *ngIf="username.dirty && !username.valid && !username.pending">
+                    <p *ngIf="username.errors.required">Username is required.</p>
+                    <p *ngIf="username.errors.startsWithNumber">Your username can't start with a number</p>
+                    <p *ngIf="username.errors.usernameTaken">This username is taken</p>
+                </div>-->
+            </div>
+
+            <div>
+                <label>Type:</label>
+                <select ngControl="type">
+                    <option value="">Default</option>
+                    <option value="1">Normal</option>
+                    <option value="2">Cool</option>
+                </select>
+            </div>
+
+            <br />
+            <br />
+
+            <button (click)="submitData()" type="button" [disabled]="!form.valid" class="btn btn-primary">Sumbit data</button>
+            <button (click)="changeValidator()" type="button" class="btn btn-primary">changeValidator</button>
+        </form>
+    </div>
+</div>
+

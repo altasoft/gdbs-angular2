@@ -4,9 +4,10 @@
       [id]="'SAs'"
       [paging]="pagingConfig"
       (refreshData)="refreshData($event)"
+      (addItem)="addItem()"
       [(configMode)]="configMode">
     <div filters>
-        <div id="SLAListFilterFormPanel" class="panel panel-default fade collapse in" data-load-url="/SavedFilter/GetFilter" data-save-url="/SavedFilter/SaveFilter" data-delete-url="/SavedFilter/DeleteFilter">
+        <div class="panel panel-default fade collapse in" data-load-url="/SavedFilter/GetFilter" data-save-url="/SavedFilter/SaveFilter" data-delete-url="/SavedFilter/DeleteFilter">
             <div class="panel-heading" style="min-height: 54px;">
                 <button type="button" class="btn btn-default delete-filter pull-right" disabled="disabled">Delete</button>
                 <select class="saved-filters pull-right" data-fill-url="/SavedFilter/GetFilters" style="width: 200px; margin-right: 10px;">
@@ -166,6 +167,7 @@
             </td>
             <td nowrap class="action-list text-center">
                 <a [routerLink]="['/ServiceAgreement', 'Details', { id: item.Id }]"><i class="fa fa-mail-forward pointer" title="Details"></i></a>
+                <a *ngIf="rights.allowed('ServiceAgreement', 'Remove')"><i class="fa fa-remove pointer" title="Delete"></i></a>
             </td>
         </tr>
     </tbody>

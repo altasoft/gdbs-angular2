@@ -1,7 +1,8 @@
 ﻿import {Component, OnInit} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from 'angular2/router'
+import {ROUTER_DIRECTIVES, Router} from 'angular2/router'
 import {ListComponent, ListColumn, PagingConfig} from '../Components/List.component'
 import {Pagination} from '../Components/pagination.component'
+import {RightsService} from '../Services/Rights.service'
 
 
 
@@ -22,10 +23,10 @@ export class List {
 
     // Columns Configuration
     columns: ListColumn[] = [
-        { Key: 'SLAAdminNumber', Name: 'SLAN', LinkRoute: ['/SLADetail'], LinkItemKey: 'SLAId' },
-        { Key: 'OldCustomerNumber', Name: 'Old Customer Number' },
-        { Key: 'CustomerFullName', Name: 'Customer Full Name' },
-        { Key: 'IdentificationNumber', Name: 'Identification Number' },
+        { Key: 'SLAAdminNumber', Name: 'SLAN', LinkRoute: ['/SLADetail'], LinkItemKey: 'SLAId', IsVisible: true },
+        { Key: 'OldCustomerNumber', Name: 'Old Customer Number', IsVisible: true },
+        { Key: 'CustomerFullName', Name: 'Customer Full Name', IsVisible: true },
+        { Key: 'IdentificationNumber', Name: 'Identification Number', IsVisible: true },
         { Key: 'District', IsVisible: true },
         { Key: 'Address', Sorting: false },
         { Key: 'ServiceType', Name: 'Service Type' },
@@ -37,7 +38,8 @@ export class List {
 
 
 
-    constructor() {
+
+    constructor(private rights: RightsService, private router: Router) {
         this.refreshData({})
     }
 
@@ -86,5 +88,9 @@ export class List {
                 State: 'Suspended',
             }
         ]
+    }
+
+    addItem() {
+        this.router.navigate(['Create'])
     }
 }

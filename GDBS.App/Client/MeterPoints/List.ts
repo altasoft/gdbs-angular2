@@ -1,32 +1,48 @@
 ﻿import {Component} from 'angular2/core';
-import {ListComponent, ListColumn} from '../Components/List.component'
-import {MPListHandler} from './MPListHandler'
+import {ListComponent, ListColumn, PagingConfig} from '../Components/List.component'
+//import {Pagination} from '../Components/pagination.component'
+import {ROUTER_DIRECTIVES} from 'angular2/router'
 
 @Component({
     selector: 'list',
     templateUrl: '/html/MeterPoints/List.html',
-    //directives: [ListComponent]
-    directives: [MPListHandler]
+    directives: [ListComponent, ROUTER_DIRECTIVES],
+    //providers: [Pagination]
 })
 
 export class List {
 
-    //classa: any[];
+    //constructor(paging: Pagination) {
+    //    paging.testEvent.subscribe(function () { alert(1); });
+    //}
 
-    pppName: string;
+    //onTestEvent() {
+    //    alert(1);
+    //}
 
-    // Configuration
+    // Paging Configuration
+    pagingConfig: PagingConfig = {
+        ActivePage: 1,
+        ItemsPerPage: 10,
+        TotalItemsCount: 3000
+    };
+
+    // Columns Configuration
     columns: ListColumn[] = [
         { Key: 'SLAAdminNumber', Name: 'SLAN', LinkRoute: ['/SLADetail'], LinkItemKey: 'SLAId' },
         { Key: 'OldCustomerNumber', Name: 'Old Customer Number' },
         { Key: 'CustomerFullName', Name: 'Customer Full Name' },
         { Key: 'IdentificationNumber', Name: 'Identification Number' },
-        { Key: 'District' },
+        { Key: 'District', IsVisible: true },
         { Key: 'Address', Sorting: false },
         { Key: 'ServiceType', Name: 'Service Type' },
         { Key: 'State' },
     ]
 
+
+    hasLink(item: any, col: ListColumn) {
+        return item && col && col.LinkRoute && col.LinkItemKey && item[col.LinkItemKey]
+    }
 
     // Mock Data
     items = [
