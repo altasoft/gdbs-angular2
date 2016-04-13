@@ -5,8 +5,8 @@ import {ControlGroup, Control, FormBuilder, Validators} from 'angular2/common';
 import {SLA} from './Models/SLA';
 import {SLATypes} from './Models/SLATypes';
 import {SLAStates} from './Models/SLAStates';
-import {EnumSelect} from '../../Common/Components';
-//import {Validator} from './Validator';
+import {EnumSelect} from '../../Common/Components/EnumSelect';
+import {Validator} from '../../Common/Components/Validator';
 
 @Component({
     selector: 'create',
@@ -22,19 +22,26 @@ export class Create {
     form: ControlGroup;
     type: Control;
     totalBalance: Control;
+    currency: Control;
     state: Control;
 
     constructor(private builder: FormBuilder) {
         this.type = new Control('', Validators.required);
-        this.totalBalance = new Control('', Validators.compose([Validators.required]));
+        this.totalBalance = new Control('', Validators.compose([Validators.required, Validator.isNumber]));
+        this.currency = new Control('');
         this.state = new Control('0', Validators.required);
 
         this.form = builder.group({
             type: this.type,
             totalBalance: this.totalBalance,
-            currency: new Control(''),
-            state: this.state
-        });
+            currency: this.currency,
+            state: this.state,
+        }, { validator: this.isRegularAndUSD });
+    }
+
+    isRegularAndUSD(group: ControlGroup) {
+        if (group.controls['type'].value == SLATypes.Regular && group.controls['currency'].value == 'USD')
+            return { isRegularAndUSD: true };
     }
 
     clear() {
