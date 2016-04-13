@@ -1,8 +1,3 @@
-﻿<select class="form-control" [(ngModel)]="source" [required]="isRequired" ngControl="select" #select="ngForm">
-    <option value="">--</option>
-    <option value="0">Regular</option>
-    <option value="1">Zero</option>
+﻿<select class="form-control" [(ngModel)]="value" (blur)="onTouched()" [disabled]="disabled">
+    <option *ngFor="#option of options" value="{{option.value}}">{{option.text}}</option>
 </select>
-<div [hidden]="select.valid && select.value || select.pristine" class="alert alert-danger">
-    Field is required
-</div>

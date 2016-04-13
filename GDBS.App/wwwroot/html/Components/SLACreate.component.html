@@ -4,53 +4,55 @@
         <h4>Create</h4>
     </div>
     <div class="form-col-2">
-        <form *ngIf="active" (ngSubmit)="onSubmit()" #slaForm="ngForm">
+        <form *ngIf="active" [ngFormModel]="form">
             <section>
                 <div>
                     <label for="type">Type</label>
                 </div>
                 <div>
-                    {{model.type}}
-                    <select class="form-control" [(ngModel)]="model.type" [enumType]="SLATypes" ngControl="type" #type="ngForm" required></select>
-                    <div [hidden]="type.valid || type.pristine" class="alert alert-danger">
-                        Type is required
+                    <enumselect [enumType]="SLATypes" ngControl="type"></enumselect>
+                    <div *ngIf="type.dirty && !type.valid">
+                        <p *ngIf="type.errors.required">
+                            Type is required
+                        </p>
                     </div>
                 </div>
             </section>
-            <!--<section>
+            <section>
                 <div>
-                    <label for="type">Total Balance</label>
+                    <label for="totalBalance">Total Balance</label>
                 </div>
                 <div>
-                    <input type="text" class="form-control" [(ngModel)]="model.totalBalance" ngControl="totalBalance" #totalBalance="ngForm" required />
-                    <div [hidden]="totalBalance.valid || totalBalance.pristine" class="alert alert-danger">
-                        Total Balance is required
+                    <input type="text" class="form-control" ngControl="totalBalance" />
+                    <div *ngIf="totalBalance.dirty && !totalBalance.valid">
+                        <p *ngIf="!totalBalance.errors.isNumber">
+                            Total Balance must be a number
+                        </p>
                     </div>
                 </div>
-            </section>-->
-            <!--<section>
+            </section>
+            <section>
                 <div>
-                    <label for="type">Currency</label>
+                    <label for="currency">Currency</label>
                 </div>
                 <div>
-                    <select class="form-control" [(ngModel)]="model.currency" ngControl="currency" #currency="ngForm" required>
-                        <option value="undefined">--</option>
+                    <select class="form-control" ngControl="currency">
+                        <option value="">--</option>
                         <option value="GEL">GEL</option>
                         <option value="USD">USD</option>
                     </select>
-                    <div [hidden]="currency.valid || currency.pristine" class="alert alert-danger">
-                        Currency is required
-                    </div>
                 </div>
-            </section>-->
+            </section>
             <section>
                 <div>
-                    <label for="type">State</label>
+                    <label for="state">State</label>
                 </div>
                 <div>
-                    <select class="form-control" [(ngModel)]="model.state" [enumType]="SLAStates" ngControl="state" #state="ngForm" required disabled></select>
-                    <div [hidden]="state.valid || state.pristine" class="alert alert-danger">
-                        State is required
+                    <enumselect [enumType]="SLAStates" [disabled]="true" ngControl="state"></enumselect>
+                    <div *ngIf="state.dirty && !state.valid">
+                        <p *ngIf="type.errors.required">
+                            State is required
+                        </p>
                     </div>
                 </div>
             </section>
@@ -58,7 +60,7 @@
             <section>
                 <div style="width: 100%; text-align:right">
                     <input type="button" (click)="clear()" value="Clear" />
-                    <input type="submit" [disabled]="!slaForm.form.valid" value="Submit" />
+                    <input type="button" [disabled]="!form.valid" (click)="submit()" value="Submit" />
                 </div>
             </section>
         </form>

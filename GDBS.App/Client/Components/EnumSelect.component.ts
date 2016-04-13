@@ -1,37 +1,68 @@
-﻿import {Directive, Input, OnInit, ElementRef} from 'angular2/core';
+﻿import {Component, Provider, forwardRef, Input, OnInit} from 'angular2/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR, CORE_DIRECTIVES} from 'angular2/common';
 
-@Directive({
-    selector: '[enumType]'
+const ENUM_SELECT_CONTROL_VALUE_ACCESSOR = new Provider(
+    NG_VALUE_ACCESSOR, {
+        useExisting: forwardRef(() => EnumSelect),
+        multi: true
+    });
+
+@Component({
+    selector: 'enumselect',
+    templateUrl: '/html/Components/EnumSelect.component.html',
+    directives: [CORE_DIRECTIVES],
+    providers: [ENUM_SELECT_CONTROL_VALUE_ACCESSOR]
 })
-
-export class EnumSelect implements OnInit {
-    @Input('enumType')
+export class EnumSelect implements ControlValueAccessor, OnInit {
+    @Input()
     enumType: any;
 
     @Input()
     defaultText: string = '--';
 
-    private _e: HTMLElement;
+    @Input()
+    disabled: boolean = null;
 
-    constructor(el: ElementRef) { this._e = el.nativeElement; }
+    private options: any[] = [];
 
     ngOnInit() {
-        var option = document.createElement('option');
-        option.value = 'undefined';
-        option.text = this.defaultText;
-
-        this._e.appendChild(option)
+        this.options.length = 0;
+        this.options.push({ value: '', text: this.defaultText });
 
         for (var i = 0; i < Object.keys(this.enumType).length / 2; i++) {
             var key = Object.keys(this.enumType)[i];
 
-            var option = document.createElement('option');
-            option.value = key;
-            option.text = this.enumType[key];
-
-            this._e.appendChild(option)
+            this.options.push({ value: key, text: this.enumType[key] });
         }
-
-        this._e.onchange = function () {  };
     }
+
+    private _value: any;
+
+    get value(): any { return this._value; };
+
+    set value(v: any) {
+        if (v !== this._value) {
+            this._value = v;
+            this._onChangeCallback(v);
+        }
+    }
+
+    writeValue(value: any) {
+        this._value = value;
+    }
+
+    onTouched() {
+        this._onTouchedCallback(null);
+    }
+
+    registerOnChange(fn: any) {
+        this._onChangeCallback = fn;
+    }
+
+    registerOnTouched(fn: any) {
+        this._onTouchedCallback = fn;
+    }
+
+    private _onChangeCallback: (_: any) => void = () => { };
+    private _onTouchedCallback: (_: any) => void = () => { };
 }
