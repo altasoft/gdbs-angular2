@@ -1,14 +1,23 @@
 ﻿{
-  "common": {
-
+  "Common": {
+    "Total": "სულ",
+    "Actions": "ოპერაციები"
   },
-  "meterpoint": {
-
+  "MeterPoint": {
+    "Title": "აღრიცხვის კვანძები"
   },
-  "serviceagreement": {
-
+  "ServiceAgreement": {
+    "Title": "ხელშეკრულებები",
+    "ModelSLAAdminNumber": "SLA ნომერი",
+    "ModelOldCustomerNumber": "ძველი კლიენტის ნომერი",
+    "ModelCustomerFullName": "სრული სახელი",
+    "ModelIdentificationNumber": "საიდენტ. ნომერი",
+    "ModelDistrict": "უბანი",
+    "ModelAddress": "მისამართი",
+    "ModelServiceType": "სერვისის ტიპი",
+    "ModelState": "მდგომარეობა"
   },
-  "sla": {
-
+  "SLA": {
+    "Title": "ხელშეკრულება"
   }
 }

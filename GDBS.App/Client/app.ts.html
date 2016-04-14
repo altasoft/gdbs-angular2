@@ -1,0 +1,26 @@
+﻿<menu style="margin: 0"></menu>
+<div class="page-content">
+    <div class="header">
+        <div class="header-seperation content-header">
+            <div class="pull-right user-info">
+
+                <div class="btn-group" data-toggle="buttons" style="margin-top: 4px">
+                    <a class="btn btn-default" data-navigate-ignore="true" id="lnkGeo"  (click)="selectLang('ka')">
+                        <input type="radio" value="geo">
+                        GEO
+                    </a>
+                    <a class="btn btn-default active" data-navigate-ignore="true" id="lnkEng" (click)="selectLang('en')">
+                        <input type="radio" value="eng">
+                        ENG
+                    </a>
+                </div>
+
+                &nbsp;&nbsp;
+
+            </div>
+        </div>
+    </div>
+    <div class="content" id="MainContent" style="opacity: 1; display: block;">
+        <router-outlet></router-outlet>
+    </div>
+</div>

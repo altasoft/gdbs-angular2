@@ -1,14 +1,25 @@
 ﻿{
-  "common": {
-
+  "Common": {
+    "Total": "Total",
+    "Actions": "Operations"
   },
-  "meterpoint": {
-
+  "MeterPoint": {
+    "Title": "Meter Points"
   },
-  "serviceagreement": {
-
+  "ServiceAgreement": {
+    "Title": "Service Agreements",
+    "ModelSLAAdminNumber": "SLA Admin Number",
+    "ModelOldCustomerNumber": "Old Customer Number",
+    "ModelCustomerFullName": "Customer Full Name",
+    "ModelIdentificationNumber": "Identification Number",
+    "ModelDistrict": "District",
+    "ModelAddress": "Address",
+    "ModelServiceType": "Service Type",
+    "ModelState": "State"
   },
-  "sla": {
-
+  "SLA": {
+    "Title": "Service Level Agreements"
   }
 }
+
+

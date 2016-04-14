@@ -65,10 +65,9 @@ export class ListComponent {
 
     sortClick(key: string) {
 
-        if (this.sortKey != key) {
-            this.sortKey = key
-            return
-        }
+        var column = this.columns.filter(x => x.Key == key)[0]
+        if (!column || !column.Sorting) return
+
 
         if (this.sortAsc == null || this.sortAsc == undefined)
             this.sortAsc = false
@@ -77,10 +76,9 @@ export class ListComponent {
         else if (this.sortAsc === true)
             this.sortAsc = null
 
+        this.sortKey = key
 
-        console.log(key, this.sortAsc)
-
-        this.pageChanged()
+        this.refreshDataRequest()
     }
 
     toggleConfigColumns() {
@@ -91,7 +89,7 @@ export class ListComponent {
                 columns[this.columns[i].Key] = this.columns[i].IsVisible || false;
 
             localStorage.setItem(this.getPathName('columns'), JSON.stringify(columns));
-    }
+        }
 
         this.configMode = !this.configMode;
         this.configModeChange.emit(this.configMode)
@@ -103,14 +101,16 @@ export class ListComponent {
         localStorage.setItem(this.getPathName('filters'), JSON.stringify(this.isFiltersVisible));
     }
 
-    pageChanged() {
+    refreshDataRequest() {
+
+
         this.refreshData.emit({
             Skip: this.paging.ActivePage * this.paging.ItemsPerPage,
             Take: this.paging.ItemsPerPage,
             SortKey: this.sortKey,
             SortAsc: this.sortAsc
         })
-        }
+    }
 
     getPathName(name: string): string {
         return this._location.path() + '#' + this.id + ':' + name

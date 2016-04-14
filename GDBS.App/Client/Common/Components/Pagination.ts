@@ -83,7 +83,6 @@ export class Pagination {
         this.currentPage = page;
 
         this.currentPageChange.emit({ page: page, itemsPerPage: this.itemsPerPage });
-        this.itemsPerPageChange.emit({ page: page, itemsPerPage: this.itemsPerPage });
     }
 
     private onChange(event: MouseEvent) {

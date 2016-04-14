@@ -24,13 +24,13 @@
                                 <td nowrap *ngFor="#col of columns" [class.hidden]="!(col.IsVisible || configMode)">
                                     <label [class.hidden]="!configMode">
                                         <input type="checkbox" [(ngModel)]="col.IsVisible">
-                                        {{col.Name || col.Key}}
+                                        {{ (col.Name || col.Key) | translate }}
                                     </label>
-                                    <label [class.hidden]="configMode" [class.pointer]="col.Sorting" (click)="sortClick(col.Key)">{{col.Name || col.Key}}</label>
-                                    <i [class.hidden]="!(col.Sorting && (sortAsc === true))" class="fa fa-caret-up" style="margin-left:5px">1</i>
-                                    <i [class.hidden]="!(col.Sorting && (sortAsc === false))" class="fa fa-caret-down" style="margin-left:5px; vertical-align: middle">2</i>
+                                    <label [class.hidden]="configMode" [class.pointer]="col.Sorting" (click)="sortClick(col.Key)">{{ (col.Name || col.Key) | translate }}</label>
+                                    <i [class.hidden]="!(col.Sorting && (sortAsc === true))" class="fa fa-caret-up" style="margin-left:5px"></i>
+                                    <i [class.hidden]="!(col.Sorting && (sortAsc === false))" class="fa fa-caret-down" style="margin-left:5px; vertical-align: middle"></i>
                                 </td>
-                                <td nowrap class="text-center">Actions</td>
+                                <td nowrap class="text-center">{{'Common.Actions' | translate}}</td>
                             </tr>
                         </thead>
                         <ng-content select="[body]"></ng-content>
@@ -42,8 +42,8 @@
                                 [itemsPerPage]="paging.ItemsPerPage"
                                 [totalItems]="paging.TotalItemsCount"
                                 [maxSize]="5"
-                                (currentPageChange)="pageChanged()"
-                                (itemsPerPageChange)="pageChanged()">
+                                (currentPageChange)="refreshDataRequest()"
+                                (itemsPerPageChange)="refreshDataRequest()">
                     </pagination>
                 </div>
             </div>

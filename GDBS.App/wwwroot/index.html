@@ -21,6 +21,7 @@
     <script src="/lib/systemjs/dist/system-polyfills.js"></script>
     <script src="/lib/angular2/bundles/angular2-polyfills.js"></script>
     <script src="/lib/rxjs/bundles/Rx.js"></script>
+    <script src="/lib/ng2-translate/bundles/ng2-translate.js"></script>
     <script src="/lib/angular2/bundles/angular2.dev.js"></script>
     <script src="/lib/angular2/bundles/router.js"></script>
     <script src="/lib/angular2/bundles/shims_for_IE.js"></script>
@@ -33,6 +34,9 @@
             packages: {
                 'js': {
                     format: 'register',
+                    defaultExtension: 'js'
+                },
+                '/ng2-translate': {
                     defaultExtension: 'js'
                 }
             }

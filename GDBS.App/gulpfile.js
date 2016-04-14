@@ -1,5 +1,4 @@
-﻿/// <binding ProjectOpened='watch, live-server' />
-// AfterBuild='clean, compile, min:js' Clean='clean'
+﻿/// <binding AfterBuild='compile' ProjectOpened='watch, live-server' />
 
 var gulp = require("gulp"),
     concat = require("gulp-concat"),
@@ -28,6 +27,7 @@ paths.ts = './Client/**/*.ts';
 paths.dts = './Client/**/*.d.ts';
 paths.less = './Client/**/*.less';
 paths.html = './Client/**/*.html';
+paths.json = './Localization/**/*.json';
 paths.js = paths.webroot + "js/**/*.js";
 paths.minJs = paths.webroot + "js/**/*.min.js";
 paths.css = paths.webroot + "css/**/*.css";
@@ -47,6 +47,10 @@ gulp.task("clean:js", function (cb) {
 
 gulp.task("clean:css", function (cb) {
     rimraf(paths.concatCssDest, cb);
+});
+
+gulp.task('compile-json', function () {
+    gulp.src(paths.json).pipe(gulp.dest('./wwwroot/lang/'));
 });
 
 gulp.task("clean", ["clean:js", "clean:css"]);
@@ -94,12 +98,14 @@ gulp.task('compile-less', function () {
 //        .pipe(gulp.dest('./wwwroot/html'));
 //});
 
-gulp.task('compile', ['compile-ts', 'compile-less']);
+gulp.task('compile', ['compile-ts', 'compile-less', 'compile-json']);
 
 gulp.task('watch', ['compile'], function () {
     gulp.watch([paths.ts], ['compile-ts']);
     gulp.watch([paths.less], ['compile-less']);
     gulp.watch([paths.html], ['compile-ts']);
+    gulp.watch([paths.json], ['compile-json']);
+
 });
 
 
