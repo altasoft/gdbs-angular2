@@ -98,16 +98,30 @@ gulp.task('compile-less', function () {
 //        .pipe(gulp.dest('./wwwroot/html'));
 //});
 
-gulp.task('compile', ['compile-ts', 'compile-less', 'compile-json']);
+gulp.task('compile', ['compile-ts', 'compile-less', 'compile-json', 'compile-lib']);
 
 gulp.task('watch', ['compile'], function () {
     gulp.watch([paths.ts], ['compile-ts']);
     gulp.watch([paths.less], ['compile-less']);
     gulp.watch([paths.html], ['compile-ts']);
     gulp.watch([paths.json], ['compile-json']);
-
+    gulp.watch(['./project.json'], ['compile-lib']);
 });
 
+gulp.task('compile-lib', function () {
+
+    if (project.libjs) {
+        gulp.src(project.libjs, { base: "." })
+            .pipe(concat('lib.js'))
+            .pipe(gulp.dest("./wwwroot/js/"));
+    }
+
+    if (project.libcss) {
+        gulp.src(project.libcss, { base: "." })
+            .pipe(concat('lib.css'))
+            .pipe(gulp.dest("./wwwroot/css/"));
+    }
+})
 
 
 gulp.task("min:js", function () {

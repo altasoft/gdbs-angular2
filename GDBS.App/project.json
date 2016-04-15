@@ -12,7 +12,7 @@
     "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
     "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final",
     "Microsoft.AspNet.Tooling.Razor": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Configuration.FileProviderExtensions" : "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration.FileProviderExtensions": "1.0.0-rc1-final",
     "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
     "Microsoft.Extensions.Logging": "1.0.0-rc1-final",
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
@@ -35,13 +35,35 @@
     "bower_components",
     "wwwroot"
   ],
+
   "publishExclude": [
     "node_modules",
     "bower_components",
     "**.user",
     "**.vspscc"
   ],
+
   "scripts": {
     "prepublish": [ "npm install", "gulp clean", "gulp compile", "gulp min:js" ]
-  }
+  },
+
+
+  "libjs": [
+    "./node_modules/jquery/dist/jquery.min.js",
+    "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+    "./node_modules/es6-shim/es6-shim.min.js",
+    "./node_modules/systemjs/dist/system.js",
+    "./node_modules/systemjs/dist/system-polyfills.min.js",
+    "./node_modules/rxjs/bundles/Rx.min.js",
+    "./node_modules/ng2-translate/bundles/ng2-translate.min.js",
+    "./node_modules/angular2/bundles/angular2-polyfills.min.js",
+    "./node_modules/angular2/bundles/angular2.min.js",
+    "./node_modules/angular2/bundles/router.min.js",
+    "./node_modules/angular2/bundles/http.min.js"
+  ],
+
+  "libcss": [
+    "./node_modules/bootstrap/dist/css/bootstrap.css",
+    "./node_modules/font-awesome/css/font-awesome.css"
+  ]
 }
