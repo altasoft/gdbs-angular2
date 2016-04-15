@@ -1,6 +1,5 @@
 ﻿import {Injectable} from 'angular2/core';
 
-
 var SLAs = [
     { "id": 1, "adminNumber": "01020304050", "type": 0, "totalBalance": 13.13, "currency": "GEL", "state": 0 },
     { "id": 2, "adminNumber": "05040302010", "type": 1, "totalBalance": 13.13, "currency": "GEL", "state": 2 },

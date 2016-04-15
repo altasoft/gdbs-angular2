@@ -3,6 +3,8 @@ import {ROUTER_DIRECTIVES, Router, Location} from 'angular2/router';
 
 import {ColumnComponent, Pagination} from '../../Common/Components'
 import {SLA} from './Models/SLA';
+import {SLATypes} from './Models/SLATypes';
+import {SLAStates} from './Models/SLAStates';
 import {SLAService} from '../../Common/Services';
 
 
@@ -15,6 +17,8 @@ import {SLAService} from '../../Common/Services';
 
 export class List extends ColumnComponent implements OnInit {
     SLAs: SLA[];
+    SLATypes = SLATypes;
+    SLAStates = SLAStates;
     total: number;
 
     constructor(

@@ -49,7 +49,7 @@
                                     <a [routerLink]="['Details', {id: SLA.id}]">{{SLA.adminNumber}}</a>
                                 </td>
                                 <td nowrap *ngIf="isVisible('type')">
-                                    <span>{{SLA.type}}</span>
+                                    <span>{{SLATypes[SLA.type]}}</span>
                                 </td>
                                 <td nowrap *ngIf="isVisible('totalBalance')">
                                     <span>{{SLA.totalBalance}}</span>
@@ -58,7 +58,7 @@
                                     <span>{{SLA.currency}}</span>
                                 </td>
                                 <td nowrap *ngIf="isVisible('state')">
-                                    <span>{{SLA.state}}</span>
+                                    <span>{{SLAStates[SLA.state]}}</span>
                                 </td>
                                 <td nowrap class="action-list text-center">
                                     <a [routerLink]="['Details', {id: SLA.id}]"><i class="fa fa-mail-forward pointer" title="Details"></i></a>
