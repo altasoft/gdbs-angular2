@@ -2,6 +2,7 @@
 import {RouteConfig, ROUTER_DIRECTIVES, RouteParams, Router} from 'angular2/router'
 
 import {MenuComponent} from './Common/Components';
+import {TranslateService}   from 'ng2-translate'
 
 import * as SLA from './Modules/SLA/Config';
 import * as ServiceAgreement from './Modules/ServiceAgreement/Config';
@@ -10,14 +11,7 @@ import * as MeterPoint from './Modules/MeterPoint/Config';
 
 @Component({
     selector: 'game',
-    template: `
-    <menu></menu>
-    <div class="page-content">
-        <div class="content" id="MainContent" style="opacity: 1; display: block;">
-            <router-outlet></router-outlet>
-        </div>
-    </div>
-    `,
+    templateUrl: 'app.ts.html',
     directives: [ROUTER_DIRECTIVES, MenuComponent]
 })
 @RouteConfig([
@@ -25,4 +19,30 @@ import * as MeterPoint from './Modules/MeterPoint/Config';
     { path: '/ServiceAgreement/...', name: 'ServiceAgreement', component: ServiceAgreement.Config },
     { path: '/MeterPoint/...', name: 'MeterPoint', component: MeterPoint.Config }
 ])
-export class AppComponent { }
+export class AppComponent implements OnInit {
+
+    defaultLang = 'en'
+
+
+    constructor(private translate: TranslateService) {
+    }
+
+
+    ngOnInit() {
+        var userLang = navigator.language.split('-')[0] || document.documentElement.lang // use navigator lang if available
+        userLang = /(ka|en|ru)/gi.test(userLang) ? userLang : this.defaultLang
+
+        userLang = this.defaultLang
+
+        // this language will be used as a fallback when a translation isn't found in the current language
+        this.translate.setDefaultLang(this.defaultLang)
+
+        // the lang to use, if the lang isn't available, it will use the current loader to get them
+        this.translate.use(userLang)
+    }
+
+
+    selectLang(lang: string) {
+        this.translate.use(lang)
+    }
+}

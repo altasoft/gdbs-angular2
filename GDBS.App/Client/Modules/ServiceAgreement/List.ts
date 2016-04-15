@@ -1,6 +1,6 @@
 ﻿import {Component, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router} from 'angular2/router'
-import {ListComponent, ListColumn, PagingConfig} from '../../Common/Components/List'
+import {ListComponent, ListColumn, PagingConfig, RefreshInfo} from '../../Common/Components/List'
 import {RightsService} from '../../Common/Services'
 
 
@@ -22,19 +22,24 @@ export class List {
 
     // Columns Configuration
     columns: ListColumn[] = [
-        { Key: 'SLAAdminNumber', Name: 'SLAN', LinkRoute: ['/SLADetail'], LinkItemKey: 'SLAId', IsVisible: true },
-        { Key: 'OldCustomerNumber', Name: 'Old Customer Number', IsVisible: true },
-        { Key: 'CustomerFullName', Name: 'Customer Full Name', IsVisible: true },
-        { Key: 'IdentificationNumber', Name: 'Identification Number', IsVisible: true },
-        { Key: 'District', IsVisible: true },
-        { Key: 'Address', Sorting: false },
-        { Key: 'ServiceType', Name: 'Service Type' },
-        { Key: 'State' },
+        {
+            Key: 'SLAAdminNumber',
+            Name: 'ServiceAgreement.ModelSLAAdminNumber',
+            LinkRoute: ['/SLA', 'Details'],
+            LinkItemKey: 'SLAId',
+            IsVisible: true,
+            Sorting: true
+        },
+        { Key: 'OldCustomerNumber', Name: 'ServiceAgreement.ModelOldCustomerNumber', IsVisible: true },
+        { Key: 'CustomerFullName', Name: 'ServiceAgreement.ModelCustomerFullName', IsVisible: true },
+        { Key: 'IdentificationNumber', Name: 'ServiceAgreement.ModelIdentificationNumber', IsVisible: true },
+        { Key: 'District', Name: 'ServiceAgreement.ModelDistrict', IsVisible: true, Sorting: true },
+        { Key: 'Address', Name: 'ServiceAgreement.ModelAddress', Sorting: false },
+        { Key: 'ServiceType', Name: 'ServiceAgreement.ModelServiceType' },
+        { Key: 'State', Name: 'ServiceAgreement.ModelState' },
     ]
 
     items: any[]
-
-
 
 
 
