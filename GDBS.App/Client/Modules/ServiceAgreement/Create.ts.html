@@ -6,11 +6,11 @@
             <h4>Create SLA</h4>
         </div>
         <div class="form-col-2">
-            <form action="/SLA/Create" autocapitalize="off" autocomplete="off" id="Add" method="post" novalidate="novalidate">
+            <form [ngFormModel]="form" (ng-submit)="submitData()" autocapitalize="off" autocomplete="off" novalidate="novalidate">
                 <input name="__RequestVerificationToken" type="hidden" value="7Ej1_TDf3T_vPWLMIrayWt3ntTCysf5sfvoVvAG-YYLSCZtxmQbiSxjezOzPFZk91FEaMjJ6AlWsVZDO-WUCzqJ1GBlkLsYgmHRsGsHFqbrHPtvfAvz-5aK9_3Na395jMR2kIrzcuVCYO3izcXrkTQ2">                <section>
                     <div><label for="FunctionType">Function Type</label></div>
                     <div>
-                        <select data-val="true" data-val-required="" id="FunctionType" name="FunctionType" title="Function Type" tabindex="-1">
+                        <select ngControl="FunctionType" title="Function Type" tabindex="-1">
                             <option value="">--</option>
                             <option value="1">Regular</option>
                             <option value="2">Zero</option>
@@ -21,7 +21,7 @@
                 <section>
                     <div><label for="OwnershipType">Ownership Type</label></div>
                     <div>
-                        <select data-val="true" data-val-required="" id="OwnershipType" name="OwnershipType" title="Ownership Type" tabindex="-1">
+                        <select ngControl="OwnershipType" title="Ownership Type" tabindex="-1">
                             <option value="">--</option>
                             <option value="0">Permanent</option>
                             <option value="1">Temporal</option>
@@ -32,7 +32,7 @@
                 <section>
                     <div><label for="ServiceType">Service Type</label></div>
                     <div>
-                        <select data-val="true" data-val-required="" id="ServiceType" name="ServiceType" title="Service Type" tabindex="-1">
+                        <select ngControl="ServiceType" title="Service Type" tabindex="-1">
                             <option value="">--</option>
                             <option value="1">Retail Social</option>
                             <option value="2">Retail Commercial</option>
@@ -47,40 +47,39 @@
                     <section>
                         <div><label for="RegularWarrantyDepositLimit">Regular Warranty Deposit Limit</label></div>
                         <div>
-                            <input data-input-type="udecimal" data-val="true" data-val-number="The field Regular Warranty Deposit Limit must be a number." id="RegularWarrantyDepositLimit" name="RegularWarrantyDepositLimit" type="text" value="">
+                            <input ngControl="RegularWarrantyDepositLimit" type="text">
                         </div>
                     </section>
                     <section>
                         <div><label for="FrozenWarrantyDepositLimit">Frozen Warranty Deposit Limit</label></div>
                         <div>
-                            <input data-input-type="udecimal" data-val="true" data-val-number="The field Frozen Warranty Deposit Limit must be a number." id="FrozenWarrantyDepositLimit" name="FrozenWarrantyDepositLimit" type="text" value="">
+                            <input ngControl="FrozenWarrantyDepositLimit" type="text">
                             <span class="field-validation-valid" data-valmsg-for="FrozenWarrantyDepositLimit" data-valmsg-replace="true"></span>
                         </div>
                     </section>
                     <section>
                         <div><label for="OldCustomerNumber">Old Customer Number</label></div>
                         <div>
-                            <input data-input-type="uinteger" data-val="true" data-val-length="Must be numeric with length 6" data-val-length-max="6" data-val-length-min="6" data-val-range="Must be numeric with length 6" data-val-range-max="999999" data-val-range-min="0" id="OldCustomerNumber" name="OldCustomerNumber" type="text" value="">
+                            <input ngControl="OldCustomerNumber" type="text">
                             <span class="field-validation-valid" data-valmsg-for="OldCustomerNumber" data-valmsg-replace="true"></span>
                         </div>
                     </section>
                     <section>
                         <div><label for="Description">Description</label></div>
                         <div>
-                            <input id="Description" name="Description" type="text" value="">
+                            <input ngControl="Description" type="text" value="">
                         </div>
                     </section>
                 </div>
                 <section>
                     <div><label for="State">State</label></div>
                     <div>
-                        <select data-val="true" data-val-required="" disabled="" id="State" name="State" title="State" tabindex="-1">
+                        <select ngControl="State" title="State" tabindex="-1">
                             <option selected="selected" value="0">Pending</option>
                             <option value="1">Cancelled</option>
                             <option value="2">Active</option>
                             <option value="3">Suspended</option>
                         </select>
-                        <input value="Pending" id="State" name="State" type="hidden">
                         <span class="field-validation-valid" data-valmsg-for="State" data-valmsg-replace="true"></span>
                     </div>
                 </section>
@@ -88,7 +87,7 @@
                     <div><label for="GeneralContractNumber">General Contract Number</label></div>
                     <div>
                         <div class="input-group">
-                            <input class="form-control" data-val="true" data-val-required="" id="GeneralContractNumber" name="GeneralContractNumber" readonly="readonly" type="text" value="">
+                            <input ngControl="GeneralContractNumber" readonly="readonly" type="text">
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default fa fa-times clear"></button>
                             </span>
@@ -97,29 +96,12 @@
                         <span class="field-validation-valid" data-valmsg-for="GeneralContractNumber" data-valmsg-replace="true"></span>
                     </div>
                 </section>
-                <section class="search" data-tag="GeneralContractNumber" style="display: none;">
-                    <div></div>
-                    <div>
-                        <div>
-                            <div id="SearchGeneralContractModule" data-load-url="/GeneralContract/Search">
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <input id="AdminNumber" name="AdminNumber" placeholder="Admin Number" type="text" value="">
-                                    </div>
-                                    <div class="col-md-5 text-right"><input type="button" id="search" value="Search"></div>
-                                </div>
-                            </div>
-                            <div id="SearchGeneralContractResult">
-                            </div>
-                        </div>
-                    </div>
-                </section>
                 <div id="SupplyPointPanel">
                     <section>
                         <div><label for="SupplyPointNumber">Supply Point Number</label></div>
                         <div>
                             <div class="input-group">
-                                <input class="form-control" data-get-url="/SupplyPoint/GetLocationSpecificInformation" id="SupplyPointNumber" name="SupplyPointNumber" readonly="readonly" type="text" value="">
+                                <input ngControl="SupplyPointNumber" readonly="readonly" type="text">
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-default fa fa-times clear"></button>
                                 </span>
@@ -128,29 +110,11 @@
                             <span class="field-validation-valid" data-valmsg-for="SupplyPointNumber" data-valmsg-replace="true"></span>
                         </div>
                     </section>
-                    <section class="search" data-tag="SupplyPointNumber" style="display: none;">
-                        <div></div>
-                        <div>
-
-                            <div>
-                                <div id="SearchSupplyPointModule" data-load-url="/SupplyPoint/Search">
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <input id="AdminNumber" name="AdminNumber" placeholder="SPAN" type="text" value="">
-                                        </div>
-                                        <div class="col-md-5 text-right"><input type="button" id="search" value="Search"></div>
-                                    </div>
-                                </div>
-                                <div id="SearchSupplyPointResult">
-                                </div>
-                            </div>
-                        </div>
-                    </section>
                 </div>
                 <section>
                     <div><label for="ServiceUnitId">Service Unit</label></div>
                     <div>
-                        <select data-val="true" data-val-number="The field Service Unit must be a number." data-val-required="" id="ServiceUnitId" name="ServiceUnitId" title="Service Unit" tabindex="-1">
+                        <select ngControl="ServiceUnitId" title="Service Unit" tabindex="-1">
                             <option value="">--</option>
                             <option value="1">SU01 - ქარელი</option>
                             <option value="2">SU02 - ხაშური</option>
@@ -208,36 +172,38 @@
                 <section>
                     <div><label for="SMSService">SMS Service</label></div>
                     <div>
-                        <select id="SMSService" name="SMSService" title="SMS Service" tabindex="-1">
+                        <select ngControl="SMSService" title="SMS Service" tabindex="-1">
                             <option selected="selected" value="">--</option>
                             <option value="True">Yes</option>
                             <option value="False">No</option>
                         </select>
                     </div>
                 </section>
-                <div id="MeterPointPanel">
+                <div id="MeterPointPanel" ngControlGroup="MeterPoint">
                     <section>
                         <div><label for="MeterPoints">Meter Points</label></div>
                         <div>
-
                             <table class="table no-more-tables" id="MeterPoints" data-check-url="/MeterPoint/SearchByAdminNumber">
                                 <thead>
                                     <tr>
-                                        <td width="85%">Meter Point Admin Number</td>
+                                        <td width="85%">Meter Points</td>
                                         <td width="15%"></td>
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                    <tr *ngFor="#item of MeterPoints">
+                                        <td>{{item.AdminNumber}}</td>
+                                    </tr>
+                                </tbody>
                                 <tfoot>
                                     <tr>
                                         <td>
                                             <div>
-                                                <input class="form-control admin-number" data-autocomplete-url="/MeterPoint/FindAdminNumber" data-input-autocomplete="adminNumber" id="MeterPoint_AdminNumber" name="MeterPoint.AdminNumber" placeholder="Meter Point Admin Number" type="text" value="">
+                                                <input class="form-control admin-number" ngControl="AdminNumber" placeholder="Admin Number" type="text">
                                             </div>
                                         </td>
                                         <td>
-                                            <input type="button" value="Add" id="add">
-                                            <div id="hiddenValues"></div>
+                                            <button class="btn btn-default" (click)="addMeterPoint(form.controls['MeterPoint'].value)" [disabled]="!form.controls['MeterPoint'].valid">Add</button>
                                         </td>
                                     </tr>
                                 </tfoot>
@@ -291,14 +257,12 @@
                         </div>
                     </section>
                 </div>
-                <section id="ContactPersonPanel">
-
-
+                <section id="ContactPersonPanel" ngControlGroup="ContactPerson">
                     <div>
                         Contact Persons
                     </div>
                     <div>
-                        <table class="table no-more-tables" id="ContactPersons">
+                        <table class="table no-more-tables">
                             <thead>
                                 <tr>
                                     <td width="30%">Contact Person</td>
@@ -307,95 +271,38 @@
                                     <td width="10%"></td>
                                 </tr>
                             </thead>
-                            <tbody></tbody>
+                            <tbody>
+                                <tr *ngFor="#item of ContactPersons">
+                                    <td>{{item.Name}}</td>
+                                    <td>{{item.Mobile}}</td>
+                                    <td>{{item.Email}}</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
                             <tfoot>
                                 <tr>
                                     <td>
                                         <div>
-                                            <input class="form-control" id="ContactPerson_FullName" maxlength="50" name="ContactPerson.FullName" type="text" value="">
+                                            <input class="form-control" ngControl="Name" type="text">
                                         </div>
                                     </td>
                                     <td>
                                         <div>
-                                            <input class="form-control" id="ContactPerson_Mobile" maxlength="50" name="ContactPerson.Mobile" type="text" value="">
+                                            <input class="form-control" ngControl="Mobile" type="text">
                                         </div>
                                     </td>
                                     <td>
                                         <div>
-                                            <input class="form-control" id="ContactPerson_Email" maxlength="50" name="ContactPerson.Email" type="text" value="">
+                                            <input class="form-control" ngControl="Email" type="text">
                                         </div>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-default btn-add">Add</button>
-                                        <div id="ContactPersonsHiddenValues"></div>
+                                        <button class="btn btn-default" (click)="addContactPerson(form.controls['ContactPerson'].value)" [disabled]="!form.controls['ContactPerson'].valid">Add</button>
                                     </td>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
-                    <script type="text/javascript">
-                        $(function () {
-                            $list = $('#ContactPersons');
-                            $list.find('button.btn-add').on('click', function () {
-
-                                var $fullname = $('input[name="ContactPerson.FullName"]');
-                                var $mobile = $('input[name="ContactPerson.Mobile"]');
-                                var $email = $('input[name="ContactPerson.Email"]');
-
-                                var fullname = $fullname.val();
-                                var mobile = $mobile.val();
-                                var email = $email.val();
-
-                                if (!fullname) {
-                                    $fullname.parent().effect('shake', {
-                                        times: 2, distance: 4
-                                    }, 'medium', function () {
-                                        $fullname.addClass('input-validation-error').focus();
-                                    });
-                                    return;
-                                }
-
-                                var $tr = $('<tr>');
-                                $tr.append('<td class="fullname" data-val="' + fullname + '">' + fullname + '</td>');
-                                $tr.append('<td class="mobile" data-val="' + mobile + '">' + mobile + '</td>');
-                                $tr.append('<td class="email" data-val="' + email + '">' + email + '</td>');
-                                $tr.append('<td><button type="button" class="btn btn-default btn-delete">Delete</button></td>');
-
-                                $list.find('tbody').append($tr);
-
-                                $fullname.val('');
-                                $mobile.val('');
-                                $email.val('');
-
-                                calculateHiddenValues();
-                            });
-
-                            $(document).off('click', '#ContactPersons button.btn-delete');
-                            $(document).on('click', '#ContactPersons button.btn-delete', function () {
-
-                                $(this).parent().parent().remove();
-
-                                calculateHiddenValues();
-                            });
-
-                            function calculateHiddenValues() {
-                                $('#ContactPersonsHiddenValues').empty();
-
-                                $('#ContactPersons tbody tr').each(function (i, item) {
-                                    var fullname = $(item).find('.fullname').data('val');
-                                    var mobile = $(item).find('.mobile').data('val');
-                                    var email = $(item).find('.email').data('val');
-
-                                    $('#ContactPersonsHiddenValues').append('<input type="hidden" name="ContactPersons[' + i + '].FullName" value="' + fullname + '" />');
-                                    $('#ContactPersonsHiddenValues').append('<input type="hidden" name="ContactPersons[' + i + '].Mobile" value="' + mobile + '" />');
-                                    $('#ContactPersonsHiddenValues').append('<input type="hidden" name="ContactPersons[' + i + '].Email" value="' + email + '" />');
-                                });
-                            }
-
-                            calculateHiddenValues();
-                        })
-                    </script>
-
                 </section>
                 <br>
                 <span style="float: right; margin-top: -5px; background: white; padding-left: 10px; color: silver;">Doc Flow</span>
@@ -403,14 +310,14 @@
                 <section>
                     <div><label for="OperationAttribute_DocId">Doc Id</label></div>
                     <div>
-                        <input data-val="true" data-val-maxlength="The field Doc Id must be a string or array type with a maximum length of '50'." data-val-maxlength-max="50" data-val-required="" id="OperationAttribute_DocId" name="OperationAttribute.DocId" type="text" value="">
+                        <input ngControl="DocId" type="text">
                         <span class="field-validation-valid" data-valmsg-for="OperationAttribute.DocId" data-valmsg-replace="true"></span>
                     </div>
                 </section>
                 <section>
                     <div><label for="OperationAttribute_WebUrl">Web Url</label></div>
                     <div>
-                        <input data-val="true" data-val-url="The Web Url field is not a valid fully-qualified http, https, or ftp URL." id="OperationAttribute_WebUrl" name="OperationAttribute.WebUrl" type="text" value="">
+                        <input ngControl="WebUrl" type="text">
                     </div>
                 </section>
                 <hr>
@@ -419,8 +326,10 @@
                         <a href="http://iisdev:3050/SLA/List" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back to List</a>
                     </div>
                     <div class="a-r">
-                        <input type="button" data-button-role="clearForm" value="Clear">
-                        <input type="submit" value="Save">
+                        <!--<input type="button" data-button-role="clearForm" value="Clear">-->
+                        <button *ngIf="!isSubmitting && !isSuccess" class="btn btn-success" (click)="submitData()" [disabled]="!form.valid">Save</button>
+                        <button *ngIf="isSubmitting" class="btn btn-success" disabled>Saving...</button>
+                        <button *ngIf="isSuccess" class="btn btn-success" disabled>Saved!</button>
                     </div>
                 </section>
             </form>

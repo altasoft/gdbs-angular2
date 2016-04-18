@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit } from 'angular2/core';
 import { RouteParams } from 'angular2/router';
-import { FormBuilder, Validators, Control, ControlGroup, FORM_DIRECTIVES } from 'angular2/common';
+import { Http, Response } from 'angular2/http';
+import { FormBuilder, Validators, Control, ControlGroup, FORM_DIRECTIVES, ControlArray } from 'angular2/common';
 
 
 @Component({
@@ -11,24 +12,103 @@ import { FormBuilder, Validators, Control, ControlGroup, FORM_DIRECTIVES } from 
 export class Create {
 
     form: ControlGroup;
+    meterPointsGroup: ControlGroup;
+    contactPersonsGroup: ControlGroup;
+
+    MeterPoints = [];
+    ContactPersons = [];
+
+    isSubmitting = false
+    isSuccess = false
+    error = ''
 
 
-    constructor(private builder: FormBuilder) {
+    constructor(private builder: FormBuilder, private http: Http) {
+
+        this.meterPointsGroup = new ControlGroup({
+            AdminNumber: new Control('', Validators.required, UsernameValidator.checkAdminNumber(http))
+        })
+
+        this.contactPersonsGroup = new ControlGroup({
+            Name: new Control('', Validators.required),
+            Mobile: new Control('', Validators.required),
+            Email: new Control('', Validators.required),
+        })
 
         this.form = builder.group({
-            username: new Control('', Validators.compose([Validators.required, UsernameValidator.startsWithNumber])),
-            type: new Control('', Validators.required)
-        });
-    }
+            FunctionType: ['', Validators.required],
+            OwnershipType: ['', Validators.required],
+            ServiceType: [],
+            RegularWarrantyDepositLimit: [],
+            FrozenWarrantyDepositLimit: [],
+            OldCustomerNumber: [],
+            Description: [],
+            State: [],
+            GeneralContractNumber: [],
+            SupplyPointNumber: [],
+            ServiceUnitId: [],
+            SMSService: [],
+            MeterPoint: this.meterPointsGroup,
+            ContactPerson: this.contactPersonsGroup,
+            DocId: [],
+            WebUrl: []
+        })
 
+        this.form.exclude('MeterPoint')
+        this.form.exclude('ContactPerson')
+    }
 
     goBack() {
         window.history.back();
     }
 
 
+    addMeterPoint(obj) {
+        var url = 'http://localhost:30507/api/ServiceAgreement/CheckMeterPointAdminNumber/' + 123123123
+
+        this.http.get(url)
+            .subscribe(
+            res => { console.log('success', res); },
+            err => { console.log(err); },
+            () => { console.log('complete'); }
+            );
+
+
+        this.MeterPoints.push(obj);
+
+        for (let i in this.meterPointsGroup.controls)
+            this.resetForm(this.meterPointsGroup)
+    }
+
+    addContactPerson(obj) {
+        this.ContactPersons.push(obj);
+
+        for (let i in this.contactPersonsGroup.controls)
+            this.resetForm(this.contactPersonsGroup)
+    }
+
+
     submitData() {
-        console.log(JSON.stringify(this.form.value))
+        var data = this.form.value;
+        data.MeterPoints = this.MeterPoints.map(x => x.AdminNumber);
+        data.ContactPersons = this.ContactPersons;
+
+        this.isSubmitting = true;
+        this.isSuccess = false;
+
+        this.http.post('http://localhost:30507/api/ServiceAgreement/Create', JSON.stringify(data)).subscribe(
+            res => this.isSuccess = true,
+            error => this.error = error,
+            () => this.isSubmitting = false
+        );
+    }
+
+    resetForm(group: ControlGroup) {
+        for (let i in group.controls) {
+            var control = (group.controls[i] as Control);
+            if (control)
+                control.updateValue('');
+        }
     }
 
     changeValidator() {
@@ -76,4 +156,23 @@ export class UsernameValidator {
         });
 
     }
+
+    static checkAdminNumber(http: Http) {
+        return (control: Control): Promise<ValidationResult> => {
+
+            return new Promise((resolve, reject) => {
+                var url = 'http://localhost:30507/api/ServiceAgreement/CheckMeterPointAdminNumber/' + control.value
+
+                http.get(url).subscribe(
+                    (res: Response) => {
+                        var isValid = res.text() === 'true';
+
+                        resolve(isValid ? null : { "checkAdminNumber": true });
+                    },
+                    err => resolve({ "checkAdminNumber": true })
+                );
+            });
+        }
+    }
+
 }

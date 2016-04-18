@@ -55,7 +55,7 @@ export class List {
 
     refreshData(info) {
         console.log(info)
-
+        
 
         this.items = [
             {

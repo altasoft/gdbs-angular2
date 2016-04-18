@@ -11,11 +11,26 @@ using System.Web.Http.Description;
 using GDBS.API.Models;
 using System.Linq.Expressions;
 using GDBS.API.Common;
+using System.Web.Http.Cors;
 
 namespace GDBS.API.Controllers
 {
+    [EnableCors("*", "*", "*")]
     public class ServiceAgreementController : EntityApiController<ServiceAgreement>
     {
+        [HttpGet]
+        public bool CheckMeterPointAdminNumber(string id)
+        {
+            return id.Length > 5;
+        }
+
+        [HttpPost]
+        public void Create(SLAModel item)
+        {
+
+        }
+
+
         [ResponseType(typeof(ServiceAgreement))]
         public IHttpActionResult GetServiceAgreement(int id)
         {
@@ -28,7 +43,7 @@ namespace GDBS.API.Controllers
             return Ok(serviceAgreement);
         }
 
-        [ResponseType(typeof(void))]
+        [HttpPost, ResponseType(typeof(void))]
         public IHttpActionResult PutServiceAgreement(int id, ServiceAgreement serviceAgreement)
         {
             if (!ModelState.IsValid)
@@ -92,10 +107,11 @@ namespace GDBS.API.Controllers
         }
 
 
-        private bool ServiceAgreementExists(int id)
+
+
+        bool ServiceAgreementExists(int id)
         {
             return db.ServiceAgreements.Count(e => e.Id == id) > 0;
         }
     }
-
 }

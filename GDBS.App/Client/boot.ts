@@ -7,15 +7,16 @@ import {ROUTER_PROVIDERS} from 'angular2/router';
 import {TRANSLATE_PROVIDERS, TranslatePipe, TranslateLoader, TranslateStaticLoader} from 'ng2-translate';
 
 import {AppComponent}  from './app'
-import {RightsService} from './Common/Services';
+import {RightsService, RightsService2} from './Common/Services';
 
 
 //enableProdMode();
 bootstrap(AppComponent, [
     HTTP_PROVIDERS,
     ROUTER_PROVIDERS,
-    RightsService,
+    provide(RightsService, { useClass: RightsService2 }),
     TRANSLATE_PROVIDERS,
     provide(TranslateLoader, { useFactory: (http: Http) => new TranslateStaticLoader(http, 'lang', '.json'), deps: [Http] }),
-    provide(PLATFORM_PIPES, { useValue: [TranslatePipe], multi: true })
+    provide(PLATFORM_PIPES, { useValue: [TranslatePipe], multi: true }),
+    //provide(Http, { useClass: MyHttp })
 ]);

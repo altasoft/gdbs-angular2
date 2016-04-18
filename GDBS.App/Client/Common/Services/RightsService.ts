@@ -3,7 +3,15 @@
 @Injectable()
 export class RightsService {
 
-    allowed(taskName: string, taskRightName: string) {
+    allowed(taskName: any, taskRightName: string) {
+        return true;
+    }
+
+}
+
+export class RightsService2 {
+
+    allowed2(taskName: any, taskRightName?: string) {
         return true;
     }
 

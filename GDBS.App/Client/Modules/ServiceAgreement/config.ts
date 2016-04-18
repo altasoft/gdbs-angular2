@@ -11,8 +11,8 @@ import {List} from './List'
 })
 @RouteConfig([
     { path: '/', name: 'List', component: List, useAsDefault: true },
-    { path: '/create', name: 'Create', component: Create },
-    { path: '/detail/:id', name: 'Details', component: Details }
+    { path: '/Create', name: 'Create', component: Create },
+    { path: '/Detail/:id', name: 'Details', component: Details }
 ])
 export class Config { }
 
