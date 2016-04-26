@@ -19,5 +19,14 @@
   },
   "SLA": {
     "Title": "ხელშეკრულება"
+  },
+
+  "UFE": {
+    "Customer.$TAXABLE": "გადამხდელი",
+    "Customer..IS_EMPLOYEE": "თანამშრომელი",
+    "Customer..TAX_PID_OR_PASSPORT": "პირადი ნომერი",
+    "Customer.IsResident": "რეზიდენტი",
+    "Customer.Attributes.IsInBlackList": "შავ სიაშია",
+    "Customer.FullName": "სრული სახელი"
   }
 }

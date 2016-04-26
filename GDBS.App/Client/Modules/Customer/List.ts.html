@@ -1,0 +1,49 @@
+﻿<list [columns]="columns"
+      [source]="items"
+      [title]="'Customers' | translate"
+      [id]="'SAs'"
+      [paging]="pagingConfig"
+      (refreshData)="refreshData($event)"
+      (addItem)="addItem()"
+      [(configMode)]="configMode">
+    <div filters>
+        <div style="margin: 12px">
+        </div>
+
+        <div class="panel panel-default fade collapse in" data-load-url="/SavedFilter/GetFilter" data-save-url="/SavedFilter/SaveFilter" data-delete-url="/SavedFilter/DeleteFilter">
+            <div class="panel-body">
+                <form class="form-horizontal" id="SLAListFilterForm" method="post" novalidate="novalidate" data-column="AdminNumber" data-direction="desc">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="AdminNumber">Personal Number</label>
+                        <div class="col-md-3">
+                            <input type="text" [(ngModel)]="searchText" placeholder="Search..." (keyup)="refreshData()" />
+                        </div>
+                        <div class="col-md-7">
+                        </div>
+                        <!--<div class="col-md-2 text-right">
+                            <button type="submit" class="btn btn-block btn-success">Filter</button>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <input type="button" data-button-role="clearFilter" class="btn btn-block btn-default" value="Clear">
+                        </div>-->
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+    <tbody body>
+        <tr *ngFor="#item of items">
+            <td nowrap *ngFor="#col of columns" [class.hidden]="!(col.IsVisible || configMode)">
+                <a *ngIf="hasLink(col)" [routerLink]="col.LinkRoute.concat({ id: item[col.LinkItemKey] })">{{item[col.Key]}}</a>
+                <span *ngIf="!hasLink(col)">{{item[col.Key]}}</span>
+            </td>
+            <td nowrap class="action-list text-center">
+                <a [routerLink]="['/ServiceAgreement', 'Details', { id: item.Id }]"><i class="fa fa-mail-forward pointer" title="Details"></i></a>
+                <a *ngIf="rights.allowed('ServiceAgreement', 'Remove')"><i class="fa fa-remove pointer" title="Delete"></i></a>
+            </td>
+        </tr>
+    </tbody>
+</list>
+

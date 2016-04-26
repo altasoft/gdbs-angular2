@@ -7,6 +7,7 @@ import {TranslateService}   from 'ng2-translate'
 import * as SLA from './Modules/SLA/Config';
 import * as ServiceAgreement from './Modules/ServiceAgreement/Config';
 import * as MeterPoint from './Modules/MeterPoint/Config';
+import * as Customer from './Modules/Customer/Config';
 
 
 @Component({
@@ -17,7 +18,8 @@ import * as MeterPoint from './Modules/MeterPoint/Config';
 @RouteConfig([
     { path: '/SLA/...', name: 'SLA', component: SLA.Config, useAsDefault: true },
     { path: '/ServiceAgreement/...', name: 'ServiceAgreement', component: ServiceAgreement.Config },
-    { path: '/MeterPoint/...', name: 'MeterPoint', component: MeterPoint.Config }
+    { path: '/MeterPoint/...', name: 'MeterPoint', component: MeterPoint.Config },
+    { path: '/Customer/...', name: 'Customer', component: Customer.Config }
 ])
 export class AppComponent implements OnInit {
 

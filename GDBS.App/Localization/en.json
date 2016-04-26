@@ -19,7 +19,15 @@
   },
   "SLA": {
     "Title": "Service Level Agreements"
+  },
+
+  "UFE": {
+    "Customer.$TAXABLE": "Taxable",
+    "Customer..IS_EMPLOYEE": "Is Employee",
+    "Customer..TAX_PID_OR_PASSPORT": "Identification Number",
+    "Customer.IsResident": "Resident",
+    "Customer.Attributes.IsInBlackList": "Black List Member",
+    "Customer.FullName": "Full Name"
   }
 }
-
 
