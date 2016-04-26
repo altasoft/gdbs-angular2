@@ -1,5 +1,5 @@
 ﻿import {Component, OnInit, ElementRef} from 'angular2/core';
-import {ROUTER_DIRECTIVES, Router, Location} from 'angular2/router';
+import {ROUTER_DIRECTIVES, Router} from 'angular2/router';
 
 import {ColumnComponent, Pagination} from '../../Common/Components'
 import {SLA} from './Models/SLA';
@@ -23,9 +23,8 @@ export class List extends ColumnComponent implements OnInit {
 
     constructor(
         element: ElementRef,
-        location: Location,
         private _SLAService: SLAService) {
-        super(element, location, 'SLA');
+        super(element, 'SLA');
     }
 
     ngOnInit() {

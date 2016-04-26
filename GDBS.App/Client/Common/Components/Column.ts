@@ -1,22 +1,18 @@
 ﻿import {Component, OnInit, ElementRef} from 'angular2/core';
-import {Location} from 'angular2/router';
 
 @Component({
-    providers: [Location]
 })
-
 export class ColumnComponent implements OnInit {
     columnsVisibility = {};
     configMode = false;
 
     constructor(
         private _element: ElementRef,
-        private _location: Location,
         private _id: string) {
     }
 
     ngOnInit() {
-        var columns = localStorage.getItem(this._location.path() + '#' + this._id);
+        var columns = localStorage.getItem(document.location.pathname + '#' + this._id);
 
         this.columnsVisibility = columns ? JSON.parse(columns) : {};
     }
@@ -33,7 +29,7 @@ export class ColumnComponent implements OnInit {
         }
 
         if (this.configMode)
-            localStorage.setItem(this._location.path() + '#' + this._id, JSON.stringify(this.columnsVisibility));
+            localStorage.setItem(document.location.pathname + '#' + this._id, JSON.stringify(this.columnsVisibility));
 
         this.configMode = !this.configMode;
     }

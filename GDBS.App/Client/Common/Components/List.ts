@@ -1,13 +1,12 @@
 ﻿import {Component, OnInit, ElementRef, Input, Output, EventEmitter} from 'angular2/core';
-import {ROUTER_DIRECTIVES, Location} from 'angular2/router'
+import {ROUTER_DIRECTIVES} from 'angular2/router'
 import {Pagination} from './Pagination'
 
 
 @Component({
     selector: 'list',
     templateUrl: 'List.ts.html',
-    directives: [ROUTER_DIRECTIVES, Pagination],
-    providers: [Location]
+    directives: [ROUTER_DIRECTIVES, Pagination]
 })
 export class ListComponent {
 
@@ -113,7 +112,7 @@ export class ListComponent {
     }
 
     getPathName(name: string): string {
-        return this._location.path() + '#' + this.id + ':' + name
+        return location.pathname + '#' + this.id + ':' + name
     }
 
     createNew() {
