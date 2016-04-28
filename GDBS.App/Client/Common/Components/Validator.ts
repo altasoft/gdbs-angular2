@@ -5,6 +5,6 @@ export class Validator {
         if (control.value != '' && isNaN(Number(control.value)))
             return { isNumber: false };
 
-        return { isNumber: true };
+        return null;
     }
 }

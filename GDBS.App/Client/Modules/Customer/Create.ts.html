@@ -1,372 +1,197 @@
-﻿
-<div class="col-lg-7 col-md-9">
-    <div class="form">
-        <div class="title green">
-            <a href="http://iisdev:3050/SLA/List"><i class="fa fa-angle-double-left"></i></a>
-            <h4>Create Customer</h4>
-        </div>
-        <div class="form-col-2">
-            <form [ngFormModel]="form" (ng-submit)="submitData()" autocapitalize="off" autocomplete="off" novalidate="novalidate">
-                <input name="__RequestVerificationToken" type="hidden" value="7Ej1_TDf3T_vPWLMIrayWt3ntTCysf5sfvoVvAG-YYLSCZtxmQbiSxjezOzPFZk91FEaMjJ6AlWsVZDO-WUCzqJ1GBlkLsYgmHRsGsHFqbrHPtvfAvz-5aK9_3Na395jMR2kIrzcuVCYO3izcXrkTQ2">                <section>
-                    <div><label for="FunctionType">Function Type</label></div>
-                    <div>
-                        <select ngControl="FunctionType" title="Function Type" tabindex="-1">
-                            <option value="">--</option>
-                            <option value="1">Regular</option>
-                            <option value="2">Zero</option>
-                        </select>
-                        <span class="field-validation-valid" data-valmsg-for="FunctionType" data-valmsg-replace="true"></span>
-                    </div>
-                </section>
-                <section>
-                    <div><label for="OwnershipType">Ownership Type</label></div>
-                    <div>
-                        <select ngControl="OwnershipType" title="Ownership Type" tabindex="-1">
-                            <option value="">--</option>
-                            <option value="0">Permanent</option>
-                            <option value="1">Temporal</option>
-                        </select>
-                        <span class="field-validation-valid" data-valmsg-for="OwnershipType" data-valmsg-replace="true"></span>
-                    </div>
-                </section>
-                <section>
-                    <div><label for="ServiceType">Service Type</label></div>
-                    <div>
-                        <select ngControl="ServiceType" title="Service Type" tabindex="-1">
-                            <option value="">--</option>
-                            <option value="1">Retail Social</option>
-                            <option value="2">Retail Commercial</option>
-                            <option value="3">State Budget</option>
-                            <option value="4">Social Service for Commercial Customers</option>
-                            <option value="5">Gas Stations</option>
-                        </select>
-                        <span class="field-validation-valid" data-valmsg-for="ServiceType" data-valmsg-replace="true"></span>
-                    </div>
-                </section>
-                <div id="NonZeroSLAPanel">
-                    <section>
-                        <div><label for="RegularWarrantyDepositLimit">Regular Warranty Deposit Limit</label></div>
-                        <div>
-                            <input ngControl="RegularWarrantyDepositLimit" type="text">
-                        </div>
-                    </section>
-                    <section>
-                        <div><label for="FrozenWarrantyDepositLimit">Frozen Warranty Deposit Limit</label></div>
-                        <div>
-                            <input ngControl="FrozenWarrantyDepositLimit" type="text">
-                            <span class="field-validation-valid" data-valmsg-for="FrozenWarrantyDepositLimit" data-valmsg-replace="true"></span>
-                        </div>
-                    </section>
-                    <section>
-                        <div><label for="OldCustomerNumber">Old Customer Number</label></div>
-                        <div>
-                            <input ngControl="OldCustomerNumber" type="text">
-                            <span class="field-validation-valid" data-valmsg-for="OldCustomerNumber" data-valmsg-replace="true"></span>
-                        </div>
-                    </section>
-                    <section>
-                        <div><label for="Description">Description</label></div>
-                        <div>
-                            <input ngControl="Description" type="text" value="">
-                        </div>
-                    </section>
+﻿<div class="form" style="width: 60%; float:left">
+    <div class="title green">
+        <a [routerLink]="['List']"><i class="fa fa-angle-double-left"></i></a>
+        <h4>Create</h4>
+    </div>
+    <div class="form-col-2">
+        <form [ngFormModel]="form">
+            <div>
+                <p *ngIf="success">
+                    Success!
+                </p>
+                <p *ngIf="fail">
+                    Epic Fail!
+                </p>
+            </div>
+            <section>
+                <div>
+                    <label>კლიენტის ტიპი</label>
                 </div>
-                <section>
-                    <div><label for="State">State</label></div>
-                    <div>
-                        <select ngControl="State" title="State" tabindex="-1">
-                            <option selected="selected" value="0">Pending</option>
-                            <option value="1">Cancelled</option>
-                            <option value="2">Active</option>
-                            <option value="3">Suspended</option>
-                        </select>
-                        <span class="field-validation-valid" data-valmsg-for="State" data-valmsg-replace="true"></span>
+                <div>
+                    <select ngControl="UFE.Customer.IsIndividual" (change)="change($event)">
+                        <option value="">--</option>
+                        <option value="False">იურიდიული პირი</option>
+                        <option value="True">ფიზიკური პირი</option>
+                    </select>
+                    <div *ngIf="form.controls['UFE.Customer.IsIndividual'].dirty && !form.controls['UFE.Customer.IsIndividual'].valid">
+                        <p *ngIf="form.controls['UFE.Customer.IsIndividual'].errors.required">
+                            აუცილებელი ველი
+                        </p>
                     </div>
-                </section>
-                <section>
-                    <div><label for="GeneralContractNumber">General Contract Number</label></div>
-                    <div>
-                        <div class="input-group">
-                            <input ngControl="GeneralContractNumber" readonly="readonly" type="text">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default fa fa-times clear"></button>
-                            </span>
-                            <input data-val="true" data-val-number="The field GeneralContractId must be a number." data-val-required="The GeneralContractId field is required." id="GeneralContractId" name="GeneralContractId" type="hidden" value="0">
-                        </div>
-                        <span class="field-validation-valid" data-valmsg-for="GeneralContractNumber" data-valmsg-replace="true"></span>
-                    </div>
-                </section>
-                <div id="SupplyPointPanel">
-                    <section>
-                        <div><label for="SupplyPointNumber">Supply Point Number</label></div>
-                        <div>
-                            <div class="input-group">
-                                <input ngControl="SupplyPointNumber" readonly="readonly" type="text">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default fa fa-times clear"></button>
-                                </span>
-                                <input data-val="true" data-val-number="The field SupplyPointId must be a number." id="SupplyPointId" name="SupplyPointId" type="hidden" value="">
-                            </div>
-                            <span class="field-validation-valid" data-valmsg-for="SupplyPointNumber" data-valmsg-replace="true"></span>
-                        </div>
-                    </section>
                 </div>
+            </section>
+            <div *ngIf="isIndividual.value == 'False'" ngControlGroup="legalEntity">
                 <section>
-                    <div><label for="ServiceUnitId">Service Unit</label></div>
                     <div>
-                        <select ngControl="ServiceUnitId" title="Service Unit" tabindex="-1">
+                        <label>სრული სახელი</label>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" ngControl="UFE.Customer.FullName" />
+                        <div *ngIf="form.controls.legalEntity.controls['UFE.Customer.FullName'].dirty && !form.controls.legalEntity.controls['UFE.Customer.FullName'].valid">
+                            <p *ngIf="form.controls.legalEntity.controls['UFE.Customer.FullName'].errors.required">
+                                აუცილებელი ველი
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div *ngIf="isIndividual.value == 'True'" ngControlGroup="individualEntity">
+                <section>
+                    <div>
+                        <label>პერსონალური იდენტიფიკატორი</label>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" ngControl="UFE.IndividualEntity.PersonalId" />
+                        <div *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.PersonalId'].dirty && !form.controls.individualEntity.controls['UFE.IndividualEntity.PersonalId'].valid">
+                            <p *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.PersonalId'].errors.required">
+                                აუცილებელი ველი
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div>
+                        <label>სახელი</label>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" ngControl="UFE.IndividualEntity.Name" />
+                        <div *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.Name'].dirty && !form.controls.individualEntity.controls['UFE.IndividualEntity.Name'].valid">
+                            <p *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.Name'].errors.required">
+                                აუცილებელი ველი
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div>
+                        <label>გვარი</label>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" ngControl="UFE.IndividualEntity.Surname" />
+                        <div *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.Surname'].dirty && !form.controls.individualEntity.controls['UFE.IndividualEntity.Surname'].valid">
+                            <p *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.Surname'].errors.required">
+                                აუცილებელი ველი
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div>
+                        <label>თარიღი</label>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" ngControl="UFE.IndividualEntity.DateofIssue" />
+                        <div *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.DateofIssue'].dirty && !form.controls.individualEntity.controls['UFE.IndividualEntity.DateofIssue'].valid">
+                            <p *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.DateofIssue'].errors.required">
+                                აუცილებელი ველი
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div>
+                        <label>ტიპი</label>
+                    </div>
+                    <div>
+                        <select type="text" class="form-control" ngControl="UFE.IndividualEntity.Type">
                             <option value="">--</option>
-                            <option value="1">SU01 - ქარელი</option>
-                            <option value="2">SU02 - ხაშური</option>
-                            <option value="3">SU03 - დმანისი</option>
-                            <option value="4">SU04 - გარდაბანი</option>
-                            <option value="5">SU05 - ყაზბეგი</option>
-                            <option value="6">SU06 - დუშეთი</option>
-                            <option value="7">SU07 - მცხეთა</option>
-                            <option value="14">SU14 - აბაშა</option>
-                            <option value="15">SU15 - ოზურგეთი</option>
-                            <option value="16">SU16 - ლანჩხუთი</option>
-                            <option value="17">SU17 - ჩოხატაური</option>
-                            <option value="18">SU18 - ბაღდათი</option>
-                            <option value="19">SU19 - წყალტუბო</option>
-                            <option value="20">SU20 - ახმეტა</option>
-                            <option value="21">SU21 - ლაგოდეხი</option>
-                            <option value="22">SU22 - ზუგდიდი</option>
-                            <option value="23">SU23 - გურჯაანი</option>
-                            <option value="24">SU24 - ყვარელი</option>
-                            <option value="25">SU25 - სიღნაღი</option>
-                            <option value="26">SU26 - ზესტაფონი</option>
-                            <option value="27">SU27 - დედოფლის წყარო</option>
-                            <option value="28">SU28 - ჭიათურა</option>
-                            <option value="30">SU30 - მარნეული</option>
-                            <option value="31">SU31 - საგარეჯო</option>
-                            <option value="32">SU32 - ფოთი</option>
-                            <option value="33">SU33 - ბათუმი</option>
-                            <option value="35">SU35 - ქობულეთი</option>
-                            <option value="36">SU36 - ხარაგაული</option>
-                            <option value="37">SU37 - ხობი</option>
-                            <option value="38">SU38 - სამტრედია</option>
-                            <option value="42">SU42 - ვანი</option>
-                            <option value="43">SU43 - თერჯოლა</option>
-                            <option value="45">SU45 - ბორჯომი</option>
-                            <option value="46">SU46 - კასპი</option>
-                            <option value="47">SU47 - გორი</option>
-                            <option value="48">SU48 - ბოლნისი</option>
-                            <option value="49">SU49 - თეთრიწყარო</option>
-                            <option value="50">SU50 - ქუთაისი</option>
-                            <option value="51">SU51 - რუსთავი</option>
-                            <option value="58">SU58 - ახალციხე</option>
-                            <option value="61">SU61 - თბილისი</option>
-                            <option value="62">SU62 - PPP test1</option>
-                            <option value="63">SU63 - aaa</option>
-                            <option value="64">SU64 - uuu</option>
-                            <option value="65">SU65 - aaa</option>
-                            <option value="66">SU66 - aadfff</option>
-                            <option value="69">SU69 - test</option>
-                            <option value="70">SU070 - testt</option>
-                            <option value="71">SU71 - ტესტ</option>
+                            <option value="0">არასამთავრობო მეწარმე</option>
+                            <option value="1">ინდ. მეწარმე</option>
+                            <option value="2">მეწარმე</option>
+                            <option value="3">გადამხდელი</option>
                         </select>
-                        <span class="field-validation-valid" data-valmsg-for="ServiceUnitId" data-valmsg-replace="true"></span>
+                        <div *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.Type'].dirty && !form.controls.individualEntity.controls['UFE.IndividualEntity.Type'].valid">
+                            <p *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.Type'].errors.required">
+                                აუცილებელი ველი
+                            </p>
+                        </div>
                     </div>
                 </section>
                 <section>
-                    <div><label for="SMSService">SMS Service</label></div>
                     <div>
-                        <select ngControl="SMSService" title="SMS Service" tabindex="-1">
-                            <option selected="selected" value="">--</option>
-                            <option value="True">Yes</option>
-                            <option value="False">No</option>
-                        </select>
+                        <label>სახლის ტელეფონი</label>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" ngControl="UFE.Customer.Phone" />
+                        <div *ngIf="form.controls.individualEntity.controls['UFE.Customer.Phone'].dirty && !form.controls.individualEntity.controls['UFE.Customer.Phone'].valid">
+                            <p *ngIf="!form.controls.individualEntity.controls['UFE.Customer.Phone'].errors.isNumber">
+                                გთხოვთ შეიყვანოთ მხოლოდ ციფრები
+                            </p>
+                            <p *ngIf="form.controls.individualEntity.controls['UFE.Customer.Phone'].errors.required">
+                                აუცილებელი ველი
+                            </p>
+                        </div>
                     </div>
                 </section>
-                <div id="MeterPointPanel" ngControlGroup="MeterPoint">
-                    <section>
-                        <div><label for="MeterPoints">Meter Points</label></div>
-                        <div>
-                            <table class="table no-more-tables" id="MeterPoints" data-check-url="/MeterPoint/SearchByAdminNumber">
-                                <thead>
-                                    <tr>
-                                        <td width="85%">Meter Points</td>
-                                        <td width="15%"></td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="#item of MeterPoints">
-                                        <td>{{item.AdminNumber}}</td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td>
-                                            <div>
-                                                <input class="form-control admin-number" ngControl="AdminNumber" placeholder="Admin Number" type="text">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-default" (click)="addMeterPoint(form.controls['MeterPoint'].value)" [disabled]="!form.controls['MeterPoint'].valid">Add</button>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </section>
-                    <section class="search" data-tag="MeterPointNumber" style="display: none;">
-                        <div></div>
-                        <div>
-                            <div>
-                                <div id="SearchMeterPointModule" data-load-url="/MeterPoint/Search">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <input data-autocomplete-url="/MeterPoint/FindAdminNumber" data-input-autocomplete="adminNumber" id="AdminNumber" name="AdminNumber" placeholder="Admin Number" type="text" value="">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="select2-container all_items" id="s2id_FilterType" title="" style="display: block; width: 100%;"><a href="javascript:void(0)" class="select2-choice" tabindex="-1">   <span class="select2-chosen" id="select2-chosen-131">--</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow" role="presentation"><b role="presentation"></b></span></a><label for="s2id_autogen131" class="select2-offscreen"></label><input class="select2-focusser select2-offscreen" type="text" aria-haspopup="true" role="button" aria-labelledby="select2-chosen-131" id="s2id_autogen131"><div class="select2-drop select2-display-none select2-with-searchbox">   <div class="select2-search">       <label for="s2id_autogen131_search" class="select2-offscreen"></label>       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" role="combobox" aria-expanded="true" aria-autocomplete="list" aria-owns="select2-results-131" id="s2id_autogen131_search" placeholder="">   </div>   <ul class="select2-results" role="listbox" id="select2-results-131">   </ul></div></div><select class="all_items" id="FilterType" name="FilterType" title="" style="display: none;" tabindex="-1">
-                                                <option value="">--</option>
-                                                <option value="0">Quasi Meter Point</option>
-                                                <option value="1">GDS Meter Point</option>
-                                                <option value="2">District Meter Point</option>
-                                                <option value="3">End User Meter Point</option>
-                                            </select>
-                                            <div class="select2-container select2-container-disabled only_quasi hidden" id="s2id_FilterType" title="" style="display: block; width: 100%;"><a href="javascript:void(0)" class="select2-choice" tabindex="-1">   <span class="select2-chosen" id="select2-chosen-132">Quasi Meter Point</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow" role="presentation"><b role="presentation"></b></span></a><label for="s2id_autogen132" class="select2-offscreen"></label><input class="select2-focusser select2-offscreen" type="text" aria-haspopup="true" role="button" aria-labelledby="select2-chosen-132" id="s2id_autogen132" disabled=""><div class="select2-drop select2-display-none select2-with-searchbox">   <div class="select2-search">       <label for="s2id_autogen132_search" class="select2-offscreen"></label>       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" role="combobox" aria-expanded="true" aria-autocomplete="list" aria-owns="select2-results-132" id="s2id_autogen132_search" placeholder="">   </div>   <ul class="select2-results" role="listbox" id="select2-results-132">   </ul></div></div><select class="only_quasi hidden" disabled="" id="FilterType" name="FilterType" title="" style="display: none;" tabindex="-1">
-                                                <option value="0">Quasi Meter Point</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <input type="button" id="search" value="Search">
-                                            <input id="State" name="State" type="hidden" value="">
-                                            <input id="FilterSupplyPointAdminNumber" name="FilterSupplyPointAdminNumber" type="hidden" value="">
-                                            <input id="ServiceUnitId" name="ServiceUnitId" type="hidden" value="">
-                                            <input value="False" id="OnlyPendingAndActive" name="OnlyPendingAndActive" type="hidden">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <input id="FilterSLAAdminNumber" name="FilterSLAAdminNumber" placeholder="SLA Admin Number" type="text" value="">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <input id="OldCustomerNumber" name="OldCustomerNumber" placeholder="Old Customer Number" type="text" value="">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <input id="ExactZoneNumber" name="ExactZoneNumber" placeholder="Zone Number (Exact)" type="text" value="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="SearchMeterPointResult" style="margin-left: -35%;">
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+            </div>
+            <section>
+                <div>
+                    <label>განმცხადებლის იურიდიული ადგილმდებარეობა</label>
                 </div>
-                <section id="ContactPersonPanel" ngControlGroup="ContactPerson">
-                    <div>
-                        Contact Persons
+                <div>
+                    <input type="text" class="form-control" ngControl="UFE.Customer.RegistrationLocationResid" />
+                    <div *ngIf="form.controls['UFE.Customer.RegistrationLocationResid'].dirty && !form.controls['UFE.Customer.RegistrationLocationResid'].valid">
+                        <p *ngIf="form.controls['UFE.Customer.RegistrationLocationResid'].errors.required">
+                            აუცილებელი ველი
+                        </p>
                     </div>
-                    <div>
-                        <table class="table no-more-tables">
-                            <thead>
-                                <tr>
-                                    <td width="30%">Contact Person</td>
-                                    <td width="30%">Mobile</td>
-                                    <td width="30%">Email</td>
-                                    <td width="10%"></td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="#item of ContactPersons">
-                                    <td>{{item.Name}}</td>
-                                    <td>{{item.Mobile}}</td>
-                                    <td>{{item.Email}}</td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td>
-                                        <div>
-                                            <input class="form-control" ngControl="Name" type="text">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <input class="form-control" ngControl="Mobile" type="text">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <input class="form-control" ngControl="Email" type="text">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-default" (click)="addContactPerson(form.controls['ContactPerson'].value)" [disabled]="!form.controls['ContactPerson'].valid">Add</button>
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                </div>
+            </section>
+            <section>
+                <div>
+                    <label>განმცხადებლის იურიდიული მისამართი (ქალაქის გარეშე, მხოლოდ ქუჩა, მასივი, კორპუსი, ბინა)</label>
+                </div>
+                <div>
+                    <input type="text" class="form-control" ngControl="UFE.Customer.RegistrationAddressResid" />
+                    <div *ngIf="form.controls['UFE.Customer.RegistrationAddressResid'].dirty && !form.controls['UFE.Customer.RegistrationAddressResid'].valid">
+                        <p *ngIf="form.controls['UFE.Customer.RegistrationAddressResid'].errors.required">
+                            აუცილებელი ველი
+                        </p>
                     </div>
-                </section>
-                <br>
-                <span style="float: right; margin-top: -5px; background: white; padding-left: 10px; color: silver;">Doc Flow</span>
-                <hr>
-                <section>
-                    <div><label for="OperationAttribute_DocId">Doc Id</label></div>
-                    <div>
-                        <input ngControl="DocId" type="text">
-                        <span class="field-validation-valid" data-valmsg-for="OperationAttribute.DocId" data-valmsg-replace="true"></span>
+                </div>
+            </section>
+            <section>
+                <div>
+                    <label>განმცხადებლის ფაქტიური ადგილმდებარეობა</label>
+                </div>
+                <div>
+                    <input type="text" class="form-control" ngControl="UFE.Customer.ActualLocationResid" />
+                    <div *ngIf="form.controls['UFE.Customer.ActualLocationResid'].dirty && !form.controls['UFE.Customer.ActualLocationResid'].valid">
+                        <p *ngIf="form.controls['UFE.Customer.ActualLocationResid'].errors.required">
+                            აუცილებელი ველი
+                        </p>
                     </div>
-                </section>
-                <section>
-                    <div><label for="OperationAttribute_WebUrl">Web Url</label></div>
-                    <div>
-                        <input ngControl="WebUrl" type="text">
+                </div>
+            </section>
+            <section>
+                <div>
+                    <label>განმცხადებლის ფაქტიური მისამართი  (ქალაქის გარეშე მხოლოდ ქუჩა, მასივი, კორპუსი, ბინა)</label>
+                </div>
+                <div>
+                    <input type="text" class="form-control" ngControl="UFE.Customer.ActualAddressResid" />
+                    <div *ngIf="form.controls['UFE.Customer.ActualAddressResid'].dirty && !form.controls['UFE.Customer.ActualAddressResid'].valid">
+                        <p *ngIf="form.controls['UFE.Customer.ActualAddressResid'].errors.required">
+                            აუცილებელი ველი
+                        </p>
                     </div>
-                </section>
-                <hr>
-                <section>
-                    <div>
-                        <a href="http://iisdev:3050/SLA/List" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back to List</a>
-                    </div>
-                    <div class="a-r">
-                        <!--<input type="button" data-button-role="clearForm" value="Clear">-->
-                        <button *ngIf="!isSubmitting && !isSuccess" class="btn btn-success" (click)="submitData()" [disabled]="!form.valid">Save</button>
-                        <button *ngIf="isSubmitting" class="btn btn-success" disabled>Saving...</button>
-                        <button *ngIf="isSuccess" class="btn btn-success" disabled>Saved!</button>
-                    </div>
-                </section>
-            </form>
-        </div>
+                </div>
+            </section>
+            <hr>
+            <section>
+                <div style="width: 100%; text-align:right">
+                    <input type="button" [disabled]="!form.valid" (click)="submit()" [attr.value]="isSubmitting ? 'Saving...' : 'Save'" />
+                </div>
+            </section>
+        </form>
     </div>
 </div>
-
-<!--<div class="form-col-2 col-1-1">
-
-    <div *ngIf="form.valid" class="alert alert-success">Form is Valid</div>
-    <div *ngIf="!form.valid" class="alert alert-warning">Form is Invalid</div>
-
-    <form [ngFormModel]="form">
-        <div>
-            <label>Admin Number:</label> <input type="text" ngControl="username" />
-            <p *ngIf="username.pending">Fetching data from the server...</p>
-
-            <div *ngIf="username.dirty && !username.valid && !username.pending">
-                <p *ngIf="username.errors.required">Username is required.</p>
-                <p *ngIf="username.errors.startsWithNumber">Your username can't start with a number</p>
-                <p *ngIf="username.errors.usernameTaken">This username is taken</p>
-            </div>
-        </div>
-
-        <div>
-            <label>Type:</label>
-            <select ngControl="type">
-                <option value="">Default</option>
-                <option value="1">Normal</option>
-                <option value="2">Cool</option>
-            </select>
-        </div>
-
-        <br />
-        <br />
-
-        <button (click)="submitData()" type="button" [disabled]="!form.valid" class="btn btn-primary">Sumbit data</button>
-        <button (click)="changeValidator()" type="button" class="btn btn-primary">changeValidator</button>
-    </form>
-</div>-->

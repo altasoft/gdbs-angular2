@@ -1,178 +1,119 @@
-﻿import { Component, OnInit } from 'angular2/core';
-import { RouteParams } from 'angular2/router';
-import { Http, Response } from 'angular2/http';
-import { FormBuilder, Validators, Control, ControlGroup, FORM_DIRECTIVES, ControlArray } from 'angular2/common';
-
+﻿import {Component} from 'angular2/core';
+import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {ControlGroup, Control, FormBuilder, Validators} from 'angular2/common';
+import {Validator} from '../../Common/Components/Validator';
+import {Service} from './Service'
 
 @Component({
     selector: 'create',
     templateUrl: 'Create.ts.html',
+    directives: [ROUTER_DIRECTIVES],
+    providers: [Service]
 })
 
 export class Create {
+    isSubmitting = false;
+    success = false;
+    fail = false;
 
     form: ControlGroup;
-    meterPointsGroup: ControlGroup;
-    contactPersonsGroup: ControlGroup;
 
-    MeterPoints = [];
-    ContactPersons = [];
+    legalEntityGroup: ControlGroup;
+    isIndividual: Control;
+    fullName: Control;
+    legalLocation: Control;
+    legalAddress: Control;
+    actualLocation: Control;
+    actualAddress: Control;
 
-    isSubmitting = false
-    isSuccess = false
-    error = ''
+    individualEntityGroup: ControlGroup;
+    personalId: Control;
+    name: Control;
+    surname: Control;
+    dateOfIssue: Control;
+    type: Control;
+    homePhone: Control;
 
-
-    constructor(private builder: FormBuilder, private http: Http) {
-
-        this.meterPointsGroup = new ControlGroup({
-            AdminNumber: new Control('', Validators.required, UsernameValidator.checkAdminNumber(http))
-        })
-
-        this.contactPersonsGroup = new ControlGroup({
-            Name: new Control('', Validators.required),
-            Mobile: new Control('', Validators.required),
-            Email: new Control('', Validators.required),
-        })
+    constructor(private customerService: Service, builder: FormBuilder) {
+        this.isIndividual = new Control('', Validators.required);
 
         this.form = builder.group({
-            FunctionType: ['', Validators.required],
-            OwnershipType: ['', Validators.required],
-            ServiceType: [],
-            RegularWarrantyDepositLimit: [],
-            FrozenWarrantyDepositLimit: [],
-            OldCustomerNumber: [],
-            Description: [],
-            State: [],
-            GeneralContractNumber: [],
-            SupplyPointNumber: [],
-            ServiceUnitId: [],
-            SMSService: [],
-            MeterPoint: this.meterPointsGroup,
-            ContactPerson: this.contactPersonsGroup,
-            DocId: [],
-            WebUrl: []
+            'UFE.Customer.IsIndividual': this.isIndividual,
+            'UFE.Customer.RegistrationLocationResid': this.legalLocation,
+            'UFE.Customer.RegistrationAddressResid': this.legalAddress,
+            'UFE.Customer.ActualLocationResid': this.actualLocation,
+            'UFE.Customer.ActualAddressResid': this.actualAddress
+        });
+    }
+
+    initGroups() {
+        this.fullName = new Control('', Validators.required);
+        this.legalLocation = new Control('', Validators.required);
+        this.legalAddress = new Control('', Validators.required);
+        this.actualLocation = new Control('', Validators.required);
+        this.actualAddress = new Control('', Validators.required);
+
+        this.legalEntityGroup = new ControlGroup({
+            'UFE.Customer.FullName': this.fullName
         })
 
-        this.form.exclude('MeterPoint')
-        this.form.exclude('ContactPerson')
+        this.personalId = new Control('', Validators.required);
+        this.name = new Control('', Validators.required);
+        this.surname = new Control('', Validators.required);
+        this.type = new Control('', Validators.required);
+        this.dateOfIssue = new Control('', Validators.required);
+        this.homePhone = new Control('', Validators.compose([Validators.required, Validator.isNumber]));
+
+        this.individualEntityGroup = new ControlGroup({
+            'UFE.IndividualEntity.PersonalId': this.personalId,
+            'UFE.IndividualEntity.Name': this.name,
+            'UFE.IndividualEntity.Surname': this.surname,
+            'UFE.IndividualEntity.Type': this.type,
+            'UFE.IndividualEntity.DateofIssue': this.dateOfIssue,
+            'UFE.Customer.Phone': this.homePhone
+        })
     }
 
-    goBack() {
-        window.history.back();
-    }
-
-
-    addMeterPoint(obj) {
-        var url = 'http://localhost:30507/api/ServiceAgreement/CheckMeterPointAdminNumber/' + 123123123
-
-        this.http.get(url)
-            .subscribe(
-            res => { console.log('success', res); },
-            err => { console.log(err); },
-            () => { console.log('complete'); }
-            );
-
-
-        this.MeterPoints.push(obj);
-
-        for (let i in this.meterPointsGroup.controls)
-            this.resetForm(this.meterPointsGroup)
-    }
-
-    addContactPerson(obj) {
-        this.ContactPersons.push(obj);
-
-        for (let i in this.contactPersonsGroup.controls)
-            this.resetForm(this.contactPersonsGroup)
-    }
-
-
-    submitData() {
-        var data = this.form.value;
-        data.MeterPoints = this.MeterPoints.map(x => x.AdminNumber);
-        data.ContactPersons = this.ContactPersons;
-
+    submit() {
         this.isSubmitting = true;
-        this.isSuccess = false;
+        this.success = false;
+        this.fail = false;
 
-        this.http.post('http://localhost:30507/api/ServiceAgreement/Create', JSON.stringify(data)).subscribe(
-            res => this.isSuccess = true,
-            error => this.error = error,
-            () => this.isSubmitting = false
-        );
-    }
+        var data = this.form.value;
+        var entity = this.form.controls['legalEntity'] ? this.form.controls['legalEntity'].value : this.form.controls['individualEntity'].value;
 
-    resetForm(group: ControlGroup) {
-        for (let i in group.controls) {
-            var control = (group.controls[i] as Control);
-            if (control)
-                control.updateValue('');
-        }
-    }
+        delete data['legalEntity'];
+        delete data['individualEntity'];
 
-    changeValidator() {
-        this.form.controls['username'].validator = null
-        this.form.controls['type'].validator = null
+        for (var property in entity)
+            data[property] = entity[property];
 
-        this.form.controls['username'].updateValueAndValidity({
-            onlySelf: false,
-            emitEvent: true
-        })
-        this.form.controls['type'].updateValueAndValidity({
-            onlySelf: false,
-            emitEvent: true
-        })
-    }
-}
+        console.log(JSON.stringify(data));
+        this.customerService.put(data, res => {
+            this.success = res.Document != null && res.Document.Data != null;
+            this.fail = !this.success;
 
-
-interface ValidationResult {
-    [key: string]: boolean;
-}
-
-export class UsernameValidator {
-
-    static startsWithNumber(control: Control): ValidationResult {
-
-        if (control.value != "" && !isNaN(control.value.charAt(0))) {
-            return { "startsWithNumber": true };
-        }
-
-        return null;
-    }
-
-    static usernameTaken(control: Control): Promise<ValidationResult> {
-
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                if (control.value === "David") {
-                    resolve({ "usernameTaken": true })
-                } else {
-                    resolve(null);
-                };
-
-            }, 1000);
+            console.log(res);
         });
 
+        this.isSubmitting = false;
     }
 
-    static checkAdminNumber(http: Http) {
-        return (control: Control): Promise<ValidationResult> => {
+    change($event) {
+        this.success = false;
+        this.fail = false;
 
-            return new Promise((resolve, reject) => {
-                var url = 'http://localhost:30507/api/ServiceAgreement/CheckMeterPointAdminNumber/' + control.value
+        if ($event.target.value != '') {
+            this.initGroups();
 
-                http.get(url).subscribe(
-                    (res: Response) => {
-                        var isValid = res.text() === 'true';
-
-                        resolve(isValid ? null : { "checkAdminNumber": true });
-                    },
-                    err => resolve({ "checkAdminNumber": true })
-                );
-            });
+            if ($event.target.value == 'True') {
+                this.form.addControl('individualEntity', this.individualEntityGroup);
+                this.form.removeControl('legalEntity');
+            }
+            else if ($event.target.value == 'False') {
+                this.form.addControl('legalEntity', this.legalEntityGroup);
+                this.form.removeControl('individualEntity');
+            }
         }
     }
-
 }
