@@ -1,7 +1,7 @@
 ﻿import {Component, OnInit, ElementRef, Input, Output, EventEmitter} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router'
 import {Pagination} from './Pagination'
-
+import {Location} from 'angular2/platform/browser'
 
 @Component({
     selector: 'list',
