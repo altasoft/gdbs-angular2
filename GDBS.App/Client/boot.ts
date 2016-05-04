@@ -23,7 +23,7 @@ class Logger {
     }
 
     logError(info) {
-        //info = JSON.stringify(info, (key, value) => {
+        //info = JSON.stringify(info, (key, value) => {j
         //    if (key == 'parent') { return value.id; }
         //    else { return value; }
         //})

@@ -1,0 +1,20 @@
+﻿
+<section>
+    <div>
+        {{title}}
+        <div *ngIf="getErrors().length">
+            <p *ngFor="#error of getErrors()" style="color: darkred; font-size: 12px;">
+                {{ ('ValidationErrors.' + error) | translate }}
+            </p>
+        </div>
+        <div *ngIf="!getErrors().length">
+            <p style="color: darkgreen; font-size: 12px;">
+                {{ 'ValidationErrors.valid' | translate }}
+            </p>
+        </div>
+    </div>
+    <div>
+        <ng-content></ng-content>
+
+    </div>
+</section>

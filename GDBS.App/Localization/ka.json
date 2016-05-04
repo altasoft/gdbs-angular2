@@ -28,5 +28,10 @@
     "Customer.IsResident": "რეზიდენტი",
     "Customer.Attributes.IsInBlackList": "შავ სიაშია",
     "Customer.FullName": "სრული სახელი"
+  },
+  "ValidationErrors": {
+    "valid": "კარგია",
+    "required": "აუცილებელი ველი",
+    "isNumber": "მხოლოდ რიცხვი"
   }
 }

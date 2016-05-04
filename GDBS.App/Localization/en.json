@@ -28,6 +28,11 @@
     "Customer.IsResident": "Resident",
     "Customer.Attributes.IsInBlackList": "Black List Member",
     "Customer.FullName": "Full Name"
+  },
+  "ValidationErrors": {
+    "valid": "Valid",
+    "required": "Is Required",
+    "isNumber": "Ony Numbers"
   }
 }
 

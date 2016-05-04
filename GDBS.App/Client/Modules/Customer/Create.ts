@@ -1,77 +1,60 @@
-﻿import {Component} from 'angular2/core';
+﻿import {Component, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {ControlGroup, Control, FormBuilder, Validators} from 'angular2/common';
 import {Validator} from '../../Common/Components/Validator';
 import {Service} from './Service'
+import {InputField} from '../../Common/Components/InputField'
 
 @Component({
     selector: 'create',
     templateUrl: 'Create.ts.html',
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, InputField],
     providers: [Service]
 })
 
-export class Create {
+export class Create implements OnInit {
     isSubmitting = false;
     success = false;
     fail = false;
 
-    form: ControlGroup;
+    form: ControlGroup
+    legalEntity: ControlGroup
+    individualEntity: ControlGroup
 
-    legalEntityGroup: ControlGroup;
-    isIndividual: Control;
-    fullName: Control;
-    legalLocation: Control;
-    legalAddress: Control;
-    actualLocation: Control;
-    actualAddress: Control;
 
-    individualEntityGroup: ControlGroup;
-    personalId: Control;
-    name: Control;
-    surname: Control;
-    dateOfIssue: Control;
-    type: Control;
-    homePhone: Control;
-
-    constructor(private customerService: Service, builder: FormBuilder) {
-        this.isIndividual = new Control('', Validators.required);
-
-        this.form = builder.group({
-            'UFE.Customer.IsIndividual': this.isIndividual,
-            'UFE.Customer.RegistrationLocationResid': this.legalLocation,
-            'UFE.Customer.RegistrationAddressResid': this.legalAddress,
-            'UFE.Customer.ActualLocationResid': this.actualLocation,
-            'UFE.Customer.ActualAddressResid': this.actualAddress
-        });
+    constructor(private customerService: Service, private builder: FormBuilder) {
     }
 
-    initGroups() {
-        this.fullName = new Control('', Validators.required);
-        this.legalLocation = new Control('', Validators.required);
-        this.legalAddress = new Control('', Validators.required);
-        this.actualLocation = new Control('', Validators.required);
-        this.actualAddress = new Control('', Validators.required);
 
-        this.legalEntityGroup = new ControlGroup({
-            'UFE.Customer.FullName': this.fullName
+    ngOnInit() {
+
+        this.legalEntity = new ControlGroup({
+            'UFE.Customer.FullName': new Control('', Validators.required)
         })
 
-        this.personalId = new Control('', Validators.required);
-        this.name = new Control('', Validators.required);
-        this.surname = new Control('', Validators.required);
-        this.type = new Control('', Validators.required);
-        this.dateOfIssue = new Control('', Validators.required);
-        this.homePhone = new Control('', Validators.compose([Validators.required, Validator.isNumber]));
-
-        this.individualEntityGroup = new ControlGroup({
-            'UFE.IndividualEntity.PersonalId': this.personalId,
-            'UFE.IndividualEntity.Name': this.name,
-            'UFE.IndividualEntity.Surname': this.surname,
-            'UFE.IndividualEntity.Type': this.type,
-            'UFE.IndividualEntity.DateofIssue': this.dateOfIssue,
-            'UFE.Customer.Phone': this.homePhone
+        this.individualEntity = new ControlGroup({
+            'UFE.IndividualEntity.PersonalId': new Control('', Validators.required),
+            'UFE.IndividualEntity.Name': new Control('', Validators.required),
+            'UFE.IndividualEntity.Surname': new Control('', Validators.required),
+            'UFE.IndividualEntity.Type': new Control('', Validators.required),
+            'UFE.IndividualEntity.DateofIssue': new Control('', Validators.required),
+            'UFE.Customer.Phone': new Control('', Validators.compose([Validators.required, Validator.isNumber]))
         })
+
+        this.form = this.builder.group({
+            'UFE.Customer.IsIndividual': ['', Validators.required],
+            'UFE.Customer.RegistrationLocationResid': ['', Validators.required],
+            'UFE.Customer.RegistrationAddressResid': ['', Validators.required],
+            'UFE.Customer.ActualLocationResid': ['', Validators.required],
+            'UFE.Customer.ActualAddressResid': ['', Validators.required],
+
+            legalEntity: this.legalEntity,
+            individualEntity: this.individualEntity
+        })
+
+
+        this.form.exclude('legalEntity')
+        this.form.exclude('individualEntity')
     }
 
     submit() {
@@ -104,15 +87,14 @@ export class Create {
         this.fail = false;
 
         if ($event.target.value != '') {
-            this.initGroups();
 
             if ($event.target.value == 'True') {
-                this.form.addControl('individualEntity', this.individualEntityGroup);
-                this.form.removeControl('legalEntity');
+                this.form.include('legalEntity')
+                this.form.exclude('individualEntity')
             }
             else if ($event.target.value == 'False') {
-                this.form.addControl('legalEntity', this.legalEntityGroup);
-                this.form.removeControl('individualEntity');
+                this.form.exclude('legalEntity')
+                this.form.include('individualEntity')
             }
         }
     }

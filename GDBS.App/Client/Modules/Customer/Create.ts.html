@@ -1,7 +1,8 @@
-﻿<div class="form" style="width: 60%; float:left">
+﻿<div class="form">
     <div class="title green">
         <a [routerLink]="['List']"><i class="fa fa-angle-double-left"></i></a>
         <h4>Create</h4>
+        {{form.controls['UFE.IndividualEntity.PersonalId'] && form.controls['UFE.IndividualEntity.PersonalId'].valid}}
     </div>
     <div class="form-col-2">
         <form [ngFormModel]="form">
@@ -13,182 +14,76 @@
                     Epic Fail!
                 </p>
             </div>
-            <section>
-                <div>
-                    <label>კლიენტის ტიპი</label>
-                </div>
-                <div>
-                    <select ngControl="UFE.Customer.IsIndividual" (change)="change($event)">
+
+
+            <field [title]="'კლიენტის ტიპი'" [errors]="form.controls['UFE.Customer.IsIndividual'].errors">
+                <select ngControl="UFE.Customer.IsIndividual" (change)="change($event)">
+                    <option value="">--</option>
+                    <option value="False">იურიდიული პირი</option>
+                    <option value="True">ფიზიკური პირი</option>
+                </select>
+            </field>
+
+            <hr />
+            <div *ngIf="form.controls['UFE.Customer.IsIndividual'].value == 'False'" ngControlGroup="legalEntity">
+                <field [title]="'სრული სახელი'" [errors]="legalEntity.controls['UFE.Customer.FullName'].errors">
+                    <input type="text" class="form-control" ngControl="UFE.Customer.FullName" />
+                </field>
+                <hr />
+            </div>
+
+            <div *ngIf="form.controls['UFE.Customer.IsIndividual'].value == 'True'" ngControlGroup="individualEntity">
+                <field [title]="'პერსონალური იდენტიფიკატორი'" [errors]="individualEntity.controls['UFE.IndividualEntity.PersonalId'].errors">
+                    <input type="text" class="form-control" ngControl="UFE.IndividualEntity.PersonalId" />
+                </field>
+
+                <field [title]="'სახელი'" [errors]="individualEntity.controls['UFE.IndividualEntity.Name'].errors">
+                    <input type="text" class="form-control" ngControl="UFE.IndividualEntity.Name" />
+                </field>
+
+                <field [title]="'გვარი'" [errors]="individualEntity.controls['UFE.IndividualEntity.Surname'].errors">
+                    <input type="text" class="form-control" ngControl="UFE.IndividualEntity.Surname" />
+                </field>
+
+                <field [title]="'თარიღი'" [errors]="individualEntity.controls['UFE.IndividualEntity.DateofIssue'].errors">
+                    <input type="text" class="form-control" ngControl="UFE.IndividualEntity.DateofIssue" />
+                </field>
+
+                <field [title]="'ტიპი'" [errors]="individualEntity.controls['UFE.IndividualEntity.Type'].errors">
+                    <select type="text" class="form-control" ngControl="UFE.IndividualEntity.Type">
                         <option value="">--</option>
-                        <option value="False">იურიდიული პირი</option>
-                        <option value="True">ფიზიკური პირი</option>
+                        <option value="0">არასამთავრობო მეწარმე</option>
+                        <option value="1">ინდ. მეწარმე</option>
+                        <option value="2">მეწარმე</option>
+                        <option value="3">გადამხდელი</option>
                     </select>
-                    <div *ngIf="form.controls['UFE.Customer.IsIndividual'].dirty && !form.controls['UFE.Customer.IsIndividual'].valid">
-                        <p *ngIf="form.controls['UFE.Customer.IsIndividual'].errors.required">
-                            აუცილებელი ველი
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <div *ngIf="isIndividual.value == 'False'" ngControlGroup="legalEntity">
-                <section>
-                    <div>
-                        <label>სრული სახელი</label>
-                    </div>
-                    <div>
-                        <input type="text" class="form-control" ngControl="UFE.Customer.FullName" />
-                        <div *ngIf="form.controls.legalEntity.controls['UFE.Customer.FullName'].dirty && !form.controls.legalEntity.controls['UFE.Customer.FullName'].valid">
-                            <p *ngIf="form.controls.legalEntity.controls['UFE.Customer.FullName'].errors.required">
-                                აუცილებელი ველი
-                            </p>
-                        </div>
-                    </div>
-                </section>
+                </field>
+
+                <field [title]="'სახლის ტელეფონი'" [errors]="individualEntity.controls['UFE.Customer.Phone'].errors">
+                    <input type="text" class="form-control" ngControl="UFE.Customer.Phone" />
+                </field>
+                <hr />
             </div>
-            <div *ngIf="isIndividual.value == 'True'" ngControlGroup="individualEntity">
-                <section>
-                    <div>
-                        <label>პერსონალური იდენტიფიკატორი</label>
-                    </div>
-                    <div>
-                        <input type="text" class="form-control" ngControl="UFE.IndividualEntity.PersonalId" />
-                        <div *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.PersonalId'].dirty && !form.controls.individualEntity.controls['UFE.IndividualEntity.PersonalId'].valid">
-                            <p *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.PersonalId'].errors.required">
-                                აუცილებელი ველი
-                            </p>
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <div>
-                        <label>სახელი</label>
-                    </div>
-                    <div>
-                        <input type="text" class="form-control" ngControl="UFE.IndividualEntity.Name" />
-                        <div *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.Name'].dirty && !form.controls.individualEntity.controls['UFE.IndividualEntity.Name'].valid">
-                            <p *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.Name'].errors.required">
-                                აუცილებელი ველი
-                            </p>
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <div>
-                        <label>გვარი</label>
-                    </div>
-                    <div>
-                        <input type="text" class="form-control" ngControl="UFE.IndividualEntity.Surname" />
-                        <div *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.Surname'].dirty && !form.controls.individualEntity.controls['UFE.IndividualEntity.Surname'].valid">
-                            <p *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.Surname'].errors.required">
-                                აუცილებელი ველი
-                            </p>
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <div>
-                        <label>თარიღი</label>
-                    </div>
-                    <div>
-                        <input type="text" class="form-control" ngControl="UFE.IndividualEntity.DateofIssue" />
-                        <div *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.DateofIssue'].dirty && !form.controls.individualEntity.controls['UFE.IndividualEntity.DateofIssue'].valid">
-                            <p *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.DateofIssue'].errors.required">
-                                აუცილებელი ველი
-                            </p>
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <div>
-                        <label>ტიპი</label>
-                    </div>
-                    <div>
-                        <select type="text" class="form-control" ngControl="UFE.IndividualEntity.Type">
-                            <option value="">--</option>
-                            <option value="0">არასამთავრობო მეწარმე</option>
-                            <option value="1">ინდ. მეწარმე</option>
-                            <option value="2">მეწარმე</option>
-                            <option value="3">გადამხდელი</option>
-                        </select>
-                        <div *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.Type'].dirty && !form.controls.individualEntity.controls['UFE.IndividualEntity.Type'].valid">
-                            <p *ngIf="form.controls.individualEntity.controls['UFE.IndividualEntity.Type'].errors.required">
-                                აუცილებელი ველი
-                            </p>
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <div>
-                        <label>სახლის ტელეფონი</label>
-                    </div>
-                    <div>
-                        <input type="text" class="form-control" ngControl="UFE.Customer.Phone" />
-                        <div *ngIf="form.controls.individualEntity.controls['UFE.Customer.Phone'].dirty && !form.controls.individualEntity.controls['UFE.Customer.Phone'].valid">
-                            <p *ngIf="!form.controls.individualEntity.controls['UFE.Customer.Phone'].errors.isNumber">
-                                გთხოვთ შეიყვანოთ მხოლოდ ციფრები
-                            </p>
-                            <p *ngIf="form.controls.individualEntity.controls['UFE.Customer.Phone'].errors.required">
-                                აუცილებელი ველი
-                            </p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <section>
-                <div>
-                    <label>განმცხადებლის იურიდიული ადგილმდებარეობა</label>
-                </div>
-                <div>
-                    <input type="text" class="form-control" ngControl="UFE.Customer.RegistrationLocationResid" />
-                    <div *ngIf="form.controls['UFE.Customer.RegistrationLocationResid'].dirty && !form.controls['UFE.Customer.RegistrationLocationResid'].valid">
-                        <p *ngIf="form.controls['UFE.Customer.RegistrationLocationResid'].errors.required">
-                            აუცილებელი ველი
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <section>
-                <div>
-                    <label>განმცხადებლის იურიდიული მისამართი (ქალაქის გარეშე, მხოლოდ ქუჩა, მასივი, კორპუსი, ბინა)</label>
-                </div>
-                <div>
-                    <input type="text" class="form-control" ngControl="UFE.Customer.RegistrationAddressResid" />
-                    <div *ngIf="form.controls['UFE.Customer.RegistrationAddressResid'].dirty && !form.controls['UFE.Customer.RegistrationAddressResid'].valid">
-                        <p *ngIf="form.controls['UFE.Customer.RegistrationAddressResid'].errors.required">
-                            აუცილებელი ველი
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <section>
-                <div>
-                    <label>განმცხადებლის ფაქტიური ადგილმდებარეობა</label>
-                </div>
-                <div>
-                    <input type="text" class="form-control" ngControl="UFE.Customer.ActualLocationResid" />
-                    <div *ngIf="form.controls['UFE.Customer.ActualLocationResid'].dirty && !form.controls['UFE.Customer.ActualLocationResid'].valid">
-                        <p *ngIf="form.controls['UFE.Customer.ActualLocationResid'].errors.required">
-                            აუცილებელი ველი
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <section>
-                <div>
-                    <label>განმცხადებლის ფაქტიური მისამართი  (ქალაქის გარეშე მხოლოდ ქუჩა, მასივი, კორპუსი, ბინა)</label>
-                </div>
-                <div>
-                    <input type="text" class="form-control" ngControl="UFE.Customer.ActualAddressResid" />
-                    <div *ngIf="form.controls['UFE.Customer.ActualAddressResid'].dirty && !form.controls['UFE.Customer.ActualAddressResid'].valid">
-                        <p *ngIf="form.controls['UFE.Customer.ActualAddressResid'].errors.required">
-                            აუცილებელი ველი
-                        </p>
-                    </div>
-                </div>
-            </section>
+
+            <field [title]="'განმცხადებლის იურიდიული ადგილმდებარეობა'" [errors]="form.controls['UFE.Customer.RegistrationLocationResid'].errors">
+                <input type="text" class="form-control" ngControl="UFE.Customer.RegistrationLocationResid" />
+            </field>
+
+            <field [title]="'განმცხადებლის იურიდიული მისამართი (ქალაქის გარეშე, მხოლოდ ქუჩა, მასივი, კორპუსი, ბინა)'" [errors]="form.controls['UFE.Customer.RegistrationAddressResid'].errors">
+                <input type="text" class="form-control" ngControl="UFE.Customer.RegistrationAddressResid" />
+            </field>
+
+            <field [title]="'განმცხადებლის ფაქტიური ადგილმდებარეობა'" [errors]="form.controls['UFE.Customer.ActualLocationResid'].errors">
+                <input type="text" class="form-control" ngControl="UFE.Customer.ActualLocationResid" />
+            </field>
+
+            <field [title]="'განმცხადებლის ფაქტიური მისამართი  (ქალაქის გარეშე მხოლოდ ქუჩა, მასივი, კორპუსი, ბინა)'" [errors]="form.controls['UFE.Customer.ActualAddressResid'].errors">
+                <input type="text" class="form-control" ngControl="UFE.Customer.ActualAddressResid" />
+            </field>
+
             <hr>
             <section>
-                <div style="width: 100%; text-align:right">
+                <div style="width: 100%; text-align: right">
                     <input type="button" [disabled]="!form.valid" (click)="submit()" [attr.value]="isSubmitting ? 'Saving...' : 'Save'" />
                 </div>
             </section>
