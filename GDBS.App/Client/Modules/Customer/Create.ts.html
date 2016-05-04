@@ -1,7 +1,7 @@
-﻿<div class="form">
+﻿<div class="form" style="width: 60%">
     <div class="title green">
         <a [routerLink]="['List']"><i class="fa fa-angle-double-left"></i></a>
-        <h4>Create</h4>
+        <h4>ახალი კლიენტის შექმნა</h4>
         {{form.controls['UFE.IndividualEntity.PersonalId'] && form.controls['UFE.IndividualEntity.PersonalId'].valid}}
     </div>
     <div class="form-col-2">
@@ -84,9 +84,10 @@
             <hr>
             <section>
                 <div style="width: 100%; text-align: right">
-                    <input type="button" [disabled]="!form.valid" (click)="submit()" [attr.value]="isSubmitting ? 'Saving...' : 'Save'" />
+                    <input type="button" [disabled]="!form.valid || isSubmitting" (click)="submit()" [attr.value]="isSubmitting ? 'Saving...' : 'Save'" />
                 </div>
             </section>
+
         </form>
     </div>
 </div>

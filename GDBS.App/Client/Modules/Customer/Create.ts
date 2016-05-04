@@ -5,6 +5,10 @@ import {Validator} from '../../Common/Components/Validator';
 import {Service} from './Service'
 import {InputField} from '../../Common/Components/InputField'
 
+declare var window: any
+
+
+
 @Component({
     selector: 'create',
     templateUrl: 'Create.ts.html',
@@ -53,6 +57,8 @@ export class Create implements OnInit {
         })
 
 
+        window.form = this.form
+
         this.form.exclude('legalEntity')
         this.form.exclude('individualEntity')
     }
@@ -71,15 +77,15 @@ export class Create implements OnInit {
         for (var property in entity)
             data[property] = entity[property];
 
-        console.log(JSON.stringify(data));
         this.customerService.put(data, res => {
+            this.isSubmitting = false;
+
             this.success = res.Document != null && res.Document.Data != null;
             this.fail = !this.success;
 
             console.log(res);
         });
 
-        this.isSubmitting = false;
     }
 
     change($event) {
@@ -89,12 +95,12 @@ export class Create implements OnInit {
         if ($event.target.value != '') {
 
             if ($event.target.value == 'True') {
-                this.form.include('legalEntity')
-                this.form.exclude('individualEntity')
-            }
-            else if ($event.target.value == 'False') {
                 this.form.exclude('legalEntity')
                 this.form.include('individualEntity')
+            }
+            else if ($event.target.value == 'False') {
+                this.form.include('legalEntity')
+                this.form.exclude('individualEntity')
             }
         }
     }
