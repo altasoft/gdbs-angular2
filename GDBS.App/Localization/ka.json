@@ -3,9 +3,11 @@
     "Total": "სულ",
     "Actions": "ოპერაციები"
   },
+
   "MeterPoint": {
     "Title": "აღრიცხვის კვანძები"
   },
+
   "ServiceAgreement": {
     "Title": "ხელშეკრულებები",
     "ModelSLAAdminNumber": "SLA ნომერი",
@@ -17,8 +19,15 @@
     "ModelServiceType": "სერვისის ტიპი",
     "ModelState": "მდგომარეობა"
   },
+
   "SLA": {
     "Title": "ხელშეკრულება"
+  },
+
+  "Customer": {
+    "MainTitle": "ახალი კლიენტის შექმნა",
+    "Save": "შენახვა",
+    "Saving": "პროცესშია..."
   },
 
   "UFE": {
@@ -27,8 +36,22 @@
     "Customer..TAX_PID_OR_PASSPORT": "პირადი ნომერი",
     "Customer.IsResident": "რეზიდენტი",
     "Customer.Attributes.IsInBlackList": "შავ სიაშია",
-    "Customer.FullName": "სრული სახელი"
+    "Customer.FullName": "სრული სახელი",
+    "Customer.IsIndividual": "კლიენტის ტიპი",
+    "Customer.IsIndividualOption1": "იურიდიული პირი",
+    "Customer.IsIndividualOption2": "ფიზიკური პირი",
+    "Customer.Phone": "სახლის ტელეფონი",
+    "Customer.RegistrationLocationResid": "განმცხადებლის იურიდიული ადგილმდებარეობა",
+    "Customer.RegistrationAddressResid": "განმცხადებლის იურიდიული მისამართი",
+    "Customer.ActualLocationResid": "განმცხადებლის ფაქტიური ადგილმდებარეობა",
+    "Customer.ActualAddressResid": "განმცხადებლის ფაქტიური მისამართი",
+    "IndividualEntity.PersonalId": "პერსონალური იდენტიფიკატორი",
+    "IndividualEntity.Name": "სახელი",
+    "IndividualEntity.Surname": "გვარი",
+    "IndividualEntity.DateofIssue": "თარიღი",
+    "IndividualEntity.Type": "ტიპი"
   },
+
   "ValidationErrors": {
     "valid": "კარგია",
     "required": "აუცილებელი ველი",

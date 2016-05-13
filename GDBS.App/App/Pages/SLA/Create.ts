@@ -1,12 +1,11 @@
 ﻿import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {ControlGroup, Control, FormBuilder, Validators} from 'angular2/common';
-
+import {EnumSelect, Validator} from 'AltaSoft/Core';
 import {SLA} from './Models/SLA';
 import {SLATypes} from './Models/SLATypes';
 import {SLAStates} from './Models/SLAStates';
-import {EnumSelect} from '../../Common/Components/EnumSelect';
-import {Validator} from '../../Common/Components/Validator';
+
 
 @Component({
     selector: 'create',

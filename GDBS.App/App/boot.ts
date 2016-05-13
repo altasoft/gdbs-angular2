@@ -6,9 +6,9 @@ import {bootstrap}  from 'angular2/platform/browser'
 import {HTTP_PROVIDERS, Http} from 'angular2/http';
 import {ROUTER_PROVIDERS} from 'angular2/router';
 import {TRANSLATE_PROVIDERS, TranslatePipe, TranslateLoader, TranslateStaticLoader} from 'ng2-translate';
+import {RightsService} from 'AltaSoft/Core';
 
 import {AppComponent}  from './app'
-import {RightsService} from './Common/Services';
 
 
 

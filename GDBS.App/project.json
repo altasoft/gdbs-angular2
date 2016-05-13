@@ -44,27 +44,30 @@
   ],
 
   "scripts": {
-    "prepublish": [ "npm install", "gulp clean", "gulp compile", "gulp min:js" ]
+    "prepublish": [ "gulp version-generator" ]
   },
 
 
-  "libjs": [
-    "./node_modules/jquery/dist/jquery.js",
-    "./node_modules/bootstrap/dist/js/bootstrap.js",
-    "./node_modules/es6-shim/es6-shim.js",
-    "./node_modules/systemjs/dist/system.src.js",
+  "lib": [
+    "./node_modules/jquery/dist/jquery.min.js",
+    "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+    "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+    "./node_modules/font-awesome/css/font-awesome.min.css",
+    "./node_modules/systemjs/dist/system.js",
+    "./node_modules/es6-shim/es6-shim.min.js",
     "./node_modules/systemjs/dist/system-polyfills.js",
-    "./node_modules/rxjs/bundles/Rx.js",
-    "./node_modules/ng2-translate/bundles/ng2-translate.js",
+    "./node_modules/angular2/ts/src/testing/shims_for_IE.js",
     "./node_modules/angular2/bundles/angular2-polyfills.js",
-    "./node_modules/angular2/bundles/angular2.dev.js",
+    "./node_modules/rxjs/bundles/Rx.min.js",
+    "./node_modules/ng2-translate/bundles/ng2-translate.js",
+    "./node_modules/angular2/bundles/angular2.js",
     "./node_modules/angular2/bundles/router.js",
-    "./node_modules/angular2/bundles/http.dev.js"
-  ],
+    "./node_modules/angular2/bundles/http.js",
 
-
-  "libcss": [
-    "./node_modules/bootstrap/dist/css/bootstrap.css",
-    "./node_modules/font-awesome/css/font-awesome.css"
+    "./node_modules/bootstrap/dist/css/bootstrap.min.css.map",
+    "./node_modules/es6-shim/es6-shim.map",
+    "./node_modules/systemjs/dist/system.js.map",
+    "./node_modules/systemjs/dist/system-polyfills.js.map",
+    "./node_modules/rxjs/bundles/Rx.min.js.map"
   ]
 }

@@ -3,9 +3,11 @@
     "Total": "Total",
     "Actions": "Operations"
   },
+
   "MeterPoint": {
     "Title": "Meter Points"
   },
+
   "ServiceAgreement": {
     "Title": "Service Agreements",
     "ModelSLAAdminNumber": "SLA Admin Number",
@@ -17,8 +19,15 @@
     "ModelServiceType": "Service Type",
     "ModelState": "State"
   },
+
   "SLA": {
     "Title": "Service Level Agreements"
+  },
+
+  "Customer": {
+    "MainTitle": "Create new customer",
+    "Save": "Save",
+    "Saving": "Saving..."
   },
 
   "UFE": {
@@ -27,8 +36,22 @@
     "Customer..TAX_PID_OR_PASSPORT": "Identification Number",
     "Customer.IsResident": "Resident",
     "Customer.Attributes.IsInBlackList": "Black List Member",
-    "Customer.FullName": "Full Name"
+    "Customer.FullName": "Full Name",
+    "Customer.IsIndividual": "Is Individual",
+    "Customer.IsIndividualOption1": "Juridical",
+    "Customer.IsIndividualOption2": "Physical",
+    "Customer.Phone": "Phone",
+    "Customer.RegistrationLocationResid": "Registration Location",
+    "Customer.RegistrationAddressResid": "Registration Address",
+    "Customer.ActualLocationResid": "Actual Location",
+    "Customer.ActualAddressResid": "Actual Address",
+    "IndividualEntity.PersonalId": "Personal Id",
+    "IndividualEntity.Name": "Name",
+    "IndividualEntity.Surname": "Surname",
+    "IndividualEntity.DateofIssue": "Date of Issue",
+    "IndividualEntity.Type": "Type"
   },
+
   "ValidationErrors": {
     "valid": "Valid",
     "required": "Is Required",

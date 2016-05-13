@@ -1,17 +1,17 @@
 ﻿import {Component, OnInit}  from 'angular2/core'
 import {RouteConfig, ROUTER_DIRECTIVES, RouteParams, Router} from 'angular2/router'
 
-import {MenuComponent} from './Common/Components';
+import {MenuComponent} from 'AltaSoft/Core';
 import {TranslateService}   from 'ng2-translate'
 
-import * as SLA from './Modules/SLA/Config';
-import * as ServiceAgreement from './Modules/ServiceAgreement/Config';
-import * as MeterPoint from './Modules/MeterPoint/Config';
-import * as Customer from './Modules/Customer/Config';
+import * as SLA from './Pages/SLA/Config';
+import * as ServiceAgreement from './Pages/ServiceAgreement/Config';
+import * as MeterPoint from './Pages/MeterPoint/Config';
+import * as Customer from './Pages/Customer/Config';
 
 
 @Component({
-    selector: 'game',
+    selector: 'app',
     templateUrl: 'app.ts.html',
     directives: [ROUTER_DIRECTIVES, MenuComponent]
 })

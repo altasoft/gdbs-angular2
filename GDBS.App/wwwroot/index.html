@@ -3,46 +3,33 @@
 <head>
     <base href="/">
 
-    <title>App</title>
+    <title>GDBS App</title>
 
-
-    <!-- 0. Styles -->
-    <link href="/css/lib.css" rel="stylesheet" />
-    <link href="/css/Common/Styles/Main.css" rel="stylesheet" />
-    <link href="/css/Common/Styles/Menu.css" rel="stylesheet" />
-
-
-    <!-- 1. Load libraries -->
-    <script src="/js/lib.js"></script>
-
-
-    <!-- 2. Configure SystemJS -->
-    <script>
-        System.config({
-            packages: {
-                'js': {
-                    format: 'register',
-                    defaultExtension: 'js'
-                },
-                '/ng2-translate': {
-                    defaultExtension: 'js'
-                }
-            }
-        });
-        System.import('js/boot')
-              .then(null, console.error.bind(console));
-    </script>
-
-    <style>
-        body {
-            text-align: center;
-        }
-    </style>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/menu.css" rel="stylesheet">
 </head>
-<!-- 3. Display the application -->
-<body class="noselect">
-    <game>
-        <div id="LoadingIcon"><i class="fa fa-spinner fa-spin"></i></div>
-    </game>
+<body>
+
+    <app>
+        <loader><i class="fa fa-spinner fa-spin"></i></loader>
+    </app>
+
+    <script src="/js/lib/jquery.min.js"></script>
+    <script src="/js/lib/bootstrap.min.js"></script>
+    <script src="/js/lib/system.js"></script>
+    <script src="/js/lib/es6-shim.min.js"></script>
+    <script src="/js/lib/system-polyfills.js"></script>
+    <script src="/js/lib/shims_for_IE.js"></script>
+    <script src="/js/lib/angular2-polyfills.js"></script>
+    <script src="/js/lib/Rx.min.js"></script>
+    <script src="/js/lib/ng2-translate.js"></script>
+    <script src="/js/lib/angular2.js"></script>
+    <script src="/js/lib/router.js"></script>
+    <script src="/js/lib/http.js"></script>
+    <script src="/js/version.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/boot.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ﻿import {Component} from 'angular2/core';
-import {Pagination} from '../../Common/Components'
+import {Pagination} from 'AltaSoft/Core'
 import {ROUTER_DIRECTIVES} from 'angular2/router'
 
 

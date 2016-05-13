@@ -1,6 +1,6 @@
 ﻿import {Component, OnInit} from 'angular2/core';
 import { RouteParams } from 'angular2/router';
-import {SLAService} from '../../Common/Services';
+import {SLAService} from 'AltaSoft/Core';
 
 @Component({
     selector: 'details',

@@ -1,11 +1,9 @@
 ﻿import {Component, OnInit, ElementRef} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router} from 'angular2/router';
-
-import {ColumnComponent, Pagination} from '../../Common/Components'
+import {ColumnComponent, Pagination, SLAService} from 'AltaSoft/Core'
 import {SLA} from './Models/SLA';
 import {SLATypes} from './Models/SLATypes';
 import {SLAStates} from './Models/SLAStates';
-import {SLAService} from '../../Common/Services';
 
 
 @Component({

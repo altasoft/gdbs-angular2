@@ -1,0 +1,92 @@
+﻿<div class="form" style="width: 60%">
+    <div class="title green">
+        <a [routerLink]="['List']"><i class="fa fa-angle-double-left"></i></a>
+        <h4>{{'Customer.MainTitle' | translate}}</h4>
+        {{form.controls['UFE.IndividualEntity.PersonalId'] && form.controls['UFE.IndividualEntity.PersonalId'].valid}}
+    </div>
+    <div class="form-col-2">
+        <form [ngFormModel]="form">
+
+            <div *ngIf="success || fail">
+                <div class="alert alert-success" *ngIf="success">
+                    Operation Completed Successfully!
+                </div>
+                <div class="alert alert-danger" *ngIf="fail">
+                    Operation Failed!
+                </div>
+                <hr>
+            </div>
+
+
+            <field [title]="'UFE.Customer.IsIndividual' | translate" [errors]="form.controls['UFE.Customer.IsIndividual'].errors">
+                <select ngControl="UFE.Customer.IsIndividual" (change)="change($event)">
+                    <option value="">--</option>
+                    <option value="False">{{'UFE.Customer.IsIndividualOption1' | translate}}</option>
+                    <option value="True">{{'UFE.Customer.IsIndividualOption2' | translate}}</option>
+                </select>
+            </field>
+
+            <hr />
+            <div *ngIf="form.controls['UFE.Customer.IsIndividual'].value == 'False'" ngControlGroup="legalEntity">
+                <field [title]="'UFE.Customer.FullName' | translate" [errors]="legalEntity.controls['UFE.Customer.FullName'].errors">
+                    <input type="text" class="form-control" ngControl="UFE.Customer.FullName" />
+                </field>
+                <hr />
+            </div>
+
+            <div *ngIf="form.controls['UFE.Customer.IsIndividual'].value == 'True'" ngControlGroup="individualEntity">
+                <field [title]="'UFE.IndividualEntity.PersonalId' | translate" [errors]="individualEntity.controls['UFE.IndividualEntity.PersonalId'].errors">
+                    <input type="text" class="form-control" ngControl="UFE.IndividualEntity.PersonalId" />
+                </field>
+
+                <field [title]="'UFE.IndividualEntity.Name' | translate" [errors]="individualEntity.controls['UFE.IndividualEntity.Name'].errors">
+                    <input type="text" class="form-control" ngControl="UFE.IndividualEntity.Name" />
+                </field>
+
+                <field [title]="'UFE.IndividualEntity.Surname' | translate" [errors]="individualEntity.controls['UFE.IndividualEntity.Surname'].errors">
+                    <input type="text" class="form-control" ngControl="UFE.IndividualEntity.Surname" />
+                </field>
+
+                <field [title]="'UFE.IndividualEntity.DateofIssue' | translate" [errors]="individualEntity.controls['UFE.IndividualEntity.DateofIssue'].errors">
+                    <input type="text" class="form-control" ngControl="UFE.IndividualEntity.DateofIssue" />
+                </field>
+
+                <field [title]="'UFE.IndividualEntity.Type' | translate" [errors]="individualEntity.controls['UFE.IndividualEntity.Type'].errors">
+                    <select type="text" class="form-control" ngControl="UFE.IndividualEntity.Type">
+                        <option value="">--</option>
+                        <option value="0">არასამთავრობო მეწარმე</option>
+                        <option value="1">ინდ. მეწარმე</option>
+                        <option value="2">მეწარმე</option>
+                        <option value="3">გადამხდელი</option>
+                    </select>
+                </field>
+
+                <field [title]="'UFE.Customer.Phone' | translate" [errors]="individualEntity.controls['UFE.Customer.Phone'].errors">
+                    <input type="text" class="form-control" ngControl="UFE.Customer.Phone" />
+                </field>
+                <hr />
+            </div>
+
+            <field [title]="'UFE.Customer.RegistrationLocationResid' | translate" [errors]="form.controls['UFE.Customer.RegistrationLocationResid'].errors">
+                <input type="text" class="form-control" ngControl="UFE.Customer.RegistrationLocationResid" />
+            </field>
+
+            <field [title]="'UFE.Customer.RegistrationAddressResid' | translate" [errors]="form.controls['UFE.Customer.RegistrationAddressResid'].errors">
+                <input type="text" class="form-control" ngControl="UFE.Customer.RegistrationAddressResid" />
+            </field>
+
+            <field [title]="'UFE.Customer.ActualLocationResid' | translate" [errors]="form.controls['UFE.Customer.ActualLocationResid'].errors">
+                <input type="text" class="form-control" ngControl="UFE.Customer.ActualLocationResid" />
+            </field>
+
+            <field [title]="'UFE.Customer.ActualAddressResid' | translate" [errors]="form.controls['UFE.Customer.ActualAddressResid'].errors">
+                <input type="text" class="form-control" ngControl="UFE.Customer.ActualAddressResid" />
+            </field>
+
+            <hr>
+            <div style="width: 100%; text-align: right" *ngIf="!success">
+                <input type="button" [disabled]="!form.valid || isSubmitting" (click)="submit()" [attr.value]="(isSubmitting ? 'Customer.Saving' : 'Customer.Save') | translate" />
+            </div>
+        </form>
+    </div>
+</div>

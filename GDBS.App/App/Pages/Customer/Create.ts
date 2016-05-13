@@ -1,9 +1,8 @@
 ﻿import {Component, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {ControlGroup, Control, FormBuilder, Validators} from 'angular2/common';
-import {Validator} from '../../Common/Components/Validator';
+import {Validator, InputField} from 'AltaSoft/Core';
 import {Service} from './Service'
-import {InputField} from '../../Common/Components/InputField'
 
 declare var window: any
 

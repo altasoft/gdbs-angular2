@@ -1,5 +1,5 @@
 ﻿import {Component} from 'angular2/core';
-import {ListComponent, ListColumn, PagingConfig} from '../../Common/Components'
+import {ListComponent, ListColumn, PagingConfig} from 'AltaSoft/Core'
 import {ROUTER_DIRECTIVES} from 'angular2/router'
 
 @Component({

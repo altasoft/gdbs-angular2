@@ -1,24 +1,22 @@
 ﻿import {Component, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router} from 'angular2/router'
-import {ListComponent, ListColumn, PagingConfig, RefreshInfo} from '../../Common/Components/List'
-import {RightsService} from '../../Common/Services'
-import {Service} from './Service'
+import {ListComponent, ListColumn, PagingConfig, RefreshInfo, RightsService} from 'AltaSoft/Core'
+import {Service} from '../Service'
 
 
 @Component({
-    selector: 'list',
-    templateUrl: 'List.ts.html',
+    selector: 'customers',
+    templateUrl: 'Customers.ts.html',
     directives: [ROUTER_DIRECTIVES, ListComponent],
     providers: [Service]
 })
-
-export class List {
+export class Customers {
 
     // Paging Configuration
     pagingConfig: PagingConfig = {
-        ActivePage: 1,
-        ItemsPerPage: 10,
-        TotalItemsCount: 2000
+        ActivePage: 0,
+        ItemsPerPage: 0,
+        TotalItemsCount: 0
     };
 
     // Columns Configuration

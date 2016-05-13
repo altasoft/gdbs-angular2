@@ -1,66 +1,66 @@
-﻿/// <binding AfterBuild='compile' ProjectOpened='watch, live-server' />
+﻿/// <binding ProjectOpened='watch' />
 
-var gulp = require("gulp"),
+const
+    gulp = require("gulp"),
+    file = require('gulp-file'),
     concat = require("gulp-concat"),
-    cssmin = require("gulp-cssmin"),
     uglify = require("gulp-uglify"),
-    less = require('gulp-less'),
-    tslint = require('gulp-tslint'),
+    sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
     tsc = require('gulp-typescript'),
-    browserify = require('gulp-browserify'),
-    gls = require('gulp-live-server'),
-    embedTemplates = require('gulp-angular-embed-templates2'),
-
-    path = require('path'),
+    embedTemplates = require('gulp-angular2-embed-templates'),
+    embedSass = require('gulp-angular2-embed-sass'),
     rimraf = require("rimraf"),
     project = require("./project.json"),
-    tsProject = tsc.createProject('tsconfig.json');
+    ext_replace = require('gulp-ext-replace')
 
 
 
-var paths = {
-    webroot: "./" + project.webroot + "/"
-};
-
-paths.ts = './Client/**/*.ts';
-paths.dts = './Client/**/*.d.ts';
-paths.less = './Client/**/*.less';
-paths.html = './Client/**/*.html';
-paths.json = './Localization/**/*.json';
-paths.js = paths.webroot + "js/**/*.js";
-paths.minJs = paths.webroot + "js/**/*.min.js";
-paths.css = paths.webroot + "css/**/*.css";
-paths.minCss = paths.webroot + "css/**/*.min.css";
-paths.concatJsDest = paths.webroot + "js/site.min.js";
-paths.concatCssDest = paths.webroot + "css/site.min.css";
+if (!String.prototype.endsWith) {
+    String.prototype.endsWith = function (searchString, position) {
+        var subjectString = this.toString();
+        if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+            position = subjectString.length;
+        }
+        position -= searchString.length;
+        var lastIndex = subjectString.indexOf(searchString, position);
+        return lastIndex !== -1 && lastIndex === position;
+    };
+}
 
 
-gulp.task('live-server', function () {
-    var server = gls.static('wwwroot', 8000); //equals to gls.static('public', 3000);
-    server.start();
+var CompanyName = 'AltaSoft'
+
+var config = {
+    source: {
+        tsbase: './App',
+
+        ts: './App/**/*.ts',
+        dts: './typings/**/*.d.ts',
+        html: './App/**/*.html',
+        sass: './App/**/*.ts.scss',
+        common_sass: './Common/Styles/**/*.scss',
+        lang: './Localization/**/*.json',
+        modules: './App/' + CompanyName + '/*.ts'
+    },
+    compiled: {
+        js: './wwwroot/js/',
+        jslib: './wwwroot/js/lib/',
+        css: './wwwroot/css/',
+        dts: './wwwroot/js/',
+        lang: './wwwroot/lang/',
+        modules: './node_modules/' + CompanyName + '/'
+    },
+    ignore: ['!node_modules/**', '!bin/**']
+}
+
+
+
+gulp.task("clean", function (cb) {
+    rimraf(config.compiled.lang, cb);
 });
-
-gulp.task("clean:js", function (cb) {
-    rimraf(paths.concatJsDest, cb);
-});
-
-gulp.task("clean:css", function (cb) {
-    rimraf(paths.concatCssDest, cb);
-});
-
-gulp.task('compile-json', function () {
-    gulp.src(paths.json).pipe(gulp.dest('./wwwroot/lang/'));
-});
-
-gulp.task("clean", ["clean:js", "clean:css"]);
-
 
 gulp.task('compile-ts', function () {
-
-    var tsOutputPath = './wwwroot/js/';
-
-    var sourceTsFiles = [paths.ts, paths.dts];
 
     var embedConfig = {
         sourceType: 'ts',
@@ -68,76 +68,94 @@ gulp.task('compile-ts', function () {
             empty: true,                      // KEEP empty attributes
             ssi: true,                        // KEEP Server Side Includes
             conditionals: true,               // KEEP conditional internet explorer comments
-            spare: false,                      // KEEP redundant attributes
+            spare: false,                     // KEEP redundant attributes
             quotes: true,                     // KEEP arbitrary quotes
         }
     }
 
-    var tsResult = gulp.src(sourceTsFiles)
-                       .pipe(embedTemplates(embedConfig))
-                       .pipe(sourcemaps.init())
-                       .pipe(tsc(tsProject));
 
-    tsResult.dts.pipe(gulp.dest(tsOutputPath));
+    var tsResult = gulp.src([config.source.ts, config.source.dts].concat(config.ignore), { base: config.source.tsbase })
+        .pipe(embedSass())
+        .pipe(embedTemplates(embedConfig))
+        .pipe(sourcemaps.init())
+        .pipe(tsc({
+            "typescript": require('typescript'),
+            "target": "es5",
+            "module": "system",
+            "moduleResolution": "node",
+            "sourceMap": true,
+            "emitDecoratorMetadata": true,
+            "experimentalDecorators": true,
+            "removeComments": true,
+            "noImplicitAny": false,
+            "outFile": "app.js"
+        }));
+
+
+    tsResult.dts.pipe(gulp.dest(config.compiled.dts));
 
     return tsResult.js
-                    .pipe(sourcemaps.write('.', { sourceRoot: '/Source', debug: true }))
-                    .pipe(gulp.dest(tsOutputPath));
+                    .pipe(sourcemaps.write('../js/', { sourceRoot: '/Source', debug: true }))
+                    .pipe(gulp.dest(config.compiled.js));
 });
 
-gulp.task('compile-less', function () {
-    gulp.src(paths.less)
-        .pipe(less())
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./wwwroot/css'));
+gulp.task('compile-modules', function () {
+
+    gulp.src([config.source.modules])
+        .pipe(ext_replace('.d.ts'))
+        .pipe(gulp.dest(config.compiled.modules));
+
 });
 
+gulp.task('compile-sass', function () {
 
-//gulp.task('compile-html', function () {
-//    gulp.src(paths.html)
-//        .pipe(gulp.dest('./wwwroot/html'));
-//});
+    gulp.src([config.source.common_sass].concat(config.ignore))
+        .pipe(sass())
+        .pipe(gulp.dest(config.compiled.css))
 
-gulp.task('compile', ['compile-ts', 'compile-less', 'compile-json', 'compile-lib']);
+});
 
-gulp.task('watch', ['compile'], function () {
-    gulp.watch([paths.ts], ['compile-ts']);
-    gulp.watch([paths.less], ['compile-less']);
-    gulp.watch([paths.html], ['compile-ts']);
-    gulp.watch([paths.json], ['compile-json']);
-    gulp.watch(['./project.json'], ['compile-lib']);
+gulp.task('compile-json', function () {
+    gulp.src([config.source.lang].concat(config.ignore)).pipe(gulp.dest(config.compiled.lang));
 });
 
 gulp.task('compile-lib', function () {
 
-    if (project.libjs) {
-        gulp.src(project.libjs, { base: "." })
-            .pipe(concat('lib.js'))
-            .pipe(gulp.dest("./wwwroot/js/"));
-    }
+    if (!project.lib || !project.lib.length) return
 
-    if (project.libcss) {
-        gulp.src(project.libcss, { base: "." })
-            .pipe(concat('lib.css'))
-            .pipe(gulp.dest("./wwwroot/css/"));
-    }
+    var jsFiles = project.lib.filter(function (item) {
+        return item.endsWith('.js') || item.endsWith('.js.map') || item.endsWith('.map')
+    })
+
+    var cssFiles = project.lib.filter(function (item) {
+        return item.endsWith('.css') || item.endsWith('css.map')
+    })
+
+    gulp.src(jsFiles)
+        .pipe(gulp.dest(config.compiled.jslib))
+
+    gulp.src(cssFiles)
+        .pipe(gulp.dest(config.compiled.css))
 })
 
+gulp.task('compile', ['compile-modules', 'compile-ts', 'compile-sass', 'compile-json', 'compile-lib']);
 
-gulp.task("min:js", function () {
-    gulp.src([paths.js, "!" + paths.minJs], { base: "." })
-        .pipe(concat(paths.concatJsDest))
-        .pipe(uglify())
-        .pipe(gulp.dest("."));
+
+gulp.task('watch', ['compile'], function () {
+    gulp.watch([config.source.ts], ['compile-ts']);
+    gulp.watch([config.source.html], ['compile-ts']);
+    gulp.watch([config.source.sass], ['compile-ts']);
+    gulp.watch([config.source.lang], ['compile-json']);
+    gulp.watch([config.source.common_sass], ['compile-sass']);
+    gulp.watch([config.source.modules], ['compile-modules']);
+    gulp.watch(['./project.json'], ['compile-lib']);
 });
 
-gulp.task("min:css", function () {
-    gulp.src([paths.css, "!" + paths.minCss])
-        .pipe(concat(paths.concatCssDest))
-        .pipe(cssmin())
-        .pipe(gulp.dest("."));
-});
 
-gulp.task("min", ["min:js", "min:css"]);
+gulp.task('version-generator', function () {
 
+    var content = 'window.ClientVersion=' + Date.now()
 
+    file('version.js', content)
+        .pipe(gulp.dest(config.compiled.js))
+})

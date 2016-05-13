@@ -1,7 +1,6 @@
 ﻿import {Component, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router} from 'angular2/router'
-import {ListComponent, ListColumn, PagingConfig, RefreshInfo} from '../../Common/Components/List'
-import {RightsService} from '../../Common/Services'
+import {ListComponent, ListColumn, PagingConfig, RefreshInfo, RightsService} from 'AltaSoft/Core'
 
 
 
