@@ -243,12 +243,12 @@ Temporary Items
 *.xproj.user
 
 
-/GDBS.App/wwwroot/css
-/GDBS.App/wwwroot/js
-/GDBS.App/wwwroot/html
+/GDBS.App/wwwroot/js/lib
+/GDBS.App/wwwroot/js/app.js
+/GDBS.App/wwwroot/js/app.js.map
 /GDBS.App/wwwroot/lang
 /GDBS.App/wwwroot/_references.js
-/wwwroot/css
-/wwwroot/js
-/wwwroot/html
+/wwwroot/js/lib
+/wwwroot/js/app.js
+/wwwroot/js/app.js.map
 /wwwroot/lang
