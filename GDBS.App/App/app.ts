@@ -13,6 +13,7 @@ import * as Customer from './Pages/Customer/Config';
 @Component({
     selector: 'app',
     templateUrl: 'app.ts.html',
+    styleUrls: ['app.ts.scss'],
     directives: [ROUTER_DIRECTIVES, MenuComponent]
 })
 @RouteConfig([
